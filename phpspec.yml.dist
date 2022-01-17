@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: BabDev\SyliusProductSamplesPlugin
+        psr4_prefix: BabDev\SyliusProductSamplesPlugin
