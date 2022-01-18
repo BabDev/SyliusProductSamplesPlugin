@@ -1,0 +1,8 @@
+<div class="ui tab" data-tab="product_samples">
+    <h3 class="ui top attached header">{{ 'babdev_sylius_product_samples.ui.product_samples'|trans }}</h3>
+    <div class="ui attached segment">
+        {{ form_row(form.samplesActive) }}
+    </div>
+
+    {{ sylius_template_event(['sylius.admin.product.' ~ action ~ '.tab_product_samples', 'sylius.admin.product.tab_product_samples'], {'form': form}) }}
+</div>

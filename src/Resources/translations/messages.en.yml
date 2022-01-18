@@ -1,0 +1,7 @@
+babdev_sylius_product_samples:
+    form:
+        product:
+            samples_available: 'Samples Available'
+
+    ui:
+        product_samples: 'Product Samples'

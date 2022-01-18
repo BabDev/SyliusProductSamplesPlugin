@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="babdev_sylius_product_samples.menu.admin.product.form" class="BabDev\SyliusProductSamplesPlugin\Menu\ProductFormMenuBuilder">
+            <tag name="kernel.event_listener" event="sylius.menu.admin.product.form" method="addProductSamplesMenu" />
+        </service>
+
+        <service id="babdev_sylius_product_samples.form.extension.product" class="BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
+        </service>
+    </services>
+</container>
