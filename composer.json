@@ -55,6 +55,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "BabDev\\SyliusProductSamplesPlugin\\Tests\\App\\": "tests/Application/src/",
             "Tests\\BabDev\\SyliusProductSamplesPlugin\\": "tests/"
         },
         "classmap": ["tests/Application/Kernel.php"]
