@@ -20,7 +20,7 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'label' => 'babdev_sylius_product_samples.form.channel.max_samples_per_order',
                 'constraints' => [
                     new GreaterThanOrEqual(value: 1, groups: ['sylius']),
-                ]
+                ],
             ])
         ;
     }

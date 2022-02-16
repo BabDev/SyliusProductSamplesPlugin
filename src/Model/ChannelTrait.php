@@ -6,9 +6,7 @@ namespace BabDev\SyliusProductSamplesPlugin\Model;
 
 trait ChannelTrait
 {
-    /**
-     * @phpstan-var positive-int|null
-     */
+    /** @phpstan-var positive-int|null */
     protected ?int $maxSamplesPerOrder = null;
 
     /**
