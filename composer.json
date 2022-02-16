@@ -39,6 +39,7 @@
         "symfony/dotenv": "^5.4",
         "symfony/intl": "^5.4",
         "symfony/web-profiler-bundle": "^5.4",
+        "symfony/webpack-encore-bundle": "^1.14",
         "vimeo/psalm": "4.18.1"
     },
     "config": {
