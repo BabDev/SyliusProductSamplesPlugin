@@ -12,11 +12,12 @@ final class BabDevSyliusProductSamplesExtensionTest extends AbstractExtensionTes
 {
     /**
      * @test
-     * @doesNotPerformAssertions
      */
     public function the_container_is_loaded_with_the_plugin_services(): void
     {
         $this->load();
+
+        $this->assertContainerBuilderHasService('babdev_sylius_product_samples.menu.admin.product.form');
     }
 
     /**
