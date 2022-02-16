@@ -11,7 +11,7 @@ use Tests\BabDev\SyliusProductSamplesPlugin\Behat\Page\Admin\Product\CreateSimpl
 use Tests\BabDev\SyliusProductSamplesPlugin\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductSamplesContext implements Context
+final class ManagingProductsContext implements Context
 {
     public function __construct(
         private ObjectManager $objectManager,

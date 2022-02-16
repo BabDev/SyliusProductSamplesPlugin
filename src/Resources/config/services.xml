@@ -6,6 +6,10 @@
             <tag name="kernel.event_listener" event="sylius.menu.admin.product.form" method="addProductSamplesMenu" />
         </service>
 
+        <service id="babdev_sylius_product_samples.form.extension.channel" class="BabDev\SyliusProductSamplesPlugin\Form\Extension\ChannelTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" />
+        </service>
+
         <service id="babdev_sylius_product_samples.form.extension.product" class="BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
         </service>

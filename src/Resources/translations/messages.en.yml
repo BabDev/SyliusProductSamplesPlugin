@@ -1,5 +1,8 @@
 babdev_sylius_product_samples:
     form:
+        channel:
+            max_samples_per_order: 'Max Samples Per Order'
+
         product:
             samples_available: 'Samples Available'
 

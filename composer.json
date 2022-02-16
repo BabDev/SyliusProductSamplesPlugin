@@ -33,6 +33,7 @@
         "phpstan/phpstan-strict-rules": "1.1.0",
         "phpstan/phpstan-webmozart-assert": "1.0.9",
         "phpunit/phpunit": "^9.5",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "sylius-labs/coding-standard": "^4.0",
         "symfony/browser-kit": "^5.4",
         "symfony/debug-bundle": "^5.4",

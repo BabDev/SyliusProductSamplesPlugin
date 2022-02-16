@@ -16,9 +16,9 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="BabDev\SyliusProductSamplesPlugin\Tests\App\Model\Product" table="sylius_product">
+    <mapped-superclass name="BabDev\SyliusProductSamplesPlugin\Tests\App\Model\Channel" table="sylius_channel">
 
-        <field name="samplesActive" column="samples_active" type="boolean" />
+        <field name="maxSamplesPerOrder" column="max_samples_per_order" type="integer" nullable="true" />
 
     </mapped-superclass>
 
