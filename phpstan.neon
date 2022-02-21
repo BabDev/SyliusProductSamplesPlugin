@@ -4,6 +4,11 @@ parameters:
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
 
+    level: max
+
+    paths:
+        - 'src'
+
     excludePaths:
         # Makes PHPStan crash
         # - 'src/DependencyInjection/Configuration.php'

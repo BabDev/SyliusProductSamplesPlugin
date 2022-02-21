@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the BabDevSyliusProductSamplesPlugin package.
+
+ (c) Michael Babker
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="BabDev\SyliusProductSamplesPlugin\Tests\App\Model\ProductVariant" table="sylius_product_variant">
+
+        <one-to-one field="sample" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" mapped-by="sampleOf">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-one>
+
+        <one-to-one field="sampleOf" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="sample">
+            <cascade>
+                <cascade-persist />
+            </cascade>
+            <join-column name="sample_of_id" />
+        </one-to-one>
+
+    </mapped-superclass>
+
+</doctrine-mapping>

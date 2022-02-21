@@ -18,20 +18,12 @@ final class BabDevSyliusProductSamplesPlugin extends Bundle
         return 'babdev_sylius_product_samples';
     }
 
-    /**
-     * @psalm-suppress DocblockTypeContradiction
-     * @psalm-suppress InvalidReturnStatement
-     * @psalm-suppress InvalidReturnType
-     */
     public function getContainerExtension(): ?ExtensionInterface
     {
-        if (null === $this->containerExtension) {
-            $this->containerExtension = new BabDevSyliusProductSamplesExtension();
+        if (null === $this->extension) {
+            $this->extension = new BabDevSyliusProductSamplesExtension();
         }
 
-        /**
-         * @phpstan-ignore-next-line
-         */
-        return $this->containerExtension === false ? null : $this->containerExtension;
+        return $this->extension ?: null;
     }
 }

@@ -16,5 +16,7 @@ final class ProductFormMenuBuilderSpec extends ObjectBehavior
         $menu->addChild('product_samples')->willReturn($menu);
         $menu->setAttribute('template', '@BabDevSyliusProductSamplesPlugin/Admin/Product/Tab/_product_samples.html.twig')->willReturn($menu);
         $menu->setLabel('babdev_sylius_product_samples.ui.product_samples')->willReturn($menu);
+
+        $this->addProductSamplesMenu($event);
     }
 }

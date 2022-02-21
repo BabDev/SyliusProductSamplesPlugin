@@ -27,3 +27,6 @@ sylius_product:
         product:
             classes:
                 model: 'BabDev\SyliusProductSamplesPlugin\Tests\App\Model\Product'
+        product_variant:
+            classes:
+                model: 'BabDev\SyliusProductSamplesPlugin\Tests\App\Model\ProductVariant'

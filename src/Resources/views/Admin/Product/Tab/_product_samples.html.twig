@@ -2,6 +2,34 @@
     <h3 class="ui top attached header">{{ 'babdev_sylius_product_samples.ui.product_samples'|trans }}</h3>
     <div class="ui attached segment">
         {{ form_row(form.samplesActive) }}
+
+        {% if product.simple %}
+            <div class="ui hidden divider"></div>
+            <div class="ui one column stackable grid">
+                <div class="column">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
+                    {% include "@SyliusAdmin/Product/_channel_pricing.html.twig" with { product: product, variantForm: form.variant.sample } only %}
+                </div>
+            </div>
+            <div class="ui two column stackable grid">
+                <div class="column">
+                    <h4 class="ui top attached header">{{ 'sylius.ui.shipping'|trans }}</h4>
+                    <div class="ui attached segment">
+                        {{ form_row(form.variant.sample.shippingCategory) }}
+                        {{ form_row(form.variant.sample.width) }}
+                        {{ form_row(form.variant.sample.height) }}
+                        {{ form_row(form.variant.sample.depth) }}
+                        {{ form_row(form.variant.sample.weight) }}
+                    </div>
+                </div>
+                <div class="column">
+                    <h4 class="ui top attached header">{{ 'sylius.ui.taxes'|trans }}</h4>
+                    <div class="ui attached segment">
+                        {{ form_row(form.variant.sample.taxCategory) }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     {{ sylius_template_event(['sylius.admin.product.' ~ action ~ '.tab_product_samples', 'sylius.admin.product.tab_product_samples'], {'form': form}) }}

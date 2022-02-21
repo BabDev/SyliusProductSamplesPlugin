@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.20.0@f82a70e7edfc6cf2705e9374c8a0b6a974a779ed">
+  <file src="src/BabDevSyliusProductSamplesPlugin.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>?ExtensionInterface</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;extension ?: null</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Form/Type/SampleProductVariantType.php">
+    <MixedArgument occurrences="1">
+      <code>$variantForm-&gt;getData()</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$productVariant</code>
+    </MixedAssignment>
+    <PossiblyNullReference occurrences="2">
+      <code>getParent</code>
+      <code>getSamplesActive</code>
+    </PossiblyNullReference>
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>getSamplesActive</code>
+    </UndefinedInterfaceMethod>
+  </file>
+</files>

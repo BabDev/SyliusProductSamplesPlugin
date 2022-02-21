@@ -1,3 +1,32 @@
 parameters:
-	ignoreErrors: []
+	ignoreErrors:
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 1
+			path: src/BabDevSyliusProductSamplesPlugin.php
+
+		-
+			message: "#^Cannot call method getData\\(\\) on Symfony\\\\Component\\\\Form\\\\FormInterface\\|null\\.$#"
+			count: 2
+			path: src/Form/Type/SampleProductVariantType.php
+
+		-
+			message: "#^Cannot call method getParent\\(\\) on Symfony\\\\Component\\\\Form\\\\FormInterface\\|null\\.$#"
+			count: 1
+			path: src/Form/Type/SampleProductVariantType.php
+
+		-
+			message: "#^Cannot call method getSamplesActive\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null\\.$#"
+			count: 1
+			path: src/Form/Type/SampleProductVariantType.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, mixed given\\.$#"
+			count: 1
+			path: src/Form/Type/SampleProductVariantType.php
+
+		-
+			message: "#^Parameter \\#1 \\$sampleOf of method BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface\\:\\:setSampleOf\\(\\) expects Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Form/Type/SampleProductVariantType.php
 
