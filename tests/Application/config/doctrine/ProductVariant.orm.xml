@@ -28,7 +28,7 @@
             <cascade>
                 <cascade-persist />
             </cascade>
-            <join-column name="sample_of_id" />
+            <join-column name="sample_of_id" on-delete="SET NULL" />
         </one-to-one>
 
     </mapped-superclass>
