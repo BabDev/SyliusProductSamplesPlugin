@@ -19,3 +19,12 @@ return [
     BabDev\SyliusProductSamplesPlugin\BabDevSyliusProductSamplesPlugin::class => ['all' => true],
 ];
 ```
+
+## Import the Configuration
+
+In your `config/packages/_sylius.yaml` file, import the plugin's application configuration to automatically configure its integrations with other bundles.
+
+```yaml
+imports:
+    - { resource: "@BabDevSyliusProductSamplesPlugin/Resources/config/app/config.yaml" }
+```
