@@ -30,13 +30,13 @@ return static function (ContainerConfigurator $container): void {
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.product', ProductTypeExtension::class)
-        ->args([
-            service('sylius.factory.product_variant'),
-        ])
         ->tag('form.type_extension', ['extended-type' => ProductType::class])
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.product_variant', ProductVariantTypeExtension::class)
+        ->args([
+            service('sylius.factory.product_variant'),
+        ])
         ->tag('form.type_extension', ['extended-type' => ProductVariantType::class])
     ;
 
