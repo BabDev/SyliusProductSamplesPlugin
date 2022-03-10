@@ -28,10 +28,10 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.2.1",
         "phpspec/phpspec": "^7.1",
         "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan": "1.4.6",
-        "phpstan/phpstan-doctrine": "1.2.10",
+        "phpstan/phpstan": "1.4.9",
+        "phpstan/phpstan-doctrine": "1.2.11",
         "phpstan/phpstan-strict-rules": "1.1.0",
-        "phpstan/phpstan-webmozart-assert": "1.0.9",
+        "phpstan/phpstan-webmozart-assert": "1.1.2",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "sylius-labs/coding-standard": "^4.0",
@@ -41,7 +41,7 @@
         "symfony/intl": "^5.4",
         "symfony/web-profiler-bundle": "^5.4",
         "symfony/webpack-encore-bundle": "^1.14",
-        "vimeo/psalm": "4.20.0"
+        "vimeo/psalm": "4.22.0"
     },
     "config": {
         "allow-plugins": {
