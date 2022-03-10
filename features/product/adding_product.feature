@@ -20,6 +20,50 @@ Feature: Adding a new product
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
+        And product "Dice Brewing" should have product samples enabled
+
+    @ui @no-api
+    Scenario: Adding a new simple product with product samples with price
+        Given I want to create a new simple product
+        When I specify its code as "BOARD_DICE_BREWING"
+        And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing" in "English (United States)"
+        And I set its price to "$10.00" for "United States" channel
+        And I enable product samples
+        And I set its sample price to "$2.50" for "United States" channel
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the product "Dice Brewing" should appear in the store
+        And product "Dice Brewing" should have product samples enabled
+
+    @ui @no-api
+    Scenario: Adding a new simple product with product samples with discounted price
+        Given I want to create a new simple product
+        When I specify its code as "BOARD_DICE_BREWING"
+        And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing" in "English (United States)"
+        And I set its price to "$10.00" for "United States" channel
+        And I enable product samples
+        And I set its sample price to "$1.00" for "United States" channel
+        And I set its original sample price to "$2.50" for "United States" channel
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the product "Dice Brewing" should appear in the store
+        And product "Dice Brewing" should have product samples enabled
+
+    @ui @no-api
+    Scenario: Adding a new simple product with product samples with specific shipping category
+        Given I want to create a new simple product
+        When I specify its code as "BOARD_DICE_BREWING"
+        And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing" in "English (United States)"
+        And I set its price to "$10.00" for "United States" channel
+        And I enable product samples
+        And I set its sample shipping category as "Standard"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the product "Dice Brewing" should appear in the store
+        And product "Dice Brewing" should have product samples enabled
 
     @ui @no-api
     Scenario: Adding a new configurable product with product samples
@@ -35,3 +79,4 @@ Feature: Adding a new product
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the store
+        And product "Gentleman Jack" should have product samples enabled

@@ -7,6 +7,7 @@ namespace Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Ui\Admin;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Tests\BabDev\SyliusProductSamplesPlugin\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
 use Tests\BabDev\SyliusProductSamplesPlugin\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Webmozart\Assert\Assert;
@@ -36,6 +37,30 @@ final class ManagingProductsContext implements Context
     public function iEnableProductSamples(): void
     {
         $this->createSimpleProductPage->enableProductSamples();
+    }
+
+    /**
+     * @When /^I set its(?:| default) sample price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsSamplePriceTo(string $price, ChannelInterface $channel): void
+    {
+        $this->createSimpleProductPage->specifySamplePrice($channel, $price);
+    }
+
+    /**
+     * @When /^I set its original sample price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsOriginalSamplePriceTo(int $originalPrice, ChannelInterface $channel): void
+    {
+        $this->createSimpleProductPage->specifyOriginalSamplePrice($channel, $originalPrice);
+    }
+
+    /**
+     * @When I set its sample shipping category as :shippingCategoryName
+     */
+    public function iSetItsSampleShippingCategoryAs(string $shippingCategoryName): void
+    {
+        $this->createSimpleProductPage->selectSampleShippingCategory($shippingCategoryName);
     }
 
     /**
