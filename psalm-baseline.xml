@@ -8,6 +8,14 @@
       <code>$this-&gt;extension ?: null</code>
     </MixedReturnStatement>
   </file>
+  <file src="src/EventListener/ProductListener.php">
+    <MixedArgument occurrences="1">
+      <code>$event-&gt;getSubject()</code>
+    </MixedArgument>
+    <MixedMethodCall occurrences="1">
+      <code>getVariants</code>
+    </MixedMethodCall>
+  </file>
   <file src="src/Form/Extension/ProductVariantTypeExtension.php">
     <PossiblyNullArgument occurrences="1">
       <code>$variant-&gt;getProduct()</code>

@@ -23,6 +23,8 @@ return static function (ContainerConfigurator $container): void {
     $services->set('babdev_sylius_product_samples.event_listener.product', ProductListener::class)
         ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_create', 'method' => 'ensureSampleVariantsHaveCodes'])
         ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_update', 'method' => 'ensureSampleVariantsHaveCodes'])
+        ->tag('kernel.event_listener', ['event' => 'sylius.product_variant.pre_create', 'method' => 'ensureSampleVariantsHaveCodes'])
+        ->tag('kernel.event_listener', ['event' => 'sylius.product_variant.pre_update', 'method' => 'ensureSampleVariantsHaveCodes'])
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.channel', ChannelTypeExtension::class)

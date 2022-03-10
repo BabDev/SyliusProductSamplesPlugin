@@ -12,21 +12,29 @@ final class ProductListener
 {
     public function ensureSampleVariantsHaveCodes(ResourceControllerEvent $event): void
     {
-        /** @var ProductInterface $product */
-        $product = $event->getSubject();
+        if ($event->getSubject() instanceof ProductInterface) {
+            foreach ($event->getSubject()->getVariants() as $variant) {
+                if (!$variant instanceof ProductVariantInterface) {
+                    continue;
+                }
 
-        foreach ($product->getVariants() as $variant) {
-            if (!$variant instanceof ProductVariantInterface) {
-                continue;
+                $this->ensureSampleVariantHasCode($variant);
             }
-
-            if (null === $sample = $variant->getSample()) {
-                continue;
-            }
-
-            if (null === $sample->getCode()) {
-                $sample->setCode(sprintf('SAMPLE-%s', $variant->getCode() ?? ''));
-            }
+        } elseif ($event->getSubject() instanceof ProductVariantInterface) {
+            $this->ensureSampleVariantHasCode($event->getSubject());
         }
+    }
+
+    private function ensureSampleVariantHasCode(ProductVariantInterface $variant): void
+    {
+        if (null === $sample = $variant->getSample()) {
+            return;
+        }
+
+        if (null !== $sample->getCode()) {
+            return;
+        }
+
+        $sample->setCode(sprintf('SAMPLE-%s', $variant->getCode() ?? ''));
     }
 }
