@@ -10,9 +10,14 @@
         </service>
 
         <service id="babdev_sylius_product_samples.behat.context.ui.admin.managing_products" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Ui\Admin\ManagingProductsContext">
-            <argument type="service" id="sylius.manager.product" />
             <argument type="service" id="babdev_sylius_product_samples.behat.page.admin.product.create_simple" />
             <argument type="service" id="babdev_sylius_product_samples.behat.page.admin.product.update_simple" />
+        </service>
+
+        <service id="babdev_sylius_product_samples.behat.context.ui.admin.managing_product_variants" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Ui\Admin\ManagingProductVariantsContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="babdev_sylius_product_samples.behat.page.admin.product_variant.create" />
+            <argument type="service" id="babdev_sylius_product_samples.behat.page.admin.product_variant.update" />
         </service>
     </services>
 </container>

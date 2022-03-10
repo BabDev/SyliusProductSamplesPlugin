@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="babdev_sylius_product_samples.behat.page.admin.product_variant.create" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Page\Admin\ProductVariant\CreatePage" parent="sylius.behat.page.admin.product_variant.create" public="false">
+            <argument type="string">sylius_admin_product_variant_create</argument>
+        </service>
+
+        <service id="babdev_sylius_product_samples.behat.page.admin.product_variant.update" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Page\Admin\ProductVariant\UpdatePage" parent="sylius.behat.page.admin.product_variant.update" public="false">
+            <argument type="string">sylius_admin_product_variant_update</argument>
+        </service>
+    </services>
+</container>

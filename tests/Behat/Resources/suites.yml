@@ -3,3 +3,4 @@
 imports:
     - suites/ui/channel/managing_channels_with_product_samples.yml
     - suites/ui/product/managing_products_with_product_samples.yml
+    - suites/ui/product/managing_product_variants_with_product_samples.yml

@@ -6,7 +6,6 @@ namespace Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Ui\Admin;
 
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use Behat\Behat\Context\Context;
-use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Tests\BabDev\SyliusProductSamplesPlugin\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
 use Tests\BabDev\SyliusProductSamplesPlugin\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
@@ -15,20 +14,9 @@ use Webmozart\Assert\Assert;
 final class ManagingProductsContext implements Context
 {
     public function __construct(
-        private ObjectManager $objectManager,
         private CreateSimpleProductPageInterface $createSimpleProductPage,
         private UpdateSimpleProductPageInterface $updateSimpleProductPage,
     ) {
-    }
-
-    /**
-     * @Given /^the ("([^"]*)" product) has product samples enabled$/
-     */
-    public function theProductHasSamplesEnabled(ProductInterface $product): void
-    {
-        $product->setSamplesActive(true);
-
-        $this->objectManager->flush();
     }
 
     /**

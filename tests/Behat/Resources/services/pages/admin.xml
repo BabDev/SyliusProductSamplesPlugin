@@ -4,5 +4,6 @@
     <imports>
         <import resource="admin/channel.xml" />
         <import resource="admin/product.xml" />
+        <import resource="admin/product_variant.xml" />
     </imports>
 </container>
