@@ -8,6 +8,11 @@
       <code>$this-&gt;extension ?: null</code>
     </MixedReturnStatement>
   </file>
+  <file src="src/Form/Extension/ProductVariantTypeExtension.php">
+    <PossiblyNullArgument occurrences="1">
+      <code>$variant-&gt;getProduct()</code>
+    </PossiblyNullArgument>
+  </file>
   <file src="src/Form/Type/SampleProductVariantType.php">
     <MixedArgument occurrences="1">
       <code>$variantForm-&gt;getData()</code>

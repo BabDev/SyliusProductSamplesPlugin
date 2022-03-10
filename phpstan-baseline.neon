@@ -6,6 +6,11 @@ parameters:
 			path: src/BabDevSyliusProductSamplesPlugin.php
 
 		-
+			message: "#^Parameter \\#1 \\$product of method Sylius\\\\Component\\\\Product\\\\Factory\\\\ProductVariantFactoryInterface\\:\\:createForProduct\\(\\) expects Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface, Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null given\\.$#"
+			count: 1
+			path: src/Form/Extension/ProductVariantTypeExtension.php
+
+		-
 			message: "#^Cannot call method getData\\(\\) on Symfony\\\\Component\\\\Form\\\\FormInterface\\|null\\.$#"
 			count: 2
 			path: src/Form/Type/SampleProductVariantType.php
