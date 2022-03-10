@@ -9,10 +9,30 @@ Feature: Editing a product
         And the store has a product "Dice Brewing"
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Disabling product samples
         Given the "Dice Brewing" product has product samples enabled
         And I want to modify the "Dice Brewing" product
         When I disable product samples for it
         And I save my changes
         Then this product should have product samples disabled
+
+    @ui @no-api
+    Scenario: Changing a simple product sample's price
+        Given the "Dice Brewing" product has product samples enabled
+        And I want to modify the "Dice Brewing" product
+        When I change its sample price to $15.00 for "United States" channel
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And it should have its sample priced at $15.00 for channel "United States"
+
+    @ui @no-api
+    Scenario: Changing a simple product sample's discount price
+        Given the "Dice Brewing" product has product samples enabled
+        And I want to modify the "Dice Brewing" product
+        When I change its sample price to $10.00 for "United States" channel
+        And I change its original sample price to "$15.00" for "United States" channel
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And it should have its sample priced at $10.00 for channel "United States"
+        And its original sample price should be "$15.00" for channel "United States"
