@@ -6,6 +6,16 @@ parameters:
 			path: src/BabDevSyliusProductSamplesPlugin.php
 
 		-
+			message: "#^Call to an undefined method Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\:\\:setSampleOf\\(\\)\\.$#"
+			count: 1
+			path: src/Form/Extension/ProductVariantTypeExtension.php
+
+		-
+			message: "#^Cannot call method addVariant\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null\\.$#"
+			count: 1
+			path: src/Form/Extension/ProductVariantTypeExtension.php
+
+		-
 			message: "#^Parameter \\#1 \\$product of method Sylius\\\\Component\\\\Product\\\\Factory\\\\ProductVariantFactoryInterface\\:\\:createForProduct\\(\\) expects Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface, Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null given\\.$#"
 			count: 1
 			path: src/Form/Extension/ProductVariantTypeExtension.php
@@ -27,11 +37,6 @@ parameters:
 
 		-
 			message: "#^Only booleans are allowed in a negated boolean, mixed given\\.$#"
-			count: 1
-			path: src/Form/Type/SampleProductVariantType.php
-
-		-
-			message: "#^Parameter \\#1 \\$sampleOf of method BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface\\:\\:setSampleOf\\(\\) expects Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null, mixed given\\.$#"
 			count: 1
 			path: src/Form/Type/SampleProductVariantType.php
 

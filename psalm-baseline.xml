@@ -20,15 +20,19 @@
     <PossiblyNullArgument occurrences="1">
       <code>$variant-&gt;getProduct()</code>
     </PossiblyNullArgument>
+    <PossiblyNullReference occurrences="1">
+      <code>addVariant</code>
+    </PossiblyNullReference>
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>setSampleOf</code>
+    </UndefinedInterfaceMethod>
   </file>
   <file src="src/Form/Type/SampleProductVariantType.php">
-    <MixedArgument occurrences="1">
-      <code>$variantForm-&gt;getData()</code>
-    </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$productVariant</code>
     </MixedAssignment>
-    <PossiblyNullReference occurrences="2">
+    <PossiblyNullReference occurrences="3">
+      <code>getData</code>
       <code>getParent</code>
       <code>getSamplesActive</code>
     </PossiblyNullReference>
