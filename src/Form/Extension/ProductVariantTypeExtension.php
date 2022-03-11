@@ -32,7 +32,10 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
             Assert::isInstanceOf($variant, ProductVariantInterface::class);
 
             if (null === $variant->getSample()) {
-                $variant->setSample($this->productVariantFactory->createForProduct($variant->getProduct()));
+                $sample = $this->productVariantFactory->createForProduct($variant->getProduct());
+
+                $variant->setSample($sample);
+                $variant->getProduct()->addVariant($sample);
             }
         });
     }

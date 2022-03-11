@@ -35,6 +35,7 @@ final class ProductContext implements Context
                 $sample->setCode(sprintf('SAMPLE-%s', $variant->getCode() ?? ''));
 
                 $variant->setSample($sample);
+                $product->addVariant($sample);
             }
         }
 
