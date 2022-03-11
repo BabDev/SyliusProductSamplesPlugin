@@ -6,6 +6,7 @@
 
         <service id="babdev_sylius_product_samples.behat.context.setup.product" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Setup\ProductContext">
             <argument type="service" id="sylius.manager.product" />
+            <argument type="service" id="sylius.factory.channel_pricing" />
             <argument type="service" id="sylius.factory.product_variant" />
         </service>
     </services>

@@ -23,7 +23,6 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @When /^I set its(?:| default) sample price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
-     * @When I do not set its sample price
      */
     public function iSetItsSamplePriceTo(?string $price = null, ?ChannelInterface $channel = null)
     {

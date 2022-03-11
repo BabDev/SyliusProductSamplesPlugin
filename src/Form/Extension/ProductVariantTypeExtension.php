@@ -33,6 +33,7 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
 
             if (null === $variant->getSample()) {
                 $sample = $this->productVariantFactory->createForProduct($variant->getProduct());
+                $sample->setSampleOf($variant);
 
                 $variant->setSample($sample);
                 $variant->getProduct()->addVariant($sample);

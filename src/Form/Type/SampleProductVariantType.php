@@ -71,6 +71,19 @@ final class SampleProductVariantType extends AbstractResourceType
             /** @var ProductVariantInterface $sampleVariant */
             $sampleVariant = $event->getData();
 
+            if (null !== $sampleVariant->getCode()) {
+                return;
+            }
+
+            /** @var ProductVariantInterface $actualVariant */
+            $actualVariant = $event->getForm()->getParent()->getData();
+            $sampleVariant->setCode(sprintf('SAMPLE-%s', $actualVariant->getCode() ?? ''));
+        });
+
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
+            /** @var ProductVariantInterface $sampleVariant */
+            $sampleVariant = $event->getData();
+
             $variantForm = $event->getForm()->getParent();
 
             if (null !== $productForm = $variantForm->getParent()) {
@@ -95,7 +108,7 @@ final class SampleProductVariantType extends AbstractResourceType
             $actualVariant = $variantForm->getData();
             $actualVariant->setSample($sampleVariant);
 
-            $sampleVariant->setSampleOf($variantForm->getData());
+            $sampleVariant->setSampleOf($actualVariant);
         });
     }
 }

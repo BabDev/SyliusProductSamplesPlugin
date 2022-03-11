@@ -11,7 +11,7 @@ Feature: Editing a product
 
     @ui @no-api
     Scenario: Disabling product samples
-        Given the "Dice Brewing" product has product samples enabled
+        Given the "Dice Brewing" product has product samples enabled for all channels
         And I want to modify the "Dice Brewing" product
         When I disable product samples for it
         And I save my changes
@@ -19,7 +19,7 @@ Feature: Editing a product
 
     @ui @no-api
     Scenario: Changing a simple product sample's price
-        Given the "Dice Brewing" product has product samples enabled
+        Given the "Dice Brewing" product has product samples enabled for all channels
         And I want to modify the "Dice Brewing" product
         When I change its sample price to $15.00 for "United States" channel
         And I save my changes
@@ -28,7 +28,7 @@ Feature: Editing a product
 
     @ui @no-api
     Scenario: Changing a simple product sample's discount price
-        Given the "Dice Brewing" product has product samples enabled
+        Given the "Dice Brewing" product has product samples enabled for all channels
         And I want to modify the "Dice Brewing" product
         When I change its sample price to $10.00 for "United States" channel
         And I change its original sample price to "$15.00" for "United States" channel
