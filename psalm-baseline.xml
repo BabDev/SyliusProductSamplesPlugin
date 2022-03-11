@@ -8,7 +8,7 @@
       <code>$this-&gt;extension ?: null</code>
     </MixedReturnStatement>
   </file>
-  <file src="src/EventListener/ProductListener.php">
+  <file src="src/EventListener/SampleVariantGeneratorListener.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>$channel</code>
     </ArgumentTypeCoercion>
