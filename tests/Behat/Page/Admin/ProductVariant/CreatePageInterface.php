@@ -10,4 +10,8 @@ use Sylius\Component\Core\Model\ChannelInterface;
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     public function specifySamplePrice(string $price, ChannelInterface $channel): void;
+
+    public function specifyOriginalSamplePrice(string $originalPrice, ChannelInterface $channel): void;
+
+    public function selectSampleShippingCategory(string $shippingCategoryName): void;
 }

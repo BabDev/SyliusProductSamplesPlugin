@@ -34,6 +34,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
         And product "Dice Brewing" should have product samples enabled
+        And product "Dice Brewing" should have its sample priced at $0.00 for channel "United States"
 
     @ui @no-api
     Scenario: Adding a new simple product with product samples with price
@@ -48,6 +49,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
         And product "Dice Brewing" should have product samples enabled
+        And product "Dice Brewing" should have its sample priced at $2.50 for channel "United States"
 
     @ui @no-api
     Scenario: Adding a new simple product with product samples with discounted price
@@ -63,6 +65,8 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
         And product "Dice Brewing" should have product samples enabled
+        And product "Dice Brewing" should have its sample priced at $1.00 for channel "United States"
+        And product "Dice Brewing" should have its sample originally priced at $2.50 for channel "United States"
 
     @ui @no-api
     Scenario: Adding a new simple product with product samples with specific shipping category

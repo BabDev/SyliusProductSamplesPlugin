@@ -24,19 +24,48 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I set its(?:| default) sample price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iSetItsSamplePriceTo(?string $price = null, ?ChannelInterface $channel = null)
+    public function iSetItsSamplePriceTo(?string $price = null, ?ChannelInterface $channel = null): void
     {
         $this->createPage->specifySamplePrice($price ?? '', $channel ?? $this->sharedStorage->get('channel'));
+    }
+
+    /**
+     * @When /^I set its original sample price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsOriginalSamplePriceTo(string $originalPrice, ChannelInterface $channel): void
+    {
+        $this->createPage->specifyOriginalSamplePrice($originalPrice, $channel);
+    }
+
+    /**
+     * @When I set its sample shipping category as :shippingCategoryName
+     */
+    public function iSetItsSampleShippingCategoryAs(string $shippingCategoryName): void
+    {
+        $this->createPage->selectSampleShippingCategory($shippingCategoryName);
     }
 
     /**
      * @Then /^the (variant with code "[^"]+") should have its sample priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
      * @Then /^the (variant with code "[^"]+") should have its sample priced at "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
      */
-    public function theVariantWithCodeShouldHaveItsSamplePricedAtForChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel)
+    public function theVariantWithCodeShouldHaveItsSamplePricedAtForChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
         Assert::same($this->updatePage->getSamplePriceForChannel($channel), $price);
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should have its sample originally priced at (?:€|£|\$)([^"]+) for (channel "[^"]+")$/
+     */
+    public function theVariantWithCodeShouldHaveItsSampleOriginallyPricedAtForChannel(
+        ProductVariantInterface $productVariant,
+        string $price,
+        ChannelInterface $channel
+    ): void {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::same($this->updatePage->getOriginalSamplePriceForChannel($channel), $price);
     }
 }

@@ -19,7 +19,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('sample_price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
-    public function specifyOriginalSamplePrice(ChannelInterface $channel, int $originalPrice): void
+    public function specifyOriginalSamplePrice(ChannelInterface $channel, string $originalPrice): void
     {
         $this->getElement('sample_original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }

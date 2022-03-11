@@ -13,7 +13,7 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function specifySamplePrice(ChannelInterface $channel, string $price): void;
 
-    public function specifyOriginalSamplePrice(ChannelInterface $channel, int $originalPrice): void;
+    public function specifyOriginalSamplePrice(ChannelInterface $channel, string $originalPrice): void;
 
     public function selectSampleShippingCategory(string $shippingCategoryName): void;
 }

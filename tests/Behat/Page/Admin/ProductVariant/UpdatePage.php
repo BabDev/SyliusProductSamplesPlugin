@@ -14,10 +14,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('sample_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
+    public function getOriginalSamplePriceForChannel(ChannelInterface $channel): string
+    {
+        return $this->getElement('sample_original_price', ['%channelCode%' => $channel->getCode()])->getValue();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'sample_price' => '#sylius_product_variant_sample_channelPricings input[id*="%channelCode%"]',
+            'sample_original_price' => '#sylius_product_variant_sample_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
+            'sample_shipping_category' => '#sylius_product_variant_sample_shippingCategory',
         ]);
     }
 }

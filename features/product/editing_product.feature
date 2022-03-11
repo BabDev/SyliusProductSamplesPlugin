@@ -35,4 +35,4 @@ Feature: Editing a product
         And I save my changes
         Then I should be notified that it has been successfully edited
         And it should have its sample priced at $10.00 for channel "United States"
-        And its original sample price should be "$15.00" for channel "United States"
+        And it should have its sample originally priced at $15.00 for channel "United States"

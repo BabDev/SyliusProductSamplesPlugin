@@ -10,4 +10,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     public function getSamplePriceForChannel(ChannelInterface $channel): string;
+
+    public function getOriginalSamplePriceForChannel(ChannelInterface $channel): string;
 }

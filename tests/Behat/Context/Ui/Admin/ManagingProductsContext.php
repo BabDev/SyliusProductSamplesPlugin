@@ -38,7 +38,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I set its original sample price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iSetItsOriginalSamplePriceTo(int $originalPrice, ChannelInterface $channel): void
+    public function iSetItsOriginalSamplePriceTo(string $originalPrice, ChannelInterface $channel): void
     {
         $this->createSimpleProductPage->specifyOriginalSamplePrice($channel, $originalPrice);
     }
@@ -117,9 +117,10 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(its|this products) original sample price should be "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
+     * @Then /^(it|this product) should have its sample originally priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
+     * @Then /^(product "[^"]+") should have its sample originally priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
      */
-    public function itsOriginalSamplePriceForChannel(ProductInterface $product, string $originalPrice, ChannelInterface $channel)
+    public function itsOriginalSamplePriceForChannel(ProductInterface $product, string $originalPrice, ChannelInterface $channel): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
