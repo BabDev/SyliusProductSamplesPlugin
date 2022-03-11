@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use BabDev\SyliusProductSamplesPlugin\EventListener\SampleVariantCodeGeneratorListener;
 use BabDev\SyliusProductSamplesPlugin\EventListener\SampleVariantGeneratorListener;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ChannelTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductTypeExtension;
@@ -19,6 +20,17 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 
 return static function (ContainerConfigurator $container): void {
     $services = $container->services();
+
+    $services->set('babdev_sylius_product_samples.event_listener.sample_variant_code_generator', SampleVariantCodeGeneratorListener::class)
+        ->args([
+            service('sylius.factory.channel_pricing'),
+            service('sylius.factory.product_variant'),
+        ])
+        ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_create', 'method' => 'ensureSampleVariantsHaveCodes', 'priority' => -10])
+        ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_update', 'method' => 'ensureSampleVariantsHaveCodes', 'priority' => -10])
+        ->tag('kernel.event_listener', ['event' => 'sylius.product_variant.pre_create', 'method' => 'ensureSampleVariantsHaveCodes', 'priority' => -10])
+        ->tag('kernel.event_listener', ['event' => 'sylius.product_variant.pre_update', 'method' => 'ensureSampleVariantsHaveCodes', 'priority' => -10])
+    ;
 
     $services->set('babdev_sylius_product_samples.event_listener.sample_variant_generator', SampleVariantGeneratorListener::class)
         ->args([

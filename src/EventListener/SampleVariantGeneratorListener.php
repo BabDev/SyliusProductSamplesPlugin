@@ -53,6 +53,9 @@ final class SampleVariantGeneratorListener
         }
     }
 
+    /**
+     * @todo The code prefix should be configurable
+     */
     private function generateSampleVariant(ProductInterface $product, ProductVariantInterface $variant): void
     {
         /** @var ProductVariantInterface $sample */

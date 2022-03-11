@@ -67,6 +67,9 @@ final class SampleProductVariantType extends AbstractResourceType
             ]);
         });
 
+        /**
+         * @todo The code prefix should be configurable
+         */
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
             /** @var ProductVariantInterface $sampleVariant */
             $sampleVariant = $event->getData();
