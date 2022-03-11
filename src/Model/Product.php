@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace BabDev\SyliusProductSamplesPlugin\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\Product as CoreProduct;
 use Sylius\Component\Product\Model\ProductVariantInterface as BaseProductVariantInterface;
 
-trait ProductTrait
+class Product extends CoreProduct implements ProductInterface
 {
     protected bool $samplesActive = false;
 
