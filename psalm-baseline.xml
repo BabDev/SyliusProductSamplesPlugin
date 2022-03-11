@@ -9,12 +9,12 @@
     </MixedReturnStatement>
   </file>
   <file src="src/EventListener/ProductListener.php">
-    <MixedArgument occurrences="1">
-      <code>$event-&gt;getSubject()</code>
-    </MixedArgument>
-    <MixedMethodCall occurrences="1">
-      <code>getVariants</code>
-    </MixedMethodCall>
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$channel</code>
+    </ArgumentTypeCoercion>
+    <PossiblyNullReference occurrences="1">
+      <code>getCode</code>
+    </PossiblyNullReference>
   </file>
   <file src="src/Form/Extension/ProductVariantTypeExtension.php">
     <PossiblyNullArgument occurrences="1">

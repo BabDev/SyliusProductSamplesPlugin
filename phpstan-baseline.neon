@@ -6,6 +6,21 @@ parameters:
 			path: src/BabDevSyliusProductSamplesPlugin.php
 
 		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductInterface' will always evaluate to true\\.$#"
+			count: 1
+			path: src/EventListener/ProductListener.php
+
+		-
+			message: "#^Cannot call method getCode\\(\\) on Sylius\\\\Component\\\\Core\\\\Model\\\\ChannelInterface\\|null\\.$#"
+			count: 1
+			path: src/EventListener/ProductListener.php
+
+		-
+			message: "#^Parameter \\#2 \\$channel of method BabDev\\\\SyliusProductSamplesPlugin\\\\EventListener\\\\ProductListener\\:\\:createChannelPricingForChannel\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\ChannelInterface\\|null, Sylius\\\\Component\\\\Channel\\\\Model\\\\ChannelInterface given\\.$#"
+			count: 1
+			path: src/EventListener/ProductListener.php
+
+		-
 			message: "#^Call to an undefined method Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\:\\:setSampleOf\\(\\)\\.$#"
 			count: 1
 			path: src/Form/Extension/ProductVariantTypeExtension.php
