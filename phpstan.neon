@@ -1,13 +1,13 @@
 includes:
   - phpstan-baseline.neon
+
 parameters:
+    level: max
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
-
-    level: max
-
     paths:
-        - 'src'
+        - src
+        - tests/Behat
 
     excludePaths:
         # Makes PHPStan crash
