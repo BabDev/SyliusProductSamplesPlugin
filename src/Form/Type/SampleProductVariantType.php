@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BabDev\SyliusProductSamplesPlugin\Form\Type;
 
-use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
+use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\ManageSampleProductVariantAssignmentsFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -21,6 +21,7 @@ final class SampleProductVariantType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->addEventSubscriber(new ManageSampleProductVariantAssignmentsFormSubscriber())
             ->add('shippingCategory', ShippingCategoryChoiceType::class, [
                 'required' => false,
                 'placeholder' => 'sylius.ui.no_requirement',
@@ -65,53 +66,6 @@ final class SampleProductVariantType extends AbstractResourceType
                 ],
                 'label' => 'sylius.form.variant.price',
             ]);
-        });
-
-        /**
-         * @todo The code prefix should be configurable
-         */
-        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
-            /** @var ProductVariantInterface $sampleVariant */
-            $sampleVariant = $event->getData();
-
-            if (null !== $sampleVariant->getCode()) {
-                return;
-            }
-
-            /** @var ProductVariantInterface $actualVariant */
-            $actualVariant = $event->getForm()->getParent()->getData();
-            $sampleVariant->setCode(sprintf('SAMPLE-%s', $actualVariant->getCode() ?? ''));
-        });
-
-        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
-            /** @var ProductVariantInterface $sampleVariant */
-            $sampleVariant = $event->getData();
-
-            $variantForm = $event->getForm()->getParent();
-
-            if (null !== $productForm = $variantForm->getParent()) {
-                if (!$productForm->get('samplesActive')->getData() && null === $sampleVariant->getId()) {
-                    $event->setData(null);
-
-                    return;
-                }
-            } else {
-                if (!$sampleVariant->getProduct()->getSamplesActive() && null === $sampleVariant->getId()) {
-                    $event->setData(null);
-
-                    return;
-                }
-            }
-
-            if (null !== $sampleVariant->getId()) {
-                return;
-            }
-
-            /** @var ProductVariantInterface $actualVariant */
-            $actualVariant = $variantForm->getData();
-            $actualVariant->setSample($sampleVariant);
-
-            $sampleVariant->setSampleOf($actualVariant);
         });
     }
 }
