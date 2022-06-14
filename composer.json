@@ -43,6 +43,9 @@
         "symfony/webpack-encore-bundle": "^1.14",
         "vimeo/psalm": "4.23.0"
     },
+    "conflict": {
+        "symplify/easy-coding-standard": ">=10.2.11"
+    },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
