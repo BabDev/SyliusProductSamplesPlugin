@@ -21,6 +21,31 @@ parameters:
 			path: src/EventListener/SampleVariantGeneratorListener.php
 
 		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
+			count: 1
+			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
+
+		-
+			message: "#^Cannot call method getData\\(\\) on Symfony\\\\Component\\\\Form\\\\FormInterface\\|null\\.$#"
+			count: 1
+			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
+
+		-
+			message: "#^Cannot call method getParent\\(\\) on Symfony\\\\Component\\\\Form\\\\FormInterface\\|null\\.$#"
+			count: 1
+			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
+
+		-
+			message: "#^Cannot call method getSamplesActive\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null\\.$#"
+			count: 1
+			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, mixed given\\.$#"
+			count: 1
+			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
+
+		-
 			message: "#^Call to an undefined method Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\:\\:setSampleOf\\(\\)\\.$#"
 			count: 1
 			path: src/Form/Extension/ProductVariantTypeExtension.php
@@ -34,26 +59,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$product of method Sylius\\\\Component\\\\Product\\\\Factory\\\\ProductVariantFactoryInterface\\:\\:createForProduct\\(\\) expects Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface, Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null given\\.$#"
 			count: 1
 			path: src/Form/Extension/ProductVariantTypeExtension.php
-
-		-
-			message: "#^Cannot call method getData\\(\\) on Symfony\\\\Component\\\\Form\\\\FormInterface\\|null\\.$#"
-			count: 2
-			path: src/Form/Type/SampleProductVariantType.php
-
-		-
-			message: "#^Cannot call method getParent\\(\\) on Symfony\\\\Component\\\\Form\\\\FormInterface\\|null\\.$#"
-			count: 1
-			path: src/Form/Type/SampleProductVariantType.php
-
-		-
-			message: "#^Cannot call method getSamplesActive\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null\\.$#"
-			count: 1
-			path: src/Form/Type/SampleProductVariantType.php
-
-		-
-			message: "#^Only booleans are allowed in a negated boolean, mixed given\\.$#"
-			count: 1
-			path: src/Form/Type/SampleProductVariantType.php
 
 		-
 			message: "#^Cannot call method getCode\\(\\) on Sylius\\\\Component\\\\Core\\\\Model\\\\ChannelInterface\\|null\\.$#"

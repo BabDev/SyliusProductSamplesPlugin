@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BabDev\SyliusProductSamplesPlugin\Form\Type;
 
 use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\ManageSampleProductVariantAssignmentsFormSubscriber;
+use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -55,6 +56,7 @@ final class SampleProductVariantType extends AbstractResourceType
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+            /** @var ProductVariantInterface $productVariant */
             $productVariant = $event->getData();
 
             $event->getForm()->add('channelPricings', ChannelCollectionType::class, [
