@@ -51,6 +51,21 @@ parameters:
 			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
 
 		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
+			count: 1
+			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
+
+		-
+			message: "#^Cannot call method getTranslations\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null\\.$#"
+			count: 1
+			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
+
+		-
+			message: "#^Cannot call method hasTranslation\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null\\.$#"
+			count: 1
+			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
+
+		-
 			message: "#^Call to an undefined method Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\:\\:setSampleOf\\(\\)\\.$#"
 			count: 1
 			path: src/Form/Extension/ProductVariantTypeExtension.php

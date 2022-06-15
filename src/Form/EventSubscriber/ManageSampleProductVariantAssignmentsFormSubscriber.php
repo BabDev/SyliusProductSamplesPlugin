@@ -16,7 +16,7 @@ final class ManageSampleProductVariantAssignmentsFormSubscriber implements Event
     public static function getSubscribedEvents(): array
     {
         return [
-            FormEvents::SUBMIT => 'onSubmit',
+            FormEvents::SUBMIT => ['onSubmit', 0],
         ];
     }
 

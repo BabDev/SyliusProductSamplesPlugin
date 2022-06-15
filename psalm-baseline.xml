@@ -50,6 +50,16 @@
       <code>getSamplesActive</code>
     </UndefinedInterfaceMethod>
   </file>
+  <file src="src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php">
+    <PossiblyNullReference occurrences="2">
+      <code>getTranslations</code>
+      <code>hasTranslation</code>
+    </PossiblyNullReference>
+    <UnnecessaryVarAnnotation occurrences="2">
+      <code>TranslationInterface</code>
+      <code>TranslationInterface</code>
+    </UnnecessaryVarAnnotation>
+  </file>
   <file src="src/Form/Extension/ProductVariantTypeExtension.php">
     <PossiblyNullArgument occurrences="1">
       <code>$variant-&gt;getProduct()</code>
