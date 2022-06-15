@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber;
 
+use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -11,11 +12,13 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Webmozart\Assert\Assert;
 
-/**
- * @todo The code prefix should be configurable
- */
 final class EnsureSampleVariantsHaveValidCodesFormSubscriber implements EventSubscriberInterface
 {
+    public function __construct(
+        private SampleVariantCodeGeneratorInterface $codeGenerator,
+    ) {
+    }
+
     public static function getSubscribedEvents(): array
     {
         return [
@@ -46,10 +49,12 @@ final class EnsureSampleVariantsHaveValidCodesFormSubscriber implements EventSub
             return;
         }
 
-        if (null !== $sample->getCode() && 'SAMPLE-' !== $sample->getCode()) {
+        Assert::isInstanceOf($sample, ProductVariantInterface::class);
+
+        if (null !== $sample->getCode() && $this->codeGenerator->getPrefix() !== $sample->getCode()) {
             return;
         }
 
-        $sample->setCode(sprintf('SAMPLE-%s', $variant->getCode() ?? ''));
+        $sample->setCode($this->codeGenerator->generate($sample));
     }
 }

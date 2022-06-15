@@ -6,6 +6,7 @@ namespace BabDev\SyliusProductSamplesPlugin\Form\Extension;
 
 use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\EnsureSampleVariantsHaveValidCodesFormSubscriber;
 use BabDev\SyliusProductSamplesPlugin\Form\Type\SampleProductVariantType;
+use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
@@ -17,14 +18,16 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantTypeExtension extends AbstractTypeExtension
 {
-    public function __construct(private ProductVariantFactoryInterface $productVariantFactory)
-    {
+    public function __construct(
+        private ProductVariantFactoryInterface $productVariantFactory,
+        private SampleVariantCodeGeneratorInterface $codeGenerator,
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->addEventSubscriber(new EnsureSampleVariantsHaveValidCodesFormSubscriber())
+            ->addEventSubscriber(new EnsureSampleVariantsHaveValidCodesFormSubscriber($this->codeGenerator))
             ->add('sample', SampleProductVariantType::class)
         ;
 

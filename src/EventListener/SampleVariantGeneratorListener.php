@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BabDev\SyliusProductSamplesPlugin\EventListener;
 
+use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -21,6 +22,7 @@ final class SampleVariantGeneratorListener
     public function __construct(
         private FactoryInterface $channelPricingFactory,
         private ProductVariantFactoryInterface $productVariantFactory,
+        private SampleVariantCodeGeneratorInterface $codeGenerator,
         private int $defaultPrice = 0,
     ) {
     }
@@ -53,17 +55,15 @@ final class SampleVariantGeneratorListener
         }
     }
 
-    /**
-     * @todo The code prefix should be configurable
-     */
     private function generateSampleVariant(ProductInterface $product, ProductVariantInterface $variant): void
     {
         /** @var ProductVariantInterface $sample */
         $sample = $this->productVariantFactory->createForProduct($product);
-        $sample->setCode(sprintf('SAMPLE-%s', $variant->getCode() ?? ''));
         $sample->setSampleOf($variant);
+        $sample->setCode($this->codeGenerator->generate($sample));
 
         $variant->setSample($sample);
+
         $product->addVariant($sample);
 
         foreach ($product->getChannels() as $channel) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spec\BabDev\SyliusProductSamplesPlugin\EventListener;
 
+use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ChannelInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
@@ -18,9 +19,12 @@ final class SampleVariantGeneratorListenerSpec extends ObjectBehavior
 {
     private const DEFAULT_PRICE = 0;
 
-    public function let(FactoryInterface $channelPricingFactory, ProductVariantFactoryInterface $productVariantFactory): void
-    {
-        $this->beConstructedWith($channelPricingFactory, $productVariantFactory, self::DEFAULT_PRICE);
+    public function let(
+        FactoryInterface $channelPricingFactory,
+        ProductVariantFactoryInterface $productVariantFactory,
+        SampleVariantCodeGeneratorInterface $codeGenerator,
+    ): void {
+        $this->beConstructedWith($channelPricingFactory, $productVariantFactory, $codeGenerator, self::DEFAULT_PRICE);
     }
 
     public function it_does_not_generate_sample_variants_if_product_samples_are_disabled(
@@ -36,6 +40,7 @@ final class SampleVariantGeneratorListenerSpec extends ObjectBehavior
     public function it_generates_sample_variants_if_product_samples_are_enabled_for_variants_without_samples(
         FactoryInterface $channelPricingFactory,
         ProductVariantFactoryInterface $productVariantFactory,
+        SampleVariantCodeGeneratorInterface $codeGenerator,
         ResourceControllerEvent $event,
         ProductInterface $product,
         ProductVariantInterface $variant1,
@@ -48,7 +53,12 @@ final class SampleVariantGeneratorListenerSpec extends ObjectBehavior
         ChannelPricingInterface $newChannelPricingForSampleOfVariant1,
         ChannelPricingInterface $newChannelPricingForSampleOfVariant3,
     ): void {
+        $newSampleOfVariant1Code = 'SAMPLE-variant-1';
+        $newSampleOfVariant3Code = 'SAMPLE-variant-3';
+
         $productVariantFactory->createForProduct($product)->willReturn($newSampleOfVariant1, $newSampleOfVariant3);
+        $codeGenerator->generate($newSampleOfVariant1)->willReturn($newSampleOfVariant1Code);
+        $codeGenerator->generate($newSampleOfVariant3)->willReturn($newSampleOfVariant3Code);
         $channelPricingFactory->createNew()->willReturn($newChannelPricingForSampleOfVariant1, $newChannelPricingForSampleOfVariant3);
 
         $channel->getCode()->willReturn('web');
@@ -65,10 +75,9 @@ final class SampleVariantGeneratorListenerSpec extends ObjectBehavior
 
         $variant1->getSampleOf()->willReturn(null);
         $variant1->getSample()->willReturn(null);
-        $variant1->getCode()->willReturn('variant-1');
 
-        $newSampleOfVariant1->setCode('SAMPLE-variant-1')->shouldBeCalled();
         $newSampleOfVariant1->setSampleOf($variant1)->shouldBeCalled();
+        $newSampleOfVariant1->setCode($newSampleOfVariant1Code)->shouldBeCalled();
 
         $variant1->setSample($newSampleOfVariant1);
 
@@ -98,9 +107,8 @@ final class SampleVariantGeneratorListenerSpec extends ObjectBehavior
 
         $variant3->getSampleOf()->willReturn(null);
         $variant3->getSample()->willReturn(null);
-        $variant3->getCode()->willReturn('variant-3');
 
-        $newSampleOfVariant3->setCode('SAMPLE-variant-3')->shouldBeCalled();
+        $newSampleOfVariant3->setCode($newSampleOfVariant3Code)->shouldBeCalled();
         $newSampleOfVariant3->setSampleOf($variant3)->shouldBeCalled();
 
         $variant3->setSample($newSampleOfVariant3);

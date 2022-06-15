@@ -11,9 +11,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Webmozart\Assert\Assert;
 
-/**
- * @todo The code prefix should be configurable
- */
 final class ManageSampleProductVariantAssignmentsFormSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array

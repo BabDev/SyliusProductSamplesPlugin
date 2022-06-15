@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spec\BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber;
 
+use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ChannelInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
@@ -14,7 +15,13 @@ use Symfony\Component\Form\FormInterface;
 
 final class EnsureSampleVariantsHaveValidCodesFormSubscriberSpec extends ObjectBehavior
 {
+    public function let(SampleVariantCodeGeneratorInterface $codeGenerator): void
+    {
+        $this->beConstructedWith($codeGenerator);
+    }
+
     public function it_generates_the_code_for_sample_variants_after_submitting_the_product_form(
+        SampleVariantCodeGeneratorInterface $codeGenerator,
         FormEvent $event,
         FormInterface $form,
         ProductInterface $product,
@@ -22,6 +29,8 @@ final class EnsureSampleVariantsHaveValidCodesFormSubscriberSpec extends ObjectB
         ProductVariantInterface $variant2,
         ProductVariantInterface $sampleOfVariant2,
     ): void {
+        $sampleOfVariant2Code = 'SAMPLE-variant-2';
+
         $form->isRoot()->willReturn(true);
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn($product);
@@ -39,9 +48,10 @@ final class EnsureSampleVariantsHaveValidCodesFormSubscriberSpec extends ObjectB
          */
 
         $variant2->getSample()->willReturn($sampleOfVariant2);
-        $variant2->getCode()->willReturn('variant-2');
         $sampleOfVariant2->getCode()->willReturn(null);
-        $sampleOfVariant2->setCode('SAMPLE-variant-2')->shouldBeCalled();
+        $codeGenerator->getPrefix()->willReturn('SAMPLE-');
+        $codeGenerator->generate($sampleOfVariant2)->willReturn($sampleOfVariant2Code);
+        $sampleOfVariant2->setCode($sampleOfVariant2Code)->shouldBeCalled();
 
         /*
          * Sample of Variant 2
@@ -53,19 +63,23 @@ final class EnsureSampleVariantsHaveValidCodesFormSubscriberSpec extends ObjectB
     }
 
     public function it_generates_the_code_for_sample_variants_after_submitting_the_product_variant_form(
+        SampleVariantCodeGeneratorInterface $codeGenerator,
         FormEvent $event,
         FormInterface $form,
         ProductVariantInterface $variant,
         ProductVariantInterface $sampleOfVariant,
     ): void {
+        $sampleOfVariantCode = 'SAMPLE-variant';
+
         $form->isRoot()->willReturn(true);
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn($variant);
 
         $variant->getSample()->willReturn($sampleOfVariant);
-        $variant->getCode()->willReturn('variant');
         $sampleOfVariant->getCode()->willReturn(null);
-        $sampleOfVariant->setCode('SAMPLE-variant')->shouldBeCalled();
+        $codeGenerator->getPrefix()->willReturn('SAMPLE-');
+        $codeGenerator->generate($sampleOfVariant)->willReturn($sampleOfVariantCode);
+        $sampleOfVariant->setCode($sampleOfVariantCode)->shouldBeCalled();
 
         $this->postSubmit($event);
     }

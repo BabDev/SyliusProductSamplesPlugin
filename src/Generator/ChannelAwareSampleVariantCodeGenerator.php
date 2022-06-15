@@ -12,8 +12,8 @@ use Webmozart\Assert\Assert;
 final class ChannelAwareSampleVariantCodeGenerator implements SampleVariantCodeGeneratorInterface
 {
     public function __construct(
-        private SampleVariantCodeGeneratorInterface $decoratedGenerator,
         private ChannelContextInterface $channelContext,
+        private SampleVariantCodeGeneratorInterface $decoratedGenerator,
     ) {
     }
 

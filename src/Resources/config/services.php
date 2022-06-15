@@ -28,6 +28,7 @@ return static function (ContainerConfigurator $container): void {
         ->args([
             service('sylius.factory.channel_pricing'),
             service('sylius.factory.product_variant'),
+            service(SampleVariantCodeGeneratorInterface::class),
         ])
         ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_create', 'method' => 'ensureSampleVariantsExist'])
         ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_update', 'method' => 'ensureSampleVariantsExist'])
@@ -38,12 +39,16 @@ return static function (ContainerConfigurator $container): void {
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.product', ProductTypeExtension::class)
+        ->args([
+            service(SampleVariantCodeGeneratorInterface::class),
+        ])
         ->tag('form.type_extension', ['extended-type' => ProductType::class])
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.product_variant', ProductVariantTypeExtension::class)
         ->args([
             service('sylius.factory.product_variant'),
+            service(SampleVariantCodeGeneratorInterface::class),
         ])
         ->tag('form.type_extension', ['extended-type' => ProductVariantType::class])
     ;
