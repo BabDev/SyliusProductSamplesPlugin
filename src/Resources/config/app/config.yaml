@@ -11,3 +11,9 @@ sylius_ui:
                 product_samples:
                     template: "@BabDevSyliusProductSamplesPlugin/Admin/Channel/_product_samples_form.html.twig"
                     priority: 0
+
+        sylius.shop.product.show.right_sidebar:
+            blocks:
+                request_sample:
+                    template: "@BabDevSyliusProductSamplesPlugin/Shop/Product/Show/_request_sample.html.twig"
+                    priority: 9

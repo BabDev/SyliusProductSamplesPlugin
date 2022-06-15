@@ -10,3 +10,5 @@ babdev_sylius_product_samples:
 
     ui:
         product_samples: 'Product Samples'
+        request_a_free_sample: 'Request a Free Sample'
+        request_a_paid_sample: 'Request a Sample (%price%)'

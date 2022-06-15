@@ -1,0 +1,16 @@
+{% import '@SyliusShop/Common/Macro/money.html.twig' as money %}
+
+{% if product.samplesActive %}
+    {% set variant = product|sylius_resolve_variant %}
+    {% set sampleVariant = variant.sample %}
+    {% set samplePricing = sampleVariant.getChannelPricingForChannel(sylius.channel) %}
+
+    <button type="button" class="ui secondary icon labeled basic button" id="sylius-request-a-sample" data-free-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans|e('html_attr') }}" data-paid-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_paid_sample'|trans|e('html_attr') }}" {{ sylius_test_html_attribute('request-a-sample-button') }}>
+        <i class="envelope icon"></i>&nbsp;
+        {%- if samplePricing.price == 0 %}
+            {{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans }}
+        {% else %}
+            {{ 'babdev_sylius_product_samples.ui.request_a_paid_sample'|trans({'%price%': money.calculatePrice(sampleVariant)}) }}
+        {% endif %}
+    </button>
+{% endif %}

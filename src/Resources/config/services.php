@@ -14,6 +14,7 @@ use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterf
 use BabDev\SyliusProductSamplesPlugin\Generator\StaticPrefixSampleVariantCodeGenerator;
 use BabDev\SyliusProductSamplesPlugin\Menu\ProductFormMenuBuilder;
 use BabDev\SyliusProductSamplesPlugin\Menu\ProductVariantFormMenuBuilder;
+use BabDev\SyliusProductSamplesPlugin\Provider\SampleAwareProductVariantPricesProvider;
 use Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder as RootProductFormMenuBuilder;
 use Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder as RootProductVariantFormMenuBuilder;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
@@ -83,5 +84,15 @@ return static function (ContainerConfigurator $container): void {
 
     $services->set('babdev_sylius_product_samples.menu.admin.product_variant.form', ProductVariantFormMenuBuilder::class)
         ->tag('kernel.event_listener', ['event' => RootProductVariantFormMenuBuilder::EVENT_NAME, 'method' => 'addProductSamplesMenu'])
+    ;
+
+    /*
+     * The below services fully replace Sylius core services
+     */
+
+    $services->set('sylius.provider.product_variants_prices', SampleAwareProductVariantPricesProvider::class)
+        ->args([
+            service('sylius.calculator.product_variant_price'),
+        ])
     ;
 };
