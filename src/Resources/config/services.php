@@ -62,13 +62,16 @@ return static function (ContainerConfigurator $container): void {
     ;
 
     $services->set('babdev_sylius_product_samples.generator.static_prefix_sample_variant_code', StaticPrefixSampleVariantCodeGenerator::class)
+        ->args([
+            param('babdev_sylius_product_samples.sample_variant_code_prefix'),
+        ])
     ;
 
     $services->set('babdev_sylius_product_samples.generator.channel_aware_sample_variant_code', ChannelAwareSampleVariantCodeGenerator::class)
         ->decorate('babdev_sylius_product_samples.generator.static_prefix_sample_variant_code')
         ->args([
             service('sylius.context.channel'),
-            service('.inner')
+            service('.inner'),
         ])
     ;
 

@@ -14,9 +14,9 @@ final class ChannelAwareSampleVariantCodeGeneratorSpec extends ObjectBehavior
 {
     private const PREFIX = 'testing-prefix-';
 
-    public function let(SampleVariantCodeGeneratorInterface $decoratedGenerator, ChannelContextInterface $channelContext): void
+    public function let(ChannelContextInterface $channelContext, SampleVariantCodeGeneratorInterface $decoratedGenerator): void
     {
-        $this->beConstructedWith($decoratedGenerator, $channelContext);
+        $this->beConstructedWith($channelContext, $decoratedGenerator);
     }
 
     public function it_generates_the_code_for_a_sample_product_variant_when_the_channel_has_a_configured_prefix(

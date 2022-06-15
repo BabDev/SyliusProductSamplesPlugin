@@ -7,12 +7,9 @@ namespace BabDev\SyliusProductSamplesPlugin\Generator;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @todo The code prefix should be configurable
- */
 final class StaticPrefixSampleVariantCodeGenerator implements SampleVariantCodeGeneratorInterface
 {
-    public function __construct(private string $prefix = 'SAMPLE-')
+    public function __construct(private string $prefix)
     {
     }
 
