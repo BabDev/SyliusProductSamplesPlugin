@@ -91,4 +91,27 @@
       <code>$channel-&gt;getSampleProductCodePrefix()</code>
     </PossiblyNullOperand>
   </file>
+  <file src="src/Provider/SampleAwareProductVariantPricesProvider.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$sample</code>
+    </ArgumentTypeCoercion>
+    <DeprecatedClass occurrences="1">
+      <code>private</code>
+    </DeprecatedClass>
+    <PossiblyNullArgument occurrences="1">
+      <code>$sample</code>
+    </PossiblyNullArgument>
+    <PossiblyNullArrayOffset occurrences="1">
+      <code>$optionMap</code>
+    </PossiblyNullArrayOffset>
+    <PossiblyNullReference occurrences="1">
+      <code>getSamplesActive</code>
+    </PossiblyNullReference>
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>getSamplesActive</code>
+    </UndefinedInterfaceMethod>
+    <UnnecessaryVarAnnotation occurrences="1">
+      <code>ProductOptionValueInterface</code>
+    </UnnecessaryVarAnnotation>
+  </file>
 </files>

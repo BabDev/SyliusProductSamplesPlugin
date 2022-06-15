@@ -91,6 +91,26 @@ parameters:
 			path: src/Generator/ChannelAwareSampleVariantCodeGenerator.php
 
 		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
+			count: 1
+			path: src/Provider/SampleAwareProductVariantPricesProvider.php
+
+		-
+			message: "#^Cannot call method getSamplesActive\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null\\.$#"
+			count: 1
+			path: src/Provider/SampleAwareProductVariantPricesProvider.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$appliedPromotions contains generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Provider/SampleAwareProductVariantPricesProvider.php
+
+		-
+			message: "#^Parameter \\#1 \\$productVariant of method Sylius\\\\Component\\\\Core\\\\Calculator\\\\ProductVariantPriceCalculatorInterface\\:\\:calculate\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface, Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null given\\.$#"
+			count: 1
+			path: src/Provider/SampleAwareProductVariantPricesProvider.php
+
+		-
 			message: "#^Cannot call method getCode\\(\\) on Sylius\\\\Component\\\\Core\\\\Model\\\\ChannelInterface\\|null\\.$#"
 			count: 1
 			path: tests/Behat/Context/Setup/ProductContext.php
