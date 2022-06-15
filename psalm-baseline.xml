@@ -25,9 +25,10 @@
     </MixedMethodCall>
   </file>
   <file src="src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php">
-    <PossiblyNullReference occurrences="2">
+    <PossiblyNullReference occurrences="3">
       <code>getParent</code>
       <code>getSamplesActive</code>
+      <code>removeVariant</code>
     </PossiblyNullReference>
     <UndefinedInterfaceMethod occurrences="1">
       <code>getSamplesActive</code>
@@ -43,5 +44,20 @@
     <UndefinedInterfaceMethod occurrences="1">
       <code>setSampleOf</code>
     </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Generator/ChannelAwareSampleVariantCodeGenerator.php">
+    <InvalidNullableReturnType occurrences="1">
+      <code>string</code>
+    </InvalidNullableReturnType>
+    <NullableReturnStatement occurrences="1">
+      <code>$channel-&gt;getSampleProductCodePrefix()</code>
+    </NullableReturnStatement>
+    <PossiblyNullArgument occurrences="2">
+      <code>$channel-&gt;getSampleProductCodePrefix()</code>
+      <code>$channel-&gt;getSampleProductCodePrefix()</code>
+    </PossiblyNullArgument>
+    <PossiblyNullOperand occurrences="1">
+      <code>$channel-&gt;getSampleProductCodePrefix()</code>
+    </PossiblyNullOperand>
   </file>
 </files>
