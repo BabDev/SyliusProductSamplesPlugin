@@ -91,6 +91,11 @@ parameters:
 			path: tests/Behat/Page/Admin/Channel/UpdatePage.php
 
 		-
+			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Channel\\\\UpdatePage\\:\\:getSampleProductCodePrefix\\(\\) should return string but returns array\\|bool\\|string\\.$#"
+			count: 1
+			path: tests/Behat/Page/Admin/Channel/UpdatePage.php
+
+		-
 			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Product\\\\UpdateSimpleProductPage\\:\\:getOriginalSamplePriceForChannel\\(\\) should return string but returns array\\|bool\\|string\\.$#"
 			count: 1
 			path: tests/Behat/Page/Admin/Product/UpdateSimpleProductPage.php

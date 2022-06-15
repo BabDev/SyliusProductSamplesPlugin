@@ -8,6 +8,22 @@
       <code>$this-&gt;extension ?: null</code>
     </MixedReturnStatement>
   </file>
+  <file src="src/DependencyInjection/BabDevSyliusProductSamplesExtension.php">
+    <MixedArgument occurrences="1">
+      <code>$mergedConfig['sample_variant_code_prefix']</code>
+    </MixedArgument>
+  </file>
+  <file src="src/DependencyInjection/Configuration.php">
+    <PossiblyNullReference occurrences="1">
+      <code>end</code>
+    </PossiblyNullReference>
+    <PossiblyUndefinedMethod occurrences="1">
+      <code>end</code>
+    </PossiblyUndefinedMethod>
+    <UnusedMethodCall occurrences="1">
+      <code>end</code>
+    </UnusedMethodCall>
+  </file>
   <file src="src/EventListener/SampleVariantGeneratorListener.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>$channel</code>
