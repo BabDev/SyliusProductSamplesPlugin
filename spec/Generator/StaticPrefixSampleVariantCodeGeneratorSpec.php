@@ -28,4 +28,9 @@ final class StaticPrefixSampleVariantCodeGeneratorSpec extends ObjectBehavior
 
         $this->generate($sampleVariant)->shouldReturn(self::PREFIX . $variantCode);
     }
+
+    public function it_provides_the_prefix(): void
+    {
+        $this->getPrefix()->shouldReturn(self::PREFIX);
+    }
 }

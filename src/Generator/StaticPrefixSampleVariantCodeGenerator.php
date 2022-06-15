@@ -25,4 +25,9 @@ final class StaticPrefixSampleVariantCodeGenerator implements SampleVariantCodeG
 
         return $this->prefix . ($variant->getCode() ?? '');
     }
+
+    public function getPrefix(): string
+    {
+        return $this->prefix;
+    }
 }

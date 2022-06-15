@@ -35,4 +35,18 @@ final class ChannelAwareSampleVariantCodeGenerator implements SampleVariantCodeG
 
         return $channel->getSampleProductCodePrefix() . ($variant->getCode() ?? '');
     }
+
+    public function getPrefix(): string
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+
+        Assert::isInstanceOf($channel, ChannelInterface::class);
+
+        if (null === $channel->getSampleProductCodePrefix() || '' === trim($channel->getSampleProductCodePrefix())) {
+            return $this->decoratedGenerator->getPrefix();
+        }
+
+        return $channel->getSampleProductCodePrefix();
+    }
 }

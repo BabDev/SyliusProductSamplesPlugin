@@ -56,4 +56,31 @@ final class ChannelAwareSampleVariantCodeGeneratorSpec extends ObjectBehavior
 
         $this->generate($sampleVariant)->shouldReturn($code);
     }
+
+    public function it_provides_the_prefix_when_the_channel_has_a_configured_prefix(
+        ChannelContextInterface $channelContext,
+        ChannelInterface $channel,
+    ): void {
+        $channelContext->getChannel()->willReturn($channel);
+
+        $channel->getSampleProductCodePrefix()->willReturn(self::PREFIX);
+
+        $this->getPrefix()->shouldReturn(self::PREFIX);
+    }
+
+    public function it_provides_the_prefix_when_the_channel_does_not_have_a_configured_prefix(
+        SampleVariantCodeGeneratorInterface $decoratedGenerator,
+        ChannelContextInterface $channelContext,
+        ChannelInterface $channel,
+    ): void {
+        $prefix = 'decorated';
+
+        $channelContext->getChannel()->willReturn($channel);
+
+        $channel->getSampleProductCodePrefix()->willReturn(null);
+
+        $decoratedGenerator->getPrefix()->willReturn($prefix);
+
+        $this->getPrefix()->shouldReturn($prefix);
+    }
 }

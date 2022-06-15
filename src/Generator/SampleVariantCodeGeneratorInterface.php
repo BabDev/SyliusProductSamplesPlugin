@@ -9,4 +9,6 @@ use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 interface SampleVariantCodeGeneratorInterface
 {
     public function generate(ProductVariantInterface $sampleVariant): string;
+
+    public function getPrefix(): string;
 }
