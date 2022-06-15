@@ -10,6 +10,15 @@ Feature: Editing a product
         And I am logged in as an administrator
 
     @ui @no-api
+    Scenario: Enabling product samples on a pre-existing product
+        Given I want to modify the "Dice Brewing" product
+        When I enable product samples for it
+        And I change its sample price to $0.00 for "United States" channel
+        And I save my changes
+        Then this product should have product samples enabled
+        And it should have its sample priced at $0.00 for channel "United States"
+
+    @ui @no-api
     Scenario: Disabling product samples
         Given the "Dice Brewing" product has product samples enabled for all channels
         And I want to modify the "Dice Brewing" product
