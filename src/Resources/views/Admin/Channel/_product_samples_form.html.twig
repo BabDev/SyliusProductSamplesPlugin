@@ -2,4 +2,11 @@
 <h4 class="ui top attached large header">{{ 'babdev_sylius_product_samples.ui.product_samples'|trans }}</h4>
 <div class="ui attached segment">
     {{ form_row(form.maxSamplesPerOrder) }}
+    <div class="field">
+        {{ form_label(form.sampleProductCodePrefix) }}
+        {{ form_widget(form.sampleProductCodePrefix) }}
+        <div class="ui small pointing label">
+            {{ form_help(form.sampleProductCodePrefix) }}
+        </div>
+    </div>
 </div>

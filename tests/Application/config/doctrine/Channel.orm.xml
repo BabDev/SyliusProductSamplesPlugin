@@ -19,6 +19,7 @@
     <mapped-superclass name="BabDev\SyliusProductSamplesPlugin\Tests\App\Model\Channel" table="sylius_channel">
 
         <field name="maxSamplesPerOrder" column="max_samples_per_order" type="integer" nullable="true" />
+        <field name="sampleProductCodePrefix" column="sample_product_code_prefix" nullable="true" />
 
     </mapped-superclass>
 

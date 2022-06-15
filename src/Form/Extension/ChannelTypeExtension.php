@@ -7,6 +7,7 @@ namespace BabDev\SyliusProductSamplesPlugin\Form\Extension;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
@@ -21,6 +22,11 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'constraints' => [
                     new GreaterThanOrEqual(value: 1, groups: ['sylius']),
                 ],
+            ])
+            ->add('sampleProductCodePrefix', TextType::class, [
+                'required' => false,
+                'label' => 'babdev_sylius_product_samples.form.channel.sample_product_code_prefix',
+                'help' => 'babdev_sylius_product_samples.form.channel.sample_product_code_prefix_help',
             ])
         ;
     }
