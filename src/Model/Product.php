@@ -24,19 +24,17 @@ class Product extends CoreProduct implements ProductInterface
 
     public function getEnabledVariants(): Collection
     {
-        return $this->variants->filter(
-            function (BaseProductVariantInterface $productVariant) {
-                if (!$productVariant->isEnabled()) {
-                    return false;
-                }
-
-                if (!$productVariant instanceof ProductVariantInterface) {
-                    return true;
-                }
-
-                return null === $productVariant->getSampleOf();
+        return $this->variants->filter(static function (BaseProductVariantInterface $productVariant) {
+            if (!$productVariant->isEnabled()) {
+                return false;
             }
-        );
+
+            if (!$productVariant instanceof ProductVariantInterface) {
+                return true;
+            }
+
+            return null === $productVariant->getSampleOf();
+        });
     }
 
     public function isSimple(): bool
