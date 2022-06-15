@@ -6,6 +6,11 @@ parameters:
 			path: src/BabDevSyliusProductSamplesPlugin.php
 
 		-
+			message: "#^Method BabDev\\\\SyliusProductSamplesPlugin\\\\Doctrine\\\\ORM\\\\ProductVariantRepository\\:\\:createQueryBuilderByProductId\\(\\) has parameter \\$productId with no type specified\\.$#"
+			count: 1
+			path: src/Doctrine/ORM/ProductVariantRepository.php
+
+		-
 			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductInterface' will always evaluate to true\\.$#"
 			count: 1
 			path: src/EventListener/SampleVariantGeneratorListener.php

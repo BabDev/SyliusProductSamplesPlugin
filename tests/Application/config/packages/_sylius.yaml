@@ -33,3 +33,4 @@ sylius_product:
         product_variant:
             classes:
                 model: 'BabDev\SyliusProductSamplesPlugin\Tests\App\Model\ProductVariant'
+                repository: 'BabDev\SyliusProductSamplesPlugin\Doctrine\ORM\ProductVariantRepository'

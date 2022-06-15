@@ -24,6 +24,11 @@
       <code>end</code>
     </UnusedMethodCall>
   </file>
+  <file src="src/Doctrine/ORM/ProductVariantRepository.php">
+    <MissingParamType occurrences="1">
+      <code>$productId</code>
+    </MissingParamType>
+  </file>
   <file src="src/EventListener/SampleVariantGeneratorListener.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>$channel</code>
