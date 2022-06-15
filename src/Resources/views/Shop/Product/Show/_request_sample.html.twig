@@ -8,9 +8,9 @@
     <button type="button" class="ui secondary icon labeled basic button" id="sylius-request-a-sample" data-free-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans|e('html_attr') }}" data-paid-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_paid_sample'|trans|e('html_attr') }}" {{ sylius_test_html_attribute('request-a-sample-button') }}>
         <i class="envelope icon"></i>&nbsp;
         {%- if samplePricing.price == 0 %}
-            {{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans }}
+        <span class="button-message">{{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans }}</span>
         {% else %}
-            {{ 'babdev_sylius_product_samples.ui.request_a_paid_sample'|trans({'%price%': money.calculatePrice(sampleVariant)}) }}
+            <span class="button-message">{{ 'babdev_sylius_product_samples.ui.request_a_paid_sample'|trans({'%price%': money.calculatePrice(sampleVariant)}) }}</span>
         {% endif %}
     </button>
 {% endif %}

@@ -12,6 +12,12 @@ sylius_ui:
                     template: "@BabDevSyliusProductSamplesPlugin/Admin/Channel/_product_samples_form.html.twig"
                     priority: 0
 
+        sylius.shop.layout.javascripts:
+            blocks:
+                request_a_sample_javascript:
+                    template: "@BabDevSyliusProductSamplesPlugin/Shop/JavaScript/_request_a_sample.html.twig"
+                    priority: 0
+
         sylius.shop.product.show.right_sidebar:
             blocks:
                 request_sample:
