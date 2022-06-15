@@ -91,6 +91,11 @@ parameters:
 			path: src/Generator/ChannelAwareSampleVariantCodeGenerator.php
 
 		-
+			message: "#^Method BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\Product\\:\\:getNonSampleVariants\\(\\) should return Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\), BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface\\> but returns Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\), Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\>\\.$#"
+			count: 1
+			path: src/Model/Product.php
+
+		-
 			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
 			count: 1
 			path: src/Provider/SampleAwareProductVariantPricesProvider.php

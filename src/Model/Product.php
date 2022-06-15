@@ -22,6 +22,17 @@ class Product extends CoreProduct implements ProductInterface
         $this->samplesActive = $samplesActive;
     }
 
+    public function getNonSampleVariants(): Collection
+    {
+        return $this->variants->filter(static function (BaseProductVariantInterface $productVariant) {
+            if (!$productVariant instanceof ProductVariantInterface) {
+                return true;
+            }
+
+            return null === $productVariant->getSampleOf();
+        });
+    }
+
     public function getEnabledVariants(): Collection
     {
         return $this->variants->filter(static function (BaseProductVariantInterface $productVariant) {
