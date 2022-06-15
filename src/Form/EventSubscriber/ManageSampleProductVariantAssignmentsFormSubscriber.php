@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber;
 
+use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -18,7 +19,7 @@ final class ManageSampleProductVariantAssignmentsFormSubscriber implements Event
     public static function getSubscribedEvents(): array
     {
         return [
-            FormEvents::POST_SUBMIT => ['postSubmit', 10],
+            FormEvents::SUBMIT => 'onSubmit',
         ];
     }
 
@@ -27,7 +28,7 @@ final class ManageSampleProductVariantAssignmentsFormSubscriber implements Event
      *       for the parent variant form has been merged onto the ProductVariant model, instead that will be handled by
      *       {@see EnsureSampleVariantsHaveValidCodesFormSubscriber} on the root form
      */
-    public function postSubmit(FormEvent $event): void
+    public function onSubmit(FormEvent $event): void
     {
         /** @var ProductVariantInterface $sampleVariant */
         $sampleVariant = $event->getData();
@@ -42,12 +43,18 @@ final class ManageSampleProductVariantAssignmentsFormSubscriber implements Event
          */
         if (null !== $productForm = $variantForm->getParent()) {
             if (!$productForm->get('samplesActive')->getData() && null === $sampleVariant->getId()) {
+                /** @var ProductInterface $product */
+                $product = $productForm->getData();
+                $product->removeVariant($sampleVariant);
+
                 $event->setData(null);
 
                 return;
             }
         } else {
             if (!$sampleVariant->getProduct()->getSamplesActive() && null === $sampleVariant->getId()) {
+                $sampleVariant->getProduct()->removeVariant($sampleVariant);
+
                 $event->setData(null);
 
                 return;

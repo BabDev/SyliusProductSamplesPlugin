@@ -21,12 +21,16 @@ final class ManageSampleProductVariantAssignmentsFormSubscriberSpec extends Obje
         FormInterface $productForm,
         FormInterface $samplesActiveForm,
         ProductVariantInterface $sampleVariant,
+        ProductInterface $product,
     ): void {
         $form->getParent()->willReturn($variantForm);
 
         $variantForm->getParent()->willReturn($productForm);
 
+        $productForm->getData()->willReturn($product);
         $productForm->get('samplesActive')->willReturn($samplesActiveForm);
+
+        $product->removeVariant($sampleVariant)->shouldBeCalled();
 
         $samplesActiveForm->getData()->willReturn(false);
 
@@ -36,7 +40,7 @@ final class ManageSampleProductVariantAssignmentsFormSubscriberSpec extends Obje
         $event->getData()->willReturn($sampleVariant);
         $event->setData(null)->shouldBeCalled();
 
-        $this->postSubmit($event);
+        $this->onSubmit($event);
     }
 
     public function it_sets_the_sample_variant_relations_when_creating_a_product_and_samples_are_active(
@@ -66,7 +70,7 @@ final class ManageSampleProductVariantAssignmentsFormSubscriberSpec extends Obje
 
         $sampleVariant->setSampleOf($variant)->shouldBeCalled();
 
-        $this->postSubmit($event);
+        $this->onSubmit($event);
     }
 
     public function it_does_nothing_when_updating_a_product_and_samples_are_active(
@@ -96,7 +100,7 @@ final class ManageSampleProductVariantAssignmentsFormSubscriberSpec extends Obje
 
         $sampleVariant->setSampleOf($variant)->shouldNotBeCalled();
 
-        $this->postSubmit($event);
+        $this->onSubmit($event);
     }
 
     public function it_clears_the_form_data_when_creating_a_product_variant_and_samples_are_not_active(
@@ -114,12 +118,13 @@ final class ManageSampleProductVariantAssignmentsFormSubscriberSpec extends Obje
         $sampleVariant->getId()->willReturn(null);
 
         $product->getSamplesActive()->willReturn(false);
+        $product->removeVariant($sampleVariant)->shouldBeCalled();
 
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn($sampleVariant);
         $event->setData(null)->shouldBeCalled();
 
-        $this->postSubmit($event);
+        $this->onSubmit($event);
     }
 
     public function it_sets_the_sample_variant_relations_when_creating_a_product_variant_and_samples_are_active(
@@ -147,7 +152,7 @@ final class ManageSampleProductVariantAssignmentsFormSubscriberSpec extends Obje
 
         $sampleVariant->setSampleOf($variant)->shouldBeCalled();
 
-        $this->postSubmit($event);
+        $this->onSubmit($event);
     }
 
     public function it_does_nothing_when_updating_a_product_variant_and_samples_are_active(
@@ -174,6 +179,6 @@ final class ManageSampleProductVariantAssignmentsFormSubscriberSpec extends Obje
 
         $sampleVariant->setSampleOf($variant)->shouldNotBeCalled();
 
-        $this->postSubmit($event);
+        $this->onSubmit($event);
     }
 }
