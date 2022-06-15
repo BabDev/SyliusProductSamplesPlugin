@@ -9,4 +9,6 @@ use Sylius\Behat\Page\Admin\Channel\CreatePageInterface as BaseCreatePageInterfa
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     public function setMaxSamplesPerOrder(string $maxSamplesPerOrder): void;
+
+    public function setSampleProductCodePrefix(string $sampleProductCodePrefix): void;
 }

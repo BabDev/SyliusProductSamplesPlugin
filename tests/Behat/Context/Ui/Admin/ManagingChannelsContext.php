@@ -27,11 +27,27 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I set the sample product code prefix to :sampleProductCodePrefix
+     */
+    public function iSetTheSampleProductCodePrefixTo(string $sampleProductCodePrefix): void
+    {
+        $this->createPage->setSampleProductCodePrefix($sampleProductCodePrefix);
+    }
+
+    /**
      * @When I set its max number of samples per order to :maxSamplesPerOrder
      */
     public function iSetItsMaxNumberOfSamplesPerOrderTo(string $maxSamplesPerOrder): void
     {
         $this->updatePage->setMaxSamplesPerOrder($maxSamplesPerOrder);
+    }
+
+    /**
+     * @When I set its sample product code prefix to :sampleProductCodePrefix
+     */
+    public function iSetItsSampleProductCodePrefixTo(string $sampleProductCodePrefix): void
+    {
+        $this->updatePage->setSampleProductCodePrefix($sampleProductCodePrefix);
     }
 
     /**
@@ -43,5 +59,16 @@ final class ManagingChannelsContext implements Context
         $this->updatePage->open(['id' => $channel->getId()]);
 
         Assert::eq($this->updatePage->getMaxSamplesPerOrder(), $number);
+    }
+
+    /**
+     * @Then /^(it|this channel) should have a sample product code prefix of "([^"]+)"$/
+     * @Then /^(channel "[^"]+") should have a sample product code prefix of "([^"]+)"$/
+     */
+    public function itShouldHaveASampleProductCodePrefixOf(ChannelInterface $channel, string $prefix): void
+    {
+        $this->updatePage->open(['id' => $channel->getId()]);
+
+        Assert::eq($this->updatePage->getSampleProductCodePrefix(), $prefix);
     }
 }

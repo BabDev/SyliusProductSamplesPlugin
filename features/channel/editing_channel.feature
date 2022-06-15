@@ -12,6 +12,8 @@ Feature: Editing channel
     Scenario: Setting a product sample limit for order on the channel
         Given I want to modify a channel "Web Channel"
         When I set its max number of samples per order to 4
+        And I set its sample product code prefix to "Web-SAMPLE-"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this channel should allow 4 samples per order
+        And this channel should have a sample product code prefix of "Web-SAMPLE-"
