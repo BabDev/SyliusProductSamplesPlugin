@@ -94,5 +94,5 @@ jobs:
                     SYMFONY_REQUIRE: "5.4.*"
 
             -
-                name: Run PHPStan
+                name: Run Psalm
                 run: vendor/bin/psalm --output-format=github
