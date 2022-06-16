@@ -42,7 +42,7 @@ class OrderItemController extends BaseOrderItemController
         $form = $this->getFormFactory()->create(
             $configuration->getFormType(),
             $this->createAddToCartCommand($cart, $orderItem),
-            $configuration->getFormOptions()
+            $configuration->getFormOptions(),
         );
 
         // We are only interested in submissions where the "request a sample" button was clicked
