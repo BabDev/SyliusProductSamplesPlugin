@@ -6,6 +6,26 @@ parameters:
 			path: src/BabDevSyliusProductSamplesPlugin.php
 
 		-
+			message: "#^Cannot call method handle\\(\\) on Sylius\\\\Bundle\\\\ResourceBundle\\\\Controller\\\\ViewHandlerInterface\\|null\\.$#"
+			count: 1
+			path: src/Controller/OrderItemController.php
+
+		-
+			message: "#^Method BabDev\\\\SyliusProductSamplesPlugin\\\\Controller\\\\OrderItemController\\:\\:addAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\Response but returns Symfony\\\\Component\\\\HttpFoundation\\\\Response\\|null\\.$#"
+			count: 1
+			path: src/Controller/OrderItemController.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of method Symfony\\\\Component\\\\Form\\\\FormFactoryInterface\\:\\:create\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Controller/OrderItemController.php
+
+		-
+			message: "#^Parameter \\#1 \\$variant of method Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemInterface\\:\\:setVariant\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface\\|null, Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null given\\.$#"
+			count: 1
+			path: src/Controller/OrderItemController.php
+
+		-
 			message: "#^Method BabDev\\\\SyliusProductSamplesPlugin\\\\Doctrine\\\\ORM\\\\ProductVariantRepository\\:\\:createQueryBuilderByProductId\\(\\) has parameter \\$productId with no type specified\\.$#"
 			count: 1
 			path: src/Doctrine/ORM/ProductVariantRepository.php

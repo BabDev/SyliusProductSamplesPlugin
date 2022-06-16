@@ -8,6 +8,27 @@
       <code>$this-&gt;extension ?: null</code>
     </MixedReturnStatement>
   </file>
+  <file src="src/Controller/OrderItemController.php">
+    <InvalidNullableReturnType occurrences="1">
+      <code>Response</code>
+    </InvalidNullableReturnType>
+    <MixedArgument occurrences="1">
+      <code>$cartItem-&gt;getVariant()-&gt;getSample()</code>
+    </MixedArgument>
+    <NullableReturnStatement occurrences="1">
+      <code>$resourceControllerEvent-&gt;getResponse()</code>
+    </NullableReturnStatement>
+    <PossiblyNullArgument occurrences="1">
+      <code>$configuration-&gt;getFormType()</code>
+    </PossiblyNullArgument>
+    <PossiblyNullReference occurrences="2">
+      <code>getSample</code>
+      <code>handle</code>
+    </PossiblyNullReference>
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>getSample</code>
+    </UndefinedInterfaceMethod>
+  </file>
   <file src="src/DependencyInjection/BabDevSyliusProductSamplesExtension.php">
     <MixedArgument occurrences="1">
       <code>$mergedConfig['sample_variant_code_prefix']</code>

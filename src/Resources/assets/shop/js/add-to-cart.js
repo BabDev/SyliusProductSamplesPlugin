@@ -33,9 +33,9 @@ export default class AddToCart {
             document.querySelectorAll('[name="sylius_add_to_cart[cartItem][variant]"]').forEach(element => {
                 element.addEventListener('change', event => this.handleProductVariantsChange(event));
             });
-        } else {
-            console.log('no init');
         }
+
+        this.button.addEventListener('click', event => this.requestASample(event));
     }
 
     /**
@@ -91,6 +91,49 @@ export default class AddToCart {
             } else {
                 this.updateButtonDisplayText(this.button.dataset.sampleMessage ?? 'Request a Sample');
             }
+        }
+    }
+
+    /**
+     * @param {Event} event
+     */
+    async requestASample(event) {
+        event.preventDefault();
+
+        // The below replicates the `sylius-add-to-cart` JavaScript module logic, minus any framework coupling
+        const validationElement = document.getElementById('sylius-cart-validation-error');
+        const form = document.getElementById('sylius-product-adding-to-cart');
+        const data = new FormData(form);
+
+        data.append(this.button.name, '1');
+
+        form.classList.add('loading');
+
+        const response = await fetch(form.action, {method: form.method ?? 'POST', body: data});
+
+        if (response.ok) {
+            validationElement.classList.add('hidden');
+
+            const redirectUrl = form.dataset.redirect ?? null;
+
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
+                window.location.reload();
+            }
+        } else {
+            const responseBody = await response.json();
+
+            let validationMessage = '';
+
+            Object.entries(responseBody.errors.errors).forEach(([, message]) => {
+                validationMessage += message;
+            });
+
+            validationElement.innerHTML = validationMessage;
+
+            validationElement.classList.remove('hidden');
+            form.classList.remove('loading');
         }
     }
 
