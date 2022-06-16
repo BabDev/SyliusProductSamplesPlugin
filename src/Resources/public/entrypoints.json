@@ -1,0 +1,9 @@
+{
+  "entrypoints": {
+    "babdev-product-samples-shop": {
+      "js": [
+        "/public/babdev-product-samples-shop.js"
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@babdev/product-samples-plugin",
+  "description": "Product samples plugin for Sylius.",
+  "repository": "https://github.com/BabDev/SyliusProductSamplesPlugin.git",
+  "license": "MIT",
+  "scripts": {
+    "dist": "yarn encore production --config-name product-samples-plugin-dist"
+  }
+}

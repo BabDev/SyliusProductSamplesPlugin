@@ -28,7 +28,7 @@
         <div class="ui large buttons">
             <button type="submit" class="ui primary icon labeled button" {{ sylius_test_html_attribute('add-to-cart-button') }}><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
             <div class="or" data-text="{{ 'sylius.ui.or'|trans|e('html_attr') }}"></div>
-            <button type="button" class="ui icon labeled button" id="{{ form.requestSample.vars.id }}" name="{{ form.requestSample.vars.full_name }}" data-free-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans|e('html_attr') }}" data-paid-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_paid_sample'|trans|e('html_attr') }}" {{ sylius_test_html_attribute('request-a-sample-button') }}>
+            <button type="button" class="ui icon labeled button" id="{{ form.requestSample.vars.id }}" name="{{ form.requestSample.vars.full_name }}" data-free-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans|e('html_attr') }}" data-paid-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_paid_sample'|trans|e('html_attr') }}" data-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_sample'|trans|e('html_attr') }}" {{ sylius_test_html_attribute('request-a-sample-button') }}>
                 <i class="envelope icon"></i>&nbsp;
                 {%- if samplePricing.price == 0 %}
                     <span class="button-message">{{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans }}</span>

@@ -34,3 +34,11 @@ sylius_product:
             classes:
                 model: 'BabDev\SyliusProductSamplesPlugin\Tests\App\Model\ProductVariant'
                 repository: 'BabDev\SyliusProductSamplesPlugin\Doctrine\ORM\ProductVariantRepository'
+
+sylius_ui:
+    events:
+        sylius.shop.layout.javascripts:
+            blocks:
+                request_a_sample_javascript:
+                    template: 'JavaScript/plugin.html.twig'
+                    priority: 0
