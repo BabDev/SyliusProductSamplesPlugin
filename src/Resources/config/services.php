@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use BabDev\SyliusProductSamplesPlugin\EventListener\SampleVariantGeneratorListener;
+use BabDev\SyliusProductSamplesPlugin\Form\Extension\AddToCartTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\CartItemTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ChannelTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductTypeExtension;
@@ -19,6 +20,7 @@ use BabDev\SyliusProductSamplesPlugin\Provider\SampleAwareProductVariantPricesPr
 use Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder as RootProductFormMenuBuilder;
 use Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder as RootProductVariantFormMenuBuilder;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
+use Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType;
 use Sylius\Bundle\OrderBundle\Form\Type\CartItemType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
@@ -35,6 +37,10 @@ return static function (ContainerConfigurator $container): void {
         ])
         ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_create', 'method' => 'ensureSampleVariantsExist'])
         ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_update', 'method' => 'ensureSampleVariantsExist'])
+    ;
+
+    $services->set('babdev_sylius_product_samples.form.extension.add_to_cart', AddToCartTypeExtension::class)
+        ->tag('form.type_extension', ['extended-type' => AddToCartType::class])
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.cart_item_type', CartItemTypeExtension::class)

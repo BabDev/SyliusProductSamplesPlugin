@@ -1,0 +1,46 @@
+{% import '@SyliusShop/Common/Macro/money.html.twig' as money %}
+
+{% set product = order_item.variant.product %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+<div class="ui segment" id="sylius-product-selecting-variant" {{ sylius_test_html_attribute('product-selecting-variant') }}>
+    {{ sylius_template_event('sylius.shop.product.show.before_add_to_cart', {'product': product, 'order_item': order_item}) }}
+
+    {{ form_start(form, {'action': path('sylius_shop_ajax_cart_add_item', {'productId': product.id}), 'attr': {'id': 'sylius-product-adding-to-cart', 'class': 'ui loadable form', 'novalidate': 'novalidate', 'data-redirect': path(configuration.getRedirectRoute('summary'))}}) }}
+    {{ form_errors(form) }}
+    <div class="ui red label bottom pointing hidden sylius-validation-error" id="sylius-cart-validation-error" {{ sylius_test_html_attribute('cart-validation-error') }}></div>
+    {% if not product.simple %}
+        {% if product.variantSelectionMethodChoice %}
+            {% include '@SyliusShop/Product/Show/_variants.html.twig' %}
+        {% else %}
+            {% include '@SyliusShop/Product/Show/_options.html.twig' %}
+        {% endif %}
+    {% endif %}
+    {{ form_row(form.cartItem.quantity, sylius_test_form_attribute('quantity')) }}
+
+    {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item, 'form': form}) }}
+
+    {% if product.samplesActive and form.requestSample is defined %}
+        {% set sampleVariant = order_item.variant.sample %}
+        {% set samplePricing = sampleVariant.getChannelPricingForChannel(sylius.channel) %}
+
+        <div class="ui large buttons">
+            <button type="submit" class="ui primary icon labeled button" {{ sylius_test_html_attribute('add-to-cart-button') }}><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
+            <div class="or" data-text="{{ 'sylius.ui.or'|trans|e('html_attr') }}"></div>
+            <button type="button" class="ui icon labeled button" id="{{ form.requestSample.vars.id }}" name="{{ form.requestSample.vars.full_name }}" data-free-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans|e('html_attr') }}" data-paid-sample-message="{{ 'babdev_sylius_product_samples.ui.request_a_paid_sample'|trans|e('html_attr') }}" {{ sylius_test_html_attribute('request-a-sample-button') }}>
+                <i class="envelope icon"></i>&nbsp;
+                {%- if samplePricing.price == 0 %}
+                    <span class="button-message">{{ 'babdev_sylius_product_samples.ui.request_a_free_sample'|trans }}</span>
+                {% else %}
+                    <span class="button-message">{{ 'babdev_sylius_product_samples.ui.request_a_paid_sample'|trans({'%price%': money.calculatePrice(sampleVariant)}) }}</span>
+                {% endif %}
+            </button>
+        </div>
+    {% else %}
+        <button type="submit" class="ui huge primary icon labeled button" {{ sylius_test_html_attribute('add-to-cart-button') }}><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
+    {% endif %}
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

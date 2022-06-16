@@ -3,7 +3,7 @@
 
     var handleProductOptionsChange = function () {
         $('[name*="sylius_add_to_cart[cartItem][variant]"]').on('change', function () {
-            var requestASampleButton = $('#sylius-request-a-sample');
+            var requestASampleButton = $('#sylius_add_to_cart_requestSample');
             var selector = '';
 
             $('#sylius-product-adding-to-cart select[data-option]').each(function (index, element) {
@@ -15,18 +15,26 @@
             var isFreeSample = $('#sylius-variants-pricing').find(selector).attr('data-free-sample') === 'yes';
 
             if (isFreeSample) {
-                requestASampleButton.find('.button-message').text(requestASampleButton.attr('data-free-sample-message'));
-            } else {
-                var samplePrice = $('#sylius-variants-pricing').find(selector).attr('data-sample-price');
+                var freeSampleMessage = requestASampleButton.attr('data-free-sample-message');
 
-                requestASampleButton.find('.button-message').text(requestASampleButton.attr('data-paid-sample-message').replace('%price%', samplePrice));
+                if (freeSampleMessage) {
+                    requestASampleButton.find('.button-message').text(requestASampleButton.attr('data-free-sample-message'));
+                }
+            } else {
+                var paidSampleMessage = requestASampleButton.attr('data-paid-sample-message');
+
+                if (paidSampleMessage) {
+                    var samplePrice = $('#sylius-variants-pricing').find(selector).attr('data-sample-price');
+
+                    requestASampleButton.find('.button-message').text(paidSampleMessage.replace('%price%', samplePrice));
+                }
             }
         });
     };
 
     const handleProductVariantsChange = function () {
         $('[name="sylius_add_to_cart[cartItem][variant]"]').on('change', function (event) {
-            var requestASampleButton = $('#sylius-request-a-sample');
+            var requestASampleButton = $('#sylius_add_to_cart_requestSample');
             var priceRow = $(event.currentTarget).parents('tr').find('.sylius-product-variant-price');
             var isFreeSample = priceRow.attr('data-free-sample') === 'yes';
 
@@ -42,7 +50,7 @@
 
     $.fn.extend({
         requestASample: function () {
-            var requestASampleButton = $('#sylius-request-a-sample');
+            var requestASampleButton = $('#sylius_add_to_cart_requestSample');
 
             if (!requestASampleButton.length) {
                 return;
