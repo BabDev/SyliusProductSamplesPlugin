@@ -65,6 +65,11 @@
       <code>TranslationInterface</code>
     </UnnecessaryVarAnnotation>
   </file>
+  <file src="src/Form/Extension/AddToCartTypeExtension.php">
+    <MixedAssignment occurrences="1">
+      <code>$product</code>
+    </MixedAssignment>
+  </file>
   <file src="src/Form/Extension/CartItemTypeExtension.php">
     <MixedMethodCall occurrences="2">
       <code>getNonSampleVariants</code>
