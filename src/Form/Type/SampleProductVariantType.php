@@ -34,7 +34,6 @@ final class SampleProductVariantType extends AbstractResourceType
         parent::__construct($dataClass, $validationGroups);
     }
 
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
