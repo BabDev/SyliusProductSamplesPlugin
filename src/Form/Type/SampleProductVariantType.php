@@ -6,6 +6,7 @@ namespace BabDev\SyliusProductSamplesPlugin\Form\Type;
 
 use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\ManageSampleProductVariantAssignmentsFormSubscriber;
 use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\SynchronizeSampleProductVariantTranslationsFormSubscriber;
+use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantNameGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
@@ -20,11 +21,25 @@ use Symfony\Component\Form\FormEvents;
 
 final class SampleProductVariantType extends AbstractResourceType
 {
+    /**
+     * @param string[] $validationGroups
+     *
+     * @phpstan-param class-string $dataClass
+     */
+    public function __construct(
+        private SampleVariantNameGeneratorInterface $nameGenerator,
+        string $dataClass,
+        array $validationGroups = [],
+    ) {
+        parent::__construct($dataClass, $validationGroups);
+    }
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->addEventSubscriber(new ManageSampleProductVariantAssignmentsFormSubscriber())
-            ->addEventSubscriber(new SynchronizeSampleProductVariantTranslationsFormSubscriber())
+            ->addEventSubscriber(new SynchronizeSampleProductVariantTranslationsFormSubscriber($this->nameGenerator))
             ->add('shippingCategory', ShippingCategoryChoiceType::class, [
                 'required' => false,
                 'placeholder' => 'sylius.ui.no_requirement',

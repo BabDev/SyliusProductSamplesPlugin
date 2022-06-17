@@ -70,6 +70,7 @@ return static function (ContainerConfigurator $container): void {
 
     $services->set('babdev_sylius_product_samples.form.type.sample_product_variant', SampleProductVariantType::class)
         ->args([
+            service(SampleVariantNameGeneratorInterface::class),
             param('sylius.model.product_variant.class'),
             param('sylius.form.type.product_variant.validation_groups'),
         ])
