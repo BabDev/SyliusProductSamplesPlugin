@@ -10,7 +10,9 @@
         "symfony/config": "^5.4",
         "symfony/dependency-injection": "^5.4",
         "symfony/form": "^5.4",
-        "symfony/http-kernel": "^5.4"
+        "symfony/http-kernel": "^5.4",
+        "symfony/translation": "^5.4",
+        "symfony/translation-contracts": "^2.5"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",

@@ -13,7 +13,9 @@ use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantTypeExtension
 use BabDev\SyliusProductSamplesPlugin\Form\Type\SampleProductVariantType;
 use BabDev\SyliusProductSamplesPlugin\Generator\ChannelAwareSampleVariantCodeGenerator;
 use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
+use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantNameGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Generator\StaticPrefixSampleVariantCodeGenerator;
+use BabDev\SyliusProductSamplesPlugin\Generator\TranslatedPrefixSampleVariantNameGenerator;
 use BabDev\SyliusProductSamplesPlugin\Menu\ProductFormMenuBuilder;
 use BabDev\SyliusProductSamplesPlugin\Menu\ProductVariantFormMenuBuilder;
 use BabDev\SyliusProductSamplesPlugin\Provider\SampleAwareProductVariantPricesProvider;
@@ -89,6 +91,14 @@ return static function (ContainerConfigurator $container): void {
     ;
 
     $services->alias(SampleVariantCodeGeneratorInterface::class, 'babdev_sylius_product_samples.generator.channel_aware_sample_variant_code');
+
+    $services->set('babdev_sylius_product_samples.generator.translated_prefix_sample_variant_name', TranslatedPrefixSampleVariantNameGenerator::class)
+        ->args([
+            service('translator'),
+        ])
+    ;
+
+    $services->alias(SampleVariantNameGeneratorInterface::class, 'babdev_sylius_product_samples.generator.translated_prefix_sample_variant_name');
 
     $services->set('babdev_sylius_product_samples.menu.admin.product.form', ProductFormMenuBuilder::class)
         ->tag('kernel.event_listener', ['event' => RootProductFormMenuBuilder::EVENT_NAME, 'method' => 'addProductSamplesMenu'])

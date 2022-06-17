@@ -8,6 +8,9 @@ babdev_sylius_product_samples:
         product:
             samples_available: 'Samples Available'
 
+    product_variant:
+        prefixed_sample_name: 'Sample - %name%'
+
     ui:
         product_samples: 'Product Samples'
         request_a_free_sample: 'Request a Free Sample'
