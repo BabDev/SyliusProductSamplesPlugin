@@ -6,26 +6,6 @@ parameters:
 			path: src/BabDevSyliusProductSamplesPlugin.php
 
 		-
-			message: "#^Cannot call method handle\\(\\) on Sylius\\\\Bundle\\\\ResourceBundle\\\\Controller\\\\ViewHandlerInterface\\|null\\.$#"
-			count: 1
-			path: src/Controller/OrderItemController.php
-
-		-
-			message: "#^Method BabDev\\\\SyliusProductSamplesPlugin\\\\Controller\\\\OrderItemController\\:\\:addAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\Response but returns Symfony\\\\Component\\\\HttpFoundation\\\\Response\\|null\\.$#"
-			count: 1
-			path: src/Controller/OrderItemController.php
-
-		-
-			message: "#^Parameter \\#1 \\$type of method Symfony\\\\Component\\\\Form\\\\FormFactoryInterface\\:\\:create\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Controller/OrderItemController.php
-
-		-
-			message: "#^Parameter \\#1 \\$variant of method Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemInterface\\:\\:setVariant\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface\\|null, Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null given\\.$#"
-			count: 1
-			path: src/Controller/OrderItemController.php
-
-		-
 			message: "#^Method BabDev\\\\SyliusProductSamplesPlugin\\\\Doctrine\\\\ORM\\\\ProductVariantRepository\\:\\:createQueryBuilderByProductId\\(\\) has parameter \\$productId with no type specified\\.$#"
 			count: 1
 			path: src/Doctrine/ORM/ProductVariantRepository.php
@@ -89,6 +69,26 @@ parameters:
 			message: "#^Cannot call method hasTranslation\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null\\.$#"
 			count: 1
 			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
+
+		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ChannelInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ChannelInterface' will always evaluate to true\\.$#"
+			count: 1
+			path: src/Form/Extension/AddToCartTypeExtension.php
+
+		-
+			message: "#^Cannot call method getSampleOf\\(\\) on Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface\\|null\\.$#"
+			count: 1
+			path: src/Form/Extension/AddToCartTypeExtension.php
+
+		-
+			message: "#^Parameter \\#1 \\$variant of method Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemInterface\\:\\:setVariant\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface\\|null, Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null given\\.$#"
+			count: 1
+			path: src/Form/Extension/AddToCartTypeExtension.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between 0 and int\\<1, max\\> will always evaluate to false\\.$#"
+			count: 1
+			path: src/Form/Extension/AddToCartTypeExtension.php
 
 		-
 			message: "#^Call to an undefined method Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\:\\:setSampleOf\\(\\)\\.$#"

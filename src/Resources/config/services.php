@@ -42,6 +42,9 @@ return static function (ContainerConfigurator $container): void {
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.add_to_cart', AddToCartTypeExtension::class)
+        ->args([
+            service('sylius.context.channel'),
+        ])
         ->tag('form.type_extension', ['extended-type' => AddToCartType::class])
     ;
 

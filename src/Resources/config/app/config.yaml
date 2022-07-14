@@ -1,9 +1,3 @@
-sylius_order:
-    resources:
-        order_item:
-            classes:
-                controller: BabDev\SyliusProductSamplesPlugin\Controller\OrderItemController
-
 sylius_ui:
     events:
         sylius.admin.channel.create.form:
