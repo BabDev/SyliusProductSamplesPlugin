@@ -7,6 +7,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use BabDev\SyliusProductSamplesPlugin\EventListener\SampleVariantGeneratorListener;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\AddToCartTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\CartItemTypeExtension;
+use BabDev\SyliusProductSamplesPlugin\Form\Extension\CartTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ChannelTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantTypeExtension;
@@ -24,6 +25,7 @@ use Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder as RootProductV
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType;
 use Sylius\Bundle\OrderBundle\Form\Type\CartItemType;
+use Sylius\Bundle\OrderBundle\Form\Type\CartType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 
@@ -46,6 +48,14 @@ return static function (ContainerConfigurator $container): void {
             service('sylius.context.channel'),
         ])
         ->tag('form.type_extension', ['extended-type' => AddToCartType::class])
+    ;
+
+    $services->set('babdev_sylius_product_samples.form.extension.cart', CartTypeExtension::class)
+        ->args([
+            service('sylius.context.channel'),
+            service('translator'),
+        ])
+        ->tag('form.type_extension', ['extended-type' => CartType::class])
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.cart_item_type', CartItemTypeExtension::class)

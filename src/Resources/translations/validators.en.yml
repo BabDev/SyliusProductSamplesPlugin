@@ -2,3 +2,4 @@ babdev_sylius_product_samples:
     order:
         allowed_samples:
             max_per_order: 'Only 1 sample may be requested per order.|Only {{ limit }} samples may be requested per order.'
+            plural_max_per_order: '{1}Only 1 sample may be requested per order.|]1,Inf[Only %count% samples may be requested per order.'

@@ -76,11 +76,6 @@ parameters:
 			path: src/Form/Extension/AddToCartTypeExtension.php
 
 		-
-			message: "#^Cannot call method getSampleOf\\(\\) on Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface\\|null\\.$#"
-			count: 1
-			path: src/Form/Extension/AddToCartTypeExtension.php
-
-		-
 			message: "#^Parameter \\#1 \\$variant of method Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemInterface\\:\\:setVariant\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface\\|null, Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null given\\.$#"
 			count: 1
 			path: src/Form/Extension/AddToCartTypeExtension.php
@@ -89,6 +84,16 @@ parameters:
 			message: "#^Strict comparison using \\=\\=\\= between 0 and int\\<1, max\\> will always evaluate to false\\.$#"
 			count: 1
 			path: src/Form/Extension/AddToCartTypeExtension.php
+
+		-
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ChannelInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ChannelInterface' will always evaluate to true\\.$#"
+			count: 1
+			path: src/Form/Extension/CartTypeExtension.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between 0 and int\\<1, max\\> will always evaluate to false\\.$#"
+			count: 1
+			path: src/Form/Extension/CartTypeExtension.php
 
 		-
 			message: "#^Call to an undefined method Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\:\\:setSampleOf\\(\\)\\.$#"

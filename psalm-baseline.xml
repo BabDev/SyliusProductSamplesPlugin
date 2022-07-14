@@ -86,6 +86,17 @@
       <code>getVariantSelectionMethod</code>
     </MixedMethodCall>
   </file>
+  <file src="src/Form/Extension/CartTypeExtension.php">
+    <PossiblyNullReference occurrences="1">
+      <code>getSampleOf</code>
+    </PossiblyNullReference>
+    <TypeDoesNotContainType occurrences="1">
+      <code>0 === $channel-&gt;getMaxSamplesPerOrder()</code>
+    </TypeDoesNotContainType>
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>getSampleOf</code>
+    </UndefinedInterfaceMethod>
+  </file>
   <file src="src/Form/Extension/ProductVariantTypeExtension.php">
     <PossiblyNullArgument occurrences="1">
       <code>$variant-&gt;getProduct()</code>

@@ -70,7 +70,7 @@ final class AddToCartTypeExtension extends AbstractTypeExtension
 
                 /** @var OrderItemInterface $item */
                 foreach ($addToCartCommand->getCart()->getItems() as $item) {
-                    Assert::isInstanceOf($cartItem->getVariant(), ProductVariantInterface::class);
+                    Assert::isInstanceOf($item->getVariant(), ProductVariantInterface::class);
 
                     if (null === $item->getVariant()->getSampleOf()) {
                         continue;
