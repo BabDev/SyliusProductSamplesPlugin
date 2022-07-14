@@ -138,7 +138,7 @@ jobs:
 
             -
                 name: Run Behat
-                run: vendor/bin/behat --colors --strict -vvv --no-interaction || vendor/bin/behat --colors --strict -vvv --no-interaction --rerun
+                run: vendor/bin/behat --colors --strict -vvv --no-interaction features/shopping_cart/adding_product_with_options_to_cart.feature || vendor/bin/behat --colors --strict -vvv --no-interaction --rerun features/shopping_cart/adding_product_with_options_to_cart.feature
 
             -
                 name: Upload Behat logs
@@ -150,6 +150,8 @@ jobs:
                     if-no-files-found: ignore
 
     composer:
+        if: ${{ false }}
+
         runs-on: ubuntu-18.04
 
         name: "Validate Composer Schema"
@@ -172,6 +174,8 @@ jobs:
                 run: composer validate --ansi --strict
 
     phpspec:
+        if: ${{ false }}
+
         runs-on: ubuntu-18.04
 
         name: "PHPSpec - Sylius ${{ matrix.sylius }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
@@ -226,6 +230,8 @@ jobs:
                 run: vendor/bin/phpspec run --ansi -f progress --no-interaction
 
     phpunit:
+        if: ${{ false }}
+
         runs-on: ubuntu-18.04
 
         name: "PHPUnit - Sylius ${{ matrix.sylius }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"

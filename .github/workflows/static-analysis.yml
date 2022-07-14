@@ -14,6 +14,8 @@ on:
 
 jobs:
     sa-phpstan:
+        if: ${{ false }}
+
         runs-on: ubuntu-18.04
 
         name: PHPStan
@@ -56,6 +58,8 @@ jobs:
                 run: vendor/bin/phpstan analyse --error-format=github
 
     sa-psalm:
+        if: ${{ false }}
+
         runs-on: ubuntu-18.04
 
         name: Psalm

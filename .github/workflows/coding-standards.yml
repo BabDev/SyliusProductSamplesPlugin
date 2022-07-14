@@ -11,6 +11,8 @@ on:
 
 jobs:
     coding-standards:
+        if: ${{ false }}
+
         runs-on: ubuntu-18.04
 
         name: Coding Standards

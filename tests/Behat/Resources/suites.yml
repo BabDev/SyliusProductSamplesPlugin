@@ -1,6 +1,7 @@
 # Put your Behat suites definitions here
 
 imports:
+    - suites/ui/cart/ui_shopping_cart_with_product_samples.yml
     - suites/ui/channel/managing_channels_with_product_samples.yml
     - suites/ui/product/managing_products_with_product_samples.yml
     - suites/ui/product/managing_product_variants_with_product_samples.yml
