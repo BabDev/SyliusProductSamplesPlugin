@@ -37,6 +37,22 @@ sylius_product:
 
 sylius_ui:
     events:
+        sylius.shop.cart.widget.popup:
+            blocks:
+                content:
+                    enabled: false
+                sample_aware_content:
+                    template: "@BabDevSyliusProductSamplesPlugin/Shop/Cart/Widget/_popup.html.twig"
+                    priority: 10
+
+        sylius.shop.checkout.sidebar:
+            blocks:
+                summary:
+                    enabled: false
+                sample_aware_summary:
+                    template: "@BabDevSyliusProductSamplesPlugin/Shop/Checkout/_summary.html.twig"
+                    priority: 20
+
         sylius.shop.layout.javascripts:
             blocks:
                 request_a_sample_javascript:
