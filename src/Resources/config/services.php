@@ -32,12 +32,12 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 return static function (ContainerConfigurator $container): void {
     $services = $container->services();
 
-    // TODO - Decide if we really need this listener, we should be able to handle this entirely within the forms
     $services->set('babdev_sylius_product_samples.event_listener.sample_variant_generator', SampleVariantGeneratorListener::class)
         ->args([
             service('sylius.factory.channel_pricing'),
             service('sylius.factory.product_variant'),
             service(SampleVariantCodeGeneratorInterface::class),
+            service(SampleVariantNameGeneratorInterface::class),
         ])
         ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_create', 'method' => 'ensureSampleVariantsExist'])
         ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_update', 'method' => 'ensureSampleVariantsExist'])
