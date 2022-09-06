@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace spec\BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber;
 
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
-use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantTranslationsSynchronizerInterface;
+use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantOptionValuesSynchronizerInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\FormEvent;
 
-final class SynchronizeSampleProductVariantTranslationsFormSubscriberSpec extends ObjectBehavior
+final class SynchronizeSampleProductVariantOptionValuesFormSubscriberSpec extends ObjectBehavior
 {
-    public function let(ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer): void
+    public function let(ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer): void
     {
-        $this->beConstructedWith($translationsSynchronizer);
+        $this->beConstructedWith($optionValuesSynchronizer);
     }
 
     public function it_does_nothing_when_there_is_no_data(FormEvent $event): void
@@ -23,14 +23,14 @@ final class SynchronizeSampleProductVariantTranslationsFormSubscriberSpec extend
         $this->onSubmit($event);
     }
 
-    public function it_synchronizes_translations_from_the_variant_to_its_sample(
-        ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
+    public function it_synchronizes_option_values_from_the_variant_to_its_sample(
+        ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,
         FormEvent $event,
         ProductVariantInterface $sampleVariant,
     ): void {
         $event->getData()->willReturn($sampleVariant);
 
-        $translationsSynchronizer->synchronize($sampleVariant)->shouldBeCalled();
+        $optionValuesSynchronizer->synchronize($sampleVariant)->shouldBeCalled();
 
         $this->onSubmit($event);
     }

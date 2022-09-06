@@ -58,15 +58,10 @@ parameters:
 		-
 			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
 			count: 1
-			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
+			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantOptionValuesFormSubscriber.php
 
 		-
-			message: "#^Cannot call method getTranslations\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null\\.$#"
-			count: 1
-			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
-
-		-
-			message: "#^Cannot call method hasTranslation\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\|null\\.$#"
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
 			count: 1
 			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
 

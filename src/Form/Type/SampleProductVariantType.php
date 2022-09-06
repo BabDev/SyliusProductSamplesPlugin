@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace BabDev\SyliusProductSamplesPlugin\Form\Type;
 
 use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\ManageSampleProductVariantAssignmentsFormSubscriber;
+use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\SynchronizeSampleProductVariantOptionValuesFormSubscriber;
 use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\SynchronizeSampleProductVariantTranslationsFormSubscriber;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
+use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantOptionValuesSynchronizerInterface;
 use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantTranslationsSynchronizerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
@@ -27,6 +29,7 @@ final class SampleProductVariantType extends AbstractResourceType
      * @phpstan-param class-string $dataClass
      */
     public function __construct(
+        private ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,
         private ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
         string $dataClass,
         array $validationGroups = [],
@@ -38,6 +41,7 @@ final class SampleProductVariantType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new ManageSampleProductVariantAssignmentsFormSubscriber())
+            ->addEventSubscriber(new SynchronizeSampleProductVariantOptionValuesFormSubscriber($this->optionValuesSynchronizer))
             ->addEventSubscriber(new SynchronizeSampleProductVariantTranslationsFormSubscriber($this->translationsSynchronizer))
             ->add('shippingCategory', ShippingCategoryChoiceType::class, [
                 'required' => false,

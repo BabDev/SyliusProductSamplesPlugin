@@ -7,6 +7,7 @@ namespace BabDev\SyliusProductSamplesPlugin\EventListener;
 use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
+use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantOptionValuesSynchronizerInterface;
 use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantTranslationsSynchronizerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -21,6 +22,7 @@ final class SampleVariantGeneratorListener
         private FactoryInterface $channelPricingFactory,
         private ProductVariantFactoryInterface $productVariantFactory,
         private SampleVariantCodeGeneratorInterface $codeGenerator,
+        private ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,
         private ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
     ) {
     }
@@ -68,6 +70,7 @@ final class SampleVariantGeneratorListener
             $sample->addChannelPricing($this->createChannelPricingForChannel(0, $channel));
         }
 
+        $this->optionValuesSynchronizer->synchronize($sample);
         $this->translationsSynchronizer->synchronize($sample);
     }
 

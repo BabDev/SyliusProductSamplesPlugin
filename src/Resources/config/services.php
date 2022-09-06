@@ -20,6 +20,8 @@ use BabDev\SyliusProductSamplesPlugin\Generator\TranslatedPrefixSampleVariantNam
 use BabDev\SyliusProductSamplesPlugin\Menu\ProductFormMenuBuilder;
 use BabDev\SyliusProductSamplesPlugin\Menu\ProductVariantFormMenuBuilder;
 use BabDev\SyliusProductSamplesPlugin\Provider\SampleAwareProductVariantPricesProvider;
+use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantOptionValuesSynchronizer;
+use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantOptionValuesSynchronizerInterface;
 use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantTranslationsSynchronizer;
 use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantTranslationsSynchronizerInterface;
 use Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder as RootProductFormMenuBuilder;
@@ -39,6 +41,7 @@ return static function (ContainerConfigurator $container): void {
             service('sylius.factory.channel_pricing'),
             service('sylius.factory.product_variant'),
             service(SampleVariantCodeGeneratorInterface::class),
+            service(ProductVariantOptionValuesSynchronizerInterface::class),
             service(ProductVariantTranslationsSynchronizerInterface::class),
         ])
         ->tag('kernel.event_listener', ['event' => 'sylius.product.pre_create', 'method' => 'ensureSampleVariantsExist'])
@@ -85,6 +88,7 @@ return static function (ContainerConfigurator $container): void {
 
     $services->set('babdev_sylius_product_samples.form.type.sample_product_variant', SampleProductVariantType::class)
         ->args([
+            service(ProductVariantOptionValuesSynchronizerInterface::class),
             service(ProductVariantTranslationsSynchronizerInterface::class),
             param('sylius.model.product_variant.class'),
             param('sylius.form.type.product_variant.validation_groups'),
@@ -123,6 +127,10 @@ return static function (ContainerConfigurator $container): void {
     $services->set('babdev_sylius_product_samples.menu.admin.product_variant.form', ProductVariantFormMenuBuilder::class)
         ->tag('kernel.event_listener', ['event' => RootProductVariantFormMenuBuilder::EVENT_NAME, 'method' => 'addProductSamplesMenu'])
     ;
+
+    $services->set('babdev_sylius_product_samples.synchronizer.product_variant.option_values', ProductVariantOptionValuesSynchronizer::class);
+
+    $services->alias(ProductVariantOptionValuesSynchronizerInterface::class, 'babdev_sylius_product_samples.synchronizer.product_variant.option_values');
 
     $services->set('babdev_sylius_product_samples.synchronizer.product_variant.translations', ProductVariantTranslationsSynchronizer::class)
         ->args([

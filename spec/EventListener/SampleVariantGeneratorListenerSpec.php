@@ -8,6 +8,7 @@ use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterf
 use BabDev\SyliusProductSamplesPlugin\Model\ChannelInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
+use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantOptionValuesSynchronizerInterface;
 use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantTranslationsSynchronizerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
@@ -24,9 +25,10 @@ final class SampleVariantGeneratorListenerSpec extends ObjectBehavior
         FactoryInterface $channelPricingFactory,
         ProductVariantFactoryInterface $productVariantFactory,
         SampleVariantCodeGeneratorInterface $codeGenerator,
+        ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,
         ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
     ): void {
-        $this->beConstructedWith($channelPricingFactory, $productVariantFactory, $codeGenerator, $translationsSynchronizer);
+        $this->beConstructedWith($channelPricingFactory, $productVariantFactory, $codeGenerator, $optionValuesSynchronizer, $translationsSynchronizer);
     }
 
     public function it_does_not_generate_sample_variants_if_product_samples_are_disabled(
@@ -43,6 +45,7 @@ final class SampleVariantGeneratorListenerSpec extends ObjectBehavior
         FactoryInterface $channelPricingFactory,
         ProductVariantFactoryInterface $productVariantFactory,
         SampleVariantCodeGeneratorInterface $codeGenerator,
+        ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,
         ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
         ResourceControllerEvent $event,
         ProductInterface $product,
@@ -91,6 +94,7 @@ final class SampleVariantGeneratorListenerSpec extends ObjectBehavior
 
         $newSampleOfVariant1->addChannelPricing($newChannelPricingForSampleOfVariant1)->shouldBeCalled();
 
+        $optionValuesSynchronizer->synchronize($newSampleOfVariant1)->shouldBeCalled();
         $translationsSynchronizer->synchronize($newSampleOfVariant1)->shouldBeCalled();
 
         /*
@@ -125,6 +129,7 @@ final class SampleVariantGeneratorListenerSpec extends ObjectBehavior
 
         $newSampleOfVariant3->addChannelPricing($newChannelPricingForSampleOfVariant3)->shouldBeCalled();
 
+        $optionValuesSynchronizer->synchronize($newSampleOfVariant3)->shouldBeCalled();
         $translationsSynchronizer->synchronize($newSampleOfVariant3)->shouldBeCalled();
 
         $this->ensureSampleVariantsExist($event);
