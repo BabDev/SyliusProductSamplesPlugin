@@ -109,7 +109,13 @@ export default class AddToCart {
 
         form.classList.add('loading');
 
-        const response = await fetch(form.action, {method: form.method ?? 'POST', body: data});
+        const response = await fetch(form.action, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            method: form.method ?? 'POST',
+            body: data,
+        });
 
         if (response.ok) {
             validationElement.classList.add('hidden');
