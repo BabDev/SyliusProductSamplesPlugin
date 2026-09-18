@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber;
 
-use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -24,6 +23,8 @@ final class ManageSampleProductVariantAssignmentsFormSubscriber implements Event
      * @note We don't handle setting the variant code in this method because this listener is called before the form data
      *       for the parent variant form has been merged onto the ProductVariant model, instead that will be handled by
      *       {@see EnsureSampleVariantsHaveValidCodesFormSubscriber} on the root form
+     * @note The sample is only ever attached to its variant here, on submit. It is not part of the product's variant
+     *       collection at this point; it reaches the database through the cascade on the variant's `sample` association
      */
     public function onSubmit(FormEvent $event): void
     {
@@ -40,18 +41,12 @@ final class ManageSampleProductVariantAssignmentsFormSubscriber implements Event
          */
         if (null !== $productForm = $variantForm->getParent()) {
             if (!$productForm->get('samplesActive')->getData() && null === $sampleVariant->getId()) {
-                /** @var ProductInterface $product */
-                $product = $productForm->getData();
-                $product->removeVariant($sampleVariant);
-
                 $event->setData(null);
 
                 return;
             }
         } else {
             if (!$sampleVariant->getProduct()->getSamplesActive() && null === $sampleVariant->getId()) {
-                $sampleVariant->getProduct()->removeVariant($sampleVariant);
-
                 $event->setData(null);
 
                 return;

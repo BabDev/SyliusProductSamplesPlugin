@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BabDev\SyliusProductSamplesPlugin\Form\Extension;
 
 use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\EnsureSampleVariantsHaveValidCodesFormSubscriber;
+use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\ManageSampleProductVariantAssignmentsFormSubscriber;
 use BabDev\SyliusProductSamplesPlugin\Form\Type\SampleProductVariantType;
 use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
@@ -14,10 +15,15 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Webmozart\Assert\Assert;
 
 final class ProductVariantTypeExtension extends AbstractTypeExtension
 {
+    /**
+     * Runs ahead of the listener {@see SampleProductVariantType} registers at the default priority,
+     * so that type sees the sample variant when it builds the channel pricing fields.
+     */
+    private const PROVIDE_SAMPLE_PRIORITY = 10;
+
     public function __construct(
         private ProductVariantFactoryInterface $productVariantFactory,
         private SampleVariantCodeGeneratorInterface $codeGenerator,
@@ -31,19 +37,41 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
             ->add('sample', SampleProductVariantType::class)
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-            $variant = $event->getData();
+        /*
+         * The sample is handed to the sub-form rather than assigned to the variant, because this also
+         * runs when the form is only being rendered. The assignment happens when the form is submitted instead.
+         */
+        $builder->get('sample')->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event): void {
+                if (null !== $event->getData()) {
+                    return;
+                }
 
-            Assert::isInstanceOf($variant, ProductVariantInterface::class);
+                $variant = $event->getForm()->getParent()?->getData();
 
-            if (null === $variant->getSample()) {
-                $sample = $this->productVariantFactory->createForProduct($variant->getProduct());
+                if (!$variant instanceof ProductVariantInterface) {
+                    return;
+                }
+
+                $product = $variant->getProduct();
+
+                if (null === $product) {
+                    return;
+                }
+
+                $sample = $this->productVariantFactory->createForProduct($product);
+
+                if (!$sample instanceof ProductVariantInterface) {
+                    return;
+                }
+
                 $sample->setSampleOf($variant);
 
-                $variant->setSample($sample);
-                $variant->getProduct()->addVariant($sample);
-            }
-        });
+                $event->setData($sample);
+            },
+            self::PROVIDE_SAMPLE_PRIORITY,
+        );
     }
 
     public static function getExtendedTypes(): iterable

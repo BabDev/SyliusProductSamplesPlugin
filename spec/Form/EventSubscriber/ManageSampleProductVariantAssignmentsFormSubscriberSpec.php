@@ -30,8 +30,6 @@ final class ManageSampleProductVariantAssignmentsFormSubscriberSpec extends Obje
         $productForm->getData()->willReturn($product);
         $productForm->get('samplesActive')->willReturn($samplesActiveForm);
 
-        $product->removeVariant($sampleVariant)->shouldBeCalled();
-
         $samplesActiveForm->getData()->willReturn(false);
 
         $sampleVariant->getId()->willReturn(null);
@@ -118,8 +116,6 @@ final class ManageSampleProductVariantAssignmentsFormSubscriberSpec extends Obje
         $sampleVariant->getId()->willReturn(null);
 
         $product->getSamplesActive()->willReturn(false);
-        $product->removeVariant($sampleVariant)->shouldBeCalled();
-
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn($sampleVariant);
         $event->setData(null)->shouldBeCalled();
