@@ -29,14 +29,6 @@
       <code>$productId</code>
     </MissingParamType>
   </file>
-  <file src="src/EventListener/SampleVariantGeneratorListener.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$channel</code>
-    </ArgumentTypeCoercion>
-    <PossiblyNullReference occurrences="1">
-      <code>getCode</code>
-    </PossiblyNullReference>
-  </file>
   <file src="src/Form/EventSubscriber/EnsureSampleVariantsHaveValidCodesFormSubscriber.php">
     <MixedArgument occurrences="1">
       <code>$event-&gt;getData()</code>
@@ -100,24 +92,12 @@
     </MoreSpecificReturnType>
   </file>
   <file src="src/Provider/SampleAwareProductVariantPricesProvider.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$sample</code>
-    </ArgumentTypeCoercion>
     <DeprecatedClass occurrences="1">
       <code>private</code>
     </DeprecatedClass>
-    <PossiblyNullArgument occurrences="1">
-      <code>$sample</code>
-    </PossiblyNullArgument>
     <PossiblyNullArrayOffset occurrences="1">
       <code>$optionMap</code>
     </PossiblyNullArrayOffset>
-    <PossiblyNullReference occurrences="1">
-      <code>getSamplesActive</code>
-    </PossiblyNullReference>
-    <UndefinedInterfaceMethod occurrences="1">
-      <code>getSamplesActive</code>
-    </UndefinedInterfaceMethod>
     <UnnecessaryVarAnnotation occurrences="1">
       <code>ProductOptionValueInterface</code>
     </UnnecessaryVarAnnotation>

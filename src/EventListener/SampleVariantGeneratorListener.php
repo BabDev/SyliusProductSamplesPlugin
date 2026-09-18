@@ -10,7 +10,7 @@ use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantOptionValuesSynchronizerInterface;
 use BabDev\SyliusProductSamplesPlugin\Synchronizer\ProductVariantTranslationsSynchronizerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -74,7 +74,7 @@ final class SampleVariantGeneratorListener
         $this->translationsSynchronizer->synchronize($sample);
     }
 
-    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null): ChannelPricingInterface
+    private function createChannelPricingForChannel(int $price, ChannelInterface $channel): ChannelPricingInterface
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();

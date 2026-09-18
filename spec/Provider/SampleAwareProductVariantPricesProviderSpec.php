@@ -225,4 +225,58 @@ final class SampleAwareProductVariantPricesProviderSpec extends ObjectBehavior
             ],
         ]);
     }
+
+    public function it_omits_the_sample_pricing_for_a_variant_which_has_no_sample(
+        ChannelInterface $channel,
+        ProductInterface $tShirt,
+        ProductOptionValueInterface $black,
+        ProductOptionValueInterface $white,
+        ProductVariantInterface $blackTShirt,
+        ProductVariantInterface $whiteTShirt,
+        ProductVariantInterface $sampleBlackTShirt,
+        ProductVariantPricesCalculatorInterface $productVariantPricesCalculator
+    ): void {
+        $tShirt->getEnabledVariants()->willReturn(new ArrayCollection([
+            $blackTShirt->getWrappedObject(),
+            $whiteTShirt->getWrappedObject(),
+        ]));
+
+        $tShirt->getSamplesActive()->willReturn(true);
+
+        $blackTShirt->getSample()->willReturn($sampleBlackTShirt);
+        $whiteTShirt->getSample()->willReturn(null);
+
+        $blackTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+        $whiteTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+
+        $blackTShirt->getOptionValues()->willReturn(new ArrayCollection([$black->getWrappedObject()]));
+        $whiteTShirt->getOptionValues()->willReturn(new ArrayCollection([$white->getWrappedObject()]));
+
+        $productVariantPricesCalculator->calculate($blackTShirt, ['channel' => $channel])->willReturn(1000);
+        $productVariantPricesCalculator->calculateOriginal($blackTShirt, ['channel' => $channel])->willReturn(1000);
+        $productVariantPricesCalculator->calculate($whiteTShirt, ['channel' => $channel])->willReturn(1500);
+        $productVariantPricesCalculator->calculateOriginal($whiteTShirt, ['channel' => $channel])->willReturn(1500);
+        $productVariantPricesCalculator->calculate($sampleBlackTShirt, ['channel' => $channel])->willReturn(0);
+
+        $productVariantPricesCalculator->calculate(null, ['channel' => $channel])->shouldNotBeCalled();
+
+        $black->getOptionCode()->willReturn('t_shirt_color');
+        $white->getOptionCode()->willReturn('t_shirt_color');
+
+        $black->getCode()->willReturn('black');
+        $white->getCode()->willReturn('white');
+
+        $this->provideVariantsPrices($tShirt, $channel)->shouldReturn([
+            [
+                't_shirt_color' => 'black',
+                'value' => 1000,
+                'sample-price' => 0,
+                'free-sample' => 'yes',
+            ],
+            [
+                't_shirt_color' => 'white',
+                'value' => 1500,
+            ],
+        ]);
+    }
 }

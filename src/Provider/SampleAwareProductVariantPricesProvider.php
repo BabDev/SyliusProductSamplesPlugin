@@ -31,13 +31,13 @@ final class SampleAwareProductVariantPricesProvider implements ProductVariantsPr
         foreach ($product->getEnabledVariants() as $variant) {
             Assert::isInstanceOf($variant, ProductVariantInterface::class);
 
-            $variantsPrices[] = $this->constructOptionsMap($variant, $channel);
+            $variantsPrices[] = $this->constructOptionsMap($product, $variant, $channel);
         }
 
         return $variantsPrices;
     }
 
-    private function constructOptionsMap(ProductVariantInterface $variant, ChannelInterface $channel): array
+    private function constructOptionsMap(ProductInterface $product, ProductVariantInterface $variant, ChannelInterface $channel): array
     {
         $optionMap = [];
 
@@ -63,13 +63,20 @@ final class SampleAwareProductVariantPricesProvider implements ProductVariantsPr
             $optionMap['applied_promotions'] = $appliedPromotions->toArray();
         }
 
-        if ($variant->getProduct()->getSamplesActive()) {
+        if ($product->getSamplesActive()) {
             $sample = $variant->getSample();
 
-            $samplePrice = $this->productVariantPriceCalculator->calculate($sample, ['channel' => $channel]);
+            /*
+             * A variant can be missing its sample when samples were activated after the variant was
+             * created; leaving the keys out lets the storefront fall back to its generic sample label
+             * instead of failing to render the product.
+             */
+            if ($sample instanceof ProductVariantInterface) {
+                $samplePrice = $this->productVariantPriceCalculator->calculate($sample, ['channel' => $channel]);
 
-            $optionMap['sample-price'] = $samplePrice;
-            $optionMap['free-sample'] = 0 === $samplePrice ? 'yes' : 'no';
+                $optionMap['sample-price'] = $samplePrice;
+                $optionMap['free-sample'] = 0 === $samplePrice ? 'yes' : 'no';
+            }
         }
 
         return $optionMap;

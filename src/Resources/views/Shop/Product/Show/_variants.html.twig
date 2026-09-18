@@ -12,7 +12,7 @@
     {% for key, variant in product.enabledVariants %}
         {% set sampleVariant = product.samplesActive ? variant.sample : null %}
         {% set channelPricing = variant.getChannelPricingForChannel(sylius.channel) %}
-        {% set sampleVariantChannelPricing = sampleVariant ? sampleVariant.getChannelPricingForChannel(sylius.channel) : false %}
+        {% set sampleVariantChannelPricing = sampleVariant ? sampleVariant.getChannelPricingForChannel(sylius.channel) : null %}
         <tr {{ sylius_test_html_attribute('product-variants-row') }}>
             <td>
                 {{ variant.name }}
@@ -27,7 +27,7 @@
                 {% endif %}
             </td>
             {% set appliedPromotions = channelPricing.appliedPromotions|map(promotion => ({'label': promotion.label, 'description': promotion.description})) %}
-            <td class="sylius-product-variant-price" data-applied-promotions="{{ appliedPromotions|json_encode }}" {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}{% if product.samplesActive %} data-sample-price="{{ money.calculateOriginalPrice(sampleVariant) }}" data-free-sample="{{ sampleVariantChannelPricing.price == 0 ? 'yes' : 'no' }}"{% endif %}>
+            <td class="sylius-product-variant-price" data-applied-promotions="{{ appliedPromotions|json_encode }}" {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}{% if sampleVariantChannelPricing %} data-sample-price="{{ money.calculateOriginalPrice(sampleVariant) }}" data-free-sample="{{ sampleVariantChannelPricing.price == 0 ? 'yes' : 'no' }}"{% endif %}>
                 {{ money.calculatePrice(variant) }}
             </td>
             <td class="right aligned">
