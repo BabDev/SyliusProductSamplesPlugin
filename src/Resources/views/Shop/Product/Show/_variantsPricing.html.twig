@@ -16,6 +16,6 @@
             {% set catalog_promotions = catalog_promotions|merge([{'label': promotion.name, 'description': promotion.description}]) %}
         {% endfor %}
     {% endif %}
-    <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' or option == 'original-price' or option == 'sample-price' %}{{ money.convertAndFormat(value) }}{% elseif option == 'applied_promotions' %}{{ catalog_promotions|json_encode }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
+    <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' or option == 'original-price' or option == 'sample-price' or option == 'sample-original-price' %}{{ money.convertAndFormat(value) }}{% elseif option == 'applied_promotions' %}{{ catalog_promotions|json_encode }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
 {% endfor %}
 </div>

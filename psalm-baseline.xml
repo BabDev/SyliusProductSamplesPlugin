@@ -78,11 +78,6 @@
       <code>Collection</code>
     </MoreSpecificReturnType>
   </file>
-  <file src="src/Provider/SampleAwareProductVariantPricesProvider.php">
-    <DeprecatedClass occurrences="1">
-      <code>private</code>
-    </DeprecatedClass>
-  </file>
   <file src="src/Validator/Constraints/MaxSamplesPerOrder.php">
     <PropertyNotSetInConstructor occurrences="1">
       <code>MaxSamplesPerOrder</code>

@@ -53,11 +53,13 @@ final class SampleAwareProductVariantPricesProviderSpec extends ObjectBehavior
         $whiteTShirt->getSample()->willReturn($sampleWhiteTShirt);
 
         $productVariantPricesCalculator->calculate($sampleBlackTShirt, ['channel' => $channel])->willReturn(0);
+        $productVariantPricesCalculator->calculateOriginal($sampleBlackTShirt, ['channel' => $channel])->willReturn(0);
         $productVariantPricesCalculator->calculate($sampleWhiteTShirt, ['channel' => $channel])->willReturn(250);
+        $productVariantPricesCalculator->calculateOriginal($sampleWhiteTShirt, ['channel' => $channel])->willReturn(500);
 
         $this->provideVariantsPrices($tShirt, $channel)->shouldReturn([
             ['t_shirt_color' => 'black', 'value' => 1000, 'sample-price' => 0, 'free-sample' => 'yes'],
-            ['t_shirt_color' => 'white', 'value' => 1500, 'original-price' => 2000, 'sample-price' => 250, 'free-sample' => 'no'],
+            ['t_shirt_color' => 'white', 'value' => 1500, 'original-price' => 2000, 'sample-price' => 250, 'sample-original-price' => 500, 'free-sample' => 'no'],
         ]);
     }
 
@@ -114,6 +116,7 @@ final class SampleAwareProductVariantPricesProviderSpec extends ObjectBehavior
         $whiteTShirt->getSample()->willReturn(null);
 
         $productVariantPricesCalculator->calculate($sampleBlackTShirt, ['channel' => $channel])->willReturn(0);
+        $productVariantPricesCalculator->calculateOriginal($sampleBlackTShirt, ['channel' => $channel])->willReturn(0);
 
         $this->provideVariantsPrices($tShirt, $channel)->shouldReturn([
             ['t_shirt_color' => 'black', 'value' => 1000, 'sample-price' => 0, 'free-sample' => 'yes'],

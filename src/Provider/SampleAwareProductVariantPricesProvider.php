@@ -6,22 +6,19 @@ namespace BabDev\SyliusProductSamplesPlugin\Provider;
 
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface as CoreProductInterface;
 use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 
 /**
  * Adds the sample pricing a product's storefront needs to the option maps built by Sylius.
- *
- * Building the maps is left to the decorated provider so this plugin does not carry a copy of that
- * logic; only the two sample keys are added here.
  */
 final class SampleAwareProductVariantPricesProvider implements ProductVariantsPricesProviderInterface
 {
     public function __construct(
         private ProductVariantsPricesProviderInterface $decoratedProvider,
-        private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
+        private ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
     ) {
     }
 
@@ -62,9 +59,16 @@ final class SampleAwareProductVariantPricesProvider implements ProductVariantsPr
                 continue;
             }
 
-            $samplePrice = $this->productVariantPriceCalculator->calculate($sample, ['channel' => $channel]);
+            $samplePrice = $this->productVariantPricesCalculator->calculate($sample, ['channel' => $channel]);
+            $sampleOriginalPrice = $this->productVariantPricesCalculator->calculateOriginal($sample, ['channel' => $channel]);
 
             $optionMap['sample-price'] = $samplePrice;
+
+            // Mirrors how the decorated provider reports a discount on the variant itself
+            if ($sampleOriginalPrice > $samplePrice) {
+                $optionMap['sample-original-price'] = $sampleOriginalPrice;
+            }
+
             $optionMap['free-sample'] = 0 === $samplePrice ? 'yes' : 'no';
 
             $variantsPrices[$position] = $optionMap;
