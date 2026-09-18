@@ -14,26 +14,42 @@ on:
 
 jobs:
     behat:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: "Behat - Sylius ${{ matrix.sylius }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
 
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0", "8.1"]
+                php: ["8.1"]
                 symfony: ["5.4.*"]
                 sylius: ["~1.11.2"]
                 node: ["14.x"]
                 mysql: ["8.0"]
 
+        services:
+            mysql:
+                image: "mysql:${{ matrix.mysql }}"
+                env:
+                    MYSQL_DATABASE: 'sylius_test'
+                    MYSQL_USER: 'sylius'
+                    MYSQL_PASSWORD: 'sylius'
+                    MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+                ports:
+                    - 3306:3306
+                options: >-
+                    --health-cmd="mysqladmin ping"
+                    --health-interval=10s
+                    --health-timeout=5s
+                    --health-retries=3
+
         env:
             APP_ENV: test
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+            DATABASE_URL: "mysql://sylius:sylius@127.0.0.1:3306/sylius_test?serverVersion=${{ matrix.mysql }}"
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v7
 
             -
                 name: Setup PHP
@@ -46,24 +62,13 @@ jobs:
 
             -
                 name: Setup Node
-                uses: actions/setup-node@v3
+                uses: actions/setup-node@v7
                 with:
                     node-version: "${{ matrix.node }}"
                     cache: "yarn"
                     cache-dependency-path: |
                         **/package.json
                         **/yarn.lock
-
-            -
-                name: Shutdown default MySQL
-                run: sudo service mysql stop
-
-            -
-                name: Setup MySQL
-                uses: mirromutth/mysql-action@v1.1
-                with:
-                    mysql version: "${{ matrix.mysql }}"
-                    mysql root password: "root"
 
             -
                 name: Output PHP version for Symfony CLI
@@ -84,11 +89,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v3
+                uses: actions/cache@v6
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
@@ -124,9 +129,7 @@ jobs:
 
             -
                 name: Prepare test application database
-                run: |
-                    (cd tests/Application && bin/console doctrine:database:create -vvv)
-                    (cd tests/Application && bin/console doctrine:schema:create -vvv)
+                run: (cd tests/Application && bin/console doctrine:schema:create -vvv)
 
             -
                 name: Validate database schema
@@ -142,7 +145,7 @@ jobs:
 
             -
                 name: Upload Behat logs
-                uses: actions/upload-artifact@v3
+                uses: actions/upload-artifact@v7
                 if: failure()
                 with:
                     name: Behat logs
@@ -150,13 +153,13 @@ jobs:
                     if-no-files-found: ignore
 
     composer:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: "Validate Composer Schema"
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v7
 
             -
                 name: Setup PHP
@@ -172,20 +175,20 @@ jobs:
                 run: composer validate --ansi --strict
 
     phpspec:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: "PHPSpec - Sylius ${{ matrix.sylius }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
 
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0", "8.1"]
+                php: ["8.1"]
                 symfony: ["5.4.*"]
                 sylius: ["~1.11.2"]
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v7
 
             -
                 name: Setup PHP
@@ -199,11 +202,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v3
+                uses: actions/cache@v6
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
@@ -226,20 +229,20 @@ jobs:
                 run: vendor/bin/phpspec run --ansi -f progress --no-interaction
 
     phpunit:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: "PHPUnit - Sylius ${{ matrix.sylius }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
 
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0", "8.1"]
+                php: ["8.1"]
                 symfony: ["5.4.*"]
                 sylius: ["~1.11.2"]
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v7
 
             -
                 name: Setup PHP
@@ -253,11 +256,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v3
+                uses: actions/cache@v6
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}

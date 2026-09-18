@@ -14,13 +14,13 @@ on:
 
 jobs:
     sa-phpstan:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: PHPStan
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v7
 
             -
                 name: Setup PHP
@@ -34,11 +34,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v3
+                uses: actions/cache@v6
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
@@ -56,13 +56,13 @@ jobs:
                 run: vendor/bin/phpstan analyse --error-format=github
 
     sa-psalm:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: Psalm
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v7
 
             -
                 name: Setup PHP
@@ -76,11 +76,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v3
+                uses: actions/cache@v6
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
