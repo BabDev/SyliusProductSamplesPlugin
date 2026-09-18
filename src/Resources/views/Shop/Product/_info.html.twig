@@ -1,3 +1,11 @@
+{#
+ # Forked from @SyliusShop/Product/_info.html.twig (Sylius 1.11).
+ #
+ # Sylius exposes neither a Twig block nor a template event inside this file, so the whole
+ # template has to be carried here to change a few lines. Diff it against the upstream file
+ # when upgrading Sylius: the only intended difference is that
+ # a sample badge is appended for line items whose variant is a sample.
+ #}
 {% set product = variant.product %}
 
 <div class="ui header">
@@ -9,7 +17,7 @@
     <div class="content">
         <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}">
             <div class="sylius-product-name" {{ sylius_test_html_attribute('product-name', item.productName) }}>{{ item.productName }}</div>
-            <span class="sub header sylius-product-variant-code" {{ sylius_test_html_attribute('product-variant-code') }}>
+            <span class="sub header sylius-product-variant-code" {{ sylius_test_html_attribute('product-variant-code', variant.code) }}>
                 {{ variant.code }}
             </span>
         </a>

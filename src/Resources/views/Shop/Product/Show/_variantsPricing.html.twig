@@ -1,3 +1,11 @@
+{#
+ # Forked from @SyliusShop/Product/Show/_variantsPricing.html.twig (Sylius 1.11).
+ #
+ # Sylius exposes neither a Twig block nor a template event inside this file, so the whole
+ # template has to be carried here to change a few lines. Diff it against the upstream file
+ # when upgrading Sylius: the only intended difference is that
+ # the sample-price key is formatted as money alongside value and original-price.
+ #}
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 <div id="sylius-variants-pricing" data-unavailable-text="{{ 'sylius.ui.unavailable'|trans }}">

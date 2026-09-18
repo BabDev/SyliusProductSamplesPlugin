@@ -6,7 +6,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use BabDev\SyliusProductSamplesPlugin\EventListener\SampleVariantGeneratorListener;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\AddToCartTypeExtension;
-use BabDev\SyliusProductSamplesPlugin\Form\Extension\CartItemTypeExtension;
+use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantChoiceTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ChannelTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantTypeExtension;
@@ -28,8 +28,8 @@ use Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder as RootProductFormMenu
 use Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder as RootProductVariantFormMenuBuilder;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType;
-use Sylius\Bundle\OrderBundle\Form\Type\CartItemType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 
 return static function (ContainerConfigurator $container): void {
@@ -51,8 +51,8 @@ return static function (ContainerConfigurator $container): void {
         ->tag('form.type_extension', ['extended-type' => AddToCartType::class])
     ;
 
-    $services->set('babdev_sylius_product_samples.form.extension.cart_item_type', CartItemTypeExtension::class)
-        ->tag('form.type_extension', ['extended-type' => CartItemType::class, 'priority' => -10]) // Needs to run after the extension in SyliusCoreBundle
+    $services->set('babdev_sylius_product_samples.form.extension.product_variant_choice', ProductVariantChoiceTypeExtension::class)
+        ->tag('form.type_extension', ['extended-type' => ProductVariantChoiceType::class])
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.channel', ChannelTypeExtension::class)
@@ -132,12 +132,10 @@ return static function (ContainerConfigurator $container): void {
         ->tag('validator.constraint_validator', ['alias' => 'babdev_sylius_product_samples_max_samples_per_order'])
     ;
 
-    /*
-     * The below services fully replace Sylius core services
-     */
-
-    $services->set('sylius.provider.product_variants_prices', SampleAwareProductVariantPricesProvider::class)
+    $services->set('babdev_sylius_product_samples.provider.sample_aware_product_variants_prices', SampleAwareProductVariantPricesProvider::class)
+        ->decorate('sylius.provider.product_variants_prices')
         ->args([
+            service('.inner'),
             service('sylius.calculator.product_variant_price'),
         ])
     ;

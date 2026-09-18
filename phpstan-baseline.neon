@@ -61,16 +61,6 @@ parameters:
 			path: src/Model/Product.php
 
 		-
-			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
-			count: 1
-			path: src/Provider/SampleAwareProductVariantPricesProvider.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$appliedPromotions contains generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
-			count: 1
-			path: src/Provider/SampleAwareProductVariantPricesProvider.php
-
-		-
 			message: "#^Cannot call method getCode\\(\\) on Sylius\\\\Component\\\\Core\\\\Model\\\\ChannelInterface\\|null\\.$#"
 			count: 1
 			path: tests/Behat/Context/Setup/ProductContext.php

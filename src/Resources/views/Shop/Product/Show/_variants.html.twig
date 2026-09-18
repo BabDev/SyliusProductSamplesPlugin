@@ -1,3 +1,11 @@
+{#
+ # Forked from @SyliusShop/Product/Show/_variants.html.twig (Sylius 1.11).
+ #
+ # Sylius exposes neither a Twig block nor a template event inside this file, so the whole
+ # template has to be carried here to change a few lines. Diff it against the upstream file
+ # when upgrading Sylius: the only intended difference is that
+ # the price cell carries data-sample-price and data-free-sample attributes, read by the plugin's add-to-cart script.
+ #}
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 <table class="ui single line small table" id="sylius-product-variants" {{ sylius_test_html_attribute('product-variants') }}>
@@ -15,7 +23,7 @@
         {% set sampleVariantChannelPricing = sampleVariant ? sampleVariant.getChannelPricingForChannel(sylius.channel) : null %}
         <tr {{ sylius_test_html_attribute('product-variants-row') }}>
             <td>
-                {{ variant.name }}
+                {{ variant.name|default(variant.descriptor) }}
                 {% if product.hasOptions() %}
                     <div class="ui horizontal divided list">
                         {% for optionValue in variant.optionValues %}

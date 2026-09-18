@@ -1,3 +1,11 @@
+{#
+ # Forked from @SyliusShop/Cart/Widget/_popup.html.twig (Sylius 1.11).
+ #
+ # Sylius exposes neither a Twig block nor a template event inside this file, so the whole
+ # template has to be carried here to change a few lines. Diff it against the upstream file
+ # when upgrading Sylius: the only intended difference is that
+ # sample line items are labelled with the sample_of_product translation instead of the product name.
+ #}
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% if cart.empty %}
@@ -15,7 +23,7 @@
         {% endfor %}
         <div class="item"><strong>{{ 'sylius.ui.subtotal'|trans }}</strong>: {{ money.convertAndFormat(cart.itemsTotal) }}</div>
     </div>
-    <a href="{{ path('sylius_shop_cart_summary') }}" class="ui fluid basic text button">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
+    <a href="{{ path('sylius_shop_cart_summary') }}" id="sylius-go-to-cart" class="ui fluid basic text button">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
     <div class="ui divider"></div>
     <a href="{{ path('sylius_shop_checkout_start') }}" class="ui fluid primary button">{{ 'sylius.ui.checkout'|trans }}</a>
 {% endif %}

@@ -52,11 +52,10 @@
       <code>hasTranslation</code>
     </PossiblyNullReference>
   </file>
-  <file src="src/Form/Extension/CartItemTypeExtension.php">
-    <MixedMethodCall occurrences="2">
-      <code>getNonSampleVariants</code>
-      <code>getVariantSelectionMethod</code>
-    </MixedMethodCall>
+  <file src="src/Form/Extension/ProductVariantChoiceTypeExtension.php">
+    <MixedAssignment occurrences="1">
+      <code>$product</code>
+    </MixedAssignment>
   </file>
   <file src="src/Generator/ChannelAwareSampleVariantCodeGenerator.php">
     <InvalidNullableReturnType occurrences="1">
@@ -83,12 +82,6 @@
     <DeprecatedClass occurrences="1">
       <code>private</code>
     </DeprecatedClass>
-    <PossiblyNullArrayOffset occurrences="1">
-      <code>$optionMap</code>
-    </PossiblyNullArrayOffset>
-    <UnnecessaryVarAnnotation occurrences="1">
-      <code>ProductOptionValueInterface</code>
-    </UnnecessaryVarAnnotation>
   </file>
   <file src="src/Validator/Constraints/MaxSamplesPerOrder.php">
     <PropertyNotSetInConstructor occurrences="1">
