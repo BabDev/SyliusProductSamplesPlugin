@@ -3,7 +3,7 @@ babdev_sylius_product_samples:
         channel:
             max_samples_per_order: 'Max Samples Per Order'
             sample_product_code_prefix: 'Sample Product Code Prefix'
-            sample_product_code_prefix_help: "Defines the prefix applied to all sample product variants in this channel, defaults to the plugin's configuration if not set."
+            sample_product_code_prefix_help: "Prefix applied to sample variant codes generated while this channel is active. A variant has a single sample whose code does not change afterward, so this is a naming convention rather than a per-channel setting. Defaults to the plugin's configuration when empty."
 
         product:
             samples_available: 'Samples Available'

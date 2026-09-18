@@ -51,11 +51,6 @@ parameters:
 			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
 
 		-
-			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ChannelInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ChannelInterface' will always evaluate to true\\.$#"
-			count: 2
-			path: src/Generator/ChannelAwareSampleVariantCodeGenerator.php
-
-		-
 			message: "#^Method BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\Product\\:\\:getNonSampleVariants\\(\\) should return Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\), BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface\\> but returns Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\), Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\>\\.$#"
 			count: 1
 			path: src/Model/Product.php

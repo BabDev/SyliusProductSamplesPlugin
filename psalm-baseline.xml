@@ -57,21 +57,6 @@
       <code>$product</code>
     </MixedAssignment>
   </file>
-  <file src="src/Generator/ChannelAwareSampleVariantCodeGenerator.php">
-    <InvalidNullableReturnType occurrences="1">
-      <code>string</code>
-    </InvalidNullableReturnType>
-    <NullableReturnStatement occurrences="1">
-      <code>$channel-&gt;getSampleProductCodePrefix()</code>
-    </NullableReturnStatement>
-    <PossiblyNullArgument occurrences="2">
-      <code>$channel-&gt;getSampleProductCodePrefix()</code>
-      <code>$channel-&gt;getSampleProductCodePrefix()</code>
-    </PossiblyNullArgument>
-    <PossiblyNullOperand occurrences="1">
-      <code>$channel-&gt;getSampleProductCodePrefix()</code>
-    </PossiblyNullOperand>
-  </file>
   <file src="src/Model/Product.php">
     <LessSpecificReturnStatement occurrences="1"/>
     <MoreSpecificReturnType occurrences="1">

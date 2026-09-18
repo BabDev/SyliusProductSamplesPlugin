@@ -9,6 +9,8 @@ use BabDev\SyliusProductSamplesPlugin\Model\ChannelInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 
 final class ChannelAwareSampleVariantCodeGeneratorSpec extends ObjectBehavior
 {
@@ -82,5 +84,41 @@ final class ChannelAwareSampleVariantCodeGeneratorSpec extends ObjectBehavior
         $decoratedGenerator->getPrefix()->willReturn($prefix);
 
         $this->getPrefix()->shouldReturn($prefix);
+    }
+
+    public function it_falls_back_to_the_decorated_generator_when_no_channel_can_be_resolved(
+        ChannelContextInterface $channelContext,
+        SampleVariantCodeGeneratorInterface $decoratedGenerator,
+        ProductVariantInterface $sampleVariant,
+    ): void {
+        $channelContext->getChannel()->willThrow(new ChannelNotFoundException());
+
+        $decoratedGenerator->generate($sampleVariant)->willReturn('SAMPLE-MUG-BLUE');
+
+        $this->generate($sampleVariant)->shouldReturn('SAMPLE-MUG-BLUE');
+    }
+
+    public function it_falls_back_to_the_decorated_prefix_when_no_channel_can_be_resolved(
+        ChannelContextInterface $channelContext,
+        SampleVariantCodeGeneratorInterface $decoratedGenerator,
+    ): void {
+        $channelContext->getChannel()->willThrow(new ChannelNotFoundException());
+
+        $decoratedGenerator->getPrefix()->willReturn('SAMPLE-');
+
+        $this->getPrefix()->shouldReturn('SAMPLE-');
+    }
+
+    public function it_falls_back_to_the_decorated_generator_when_the_channel_is_not_sample_aware(
+        ChannelContextInterface $channelContext,
+        SampleVariantCodeGeneratorInterface $decoratedGenerator,
+        BaseChannelInterface $channel,
+        ProductVariantInterface $sampleVariant,
+    ): void {
+        $channelContext->getChannel()->willReturn($channel);
+
+        $decoratedGenerator->generate($sampleVariant)->willReturn('SAMPLE-MUG-BLUE');
+
+        $this->generate($sampleVariant)->shouldReturn('SAMPLE-MUG-BLUE');
     }
 }
