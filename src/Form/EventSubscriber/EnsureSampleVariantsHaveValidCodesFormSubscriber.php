@@ -51,7 +51,10 @@ final class EnsureSampleVariantsHaveValidCodesFormSubscriber implements EventSub
 
         Assert::isInstanceOf($sample, ProductVariantInterface::class);
 
-        if (null !== $sample->getCode() && $this->codeGenerator->getPrefix() !== $sample->getCode()) {
+        $code = $sample->getCode();
+
+        // A code which has been filled in, whether generated earlier or entered by hand, is left alone
+        if (null !== $code && '' !== trim($code)) {
             return;
         }
 

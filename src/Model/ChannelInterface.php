@@ -17,8 +17,4 @@ interface ChannelInterface extends BaseChannelInterface
      * @phpstan-param positive-int|null $maxSamplesPerOrder
      */
     public function setMaxSamplesPerOrder(?int $maxSamplesPerOrder): void;
-
-    public function getSampleProductCodePrefix(): ?string;
-
-    public function setSampleProductCodePrefix(?string $sampleProductCodePrefix): void;
 }

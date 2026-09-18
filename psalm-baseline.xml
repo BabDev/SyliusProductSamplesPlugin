@@ -10,7 +10,7 @@
   </file>
   <file src="src/DependencyInjection/BabDevSyliusProductSamplesExtension.php">
     <MixedArgument occurrences="1">
-      <code>$mergedConfig['sample_variant_code_prefix']</code>
+      <code>$mergedConfig['sample_variant_code_template']</code>
     </MixedArgument>
   </file>
   <file src="src/DependencyInjection/Configuration.php">

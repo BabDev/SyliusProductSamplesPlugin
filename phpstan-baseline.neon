@@ -71,16 +71,6 @@ parameters:
 			path: tests/Behat/Context/Ui/Admin/ManagingProductVariantsContext.php
 
 		-
-			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Channel\\\\UpdatePage\\:\\:getMaxSamplesPerOrder\\(\\) should return string but returns array\\|bool\\|string\\.$#"
-			count: 1
-			path: tests/Behat/Page/Admin/Channel/UpdatePage.php
-
-		-
-			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Channel\\\\UpdatePage\\:\\:getSampleProductCodePrefix\\(\\) should return string but returns array\\|bool\\|string\\.$#"
-			count: 1
-			path: tests/Behat/Page/Admin/Channel/UpdatePage.php
-
-		-
 			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Product\\\\UpdateSimpleProductPage\\:\\:getOriginalSamplePriceForChannel\\(\\) should return string but returns array\\|bool\\|string\\.$#"
 			count: 1
 			path: tests/Behat/Page/Admin/Product/UpdateSimpleProductPage.php
@@ -104,3 +94,8 @@ parameters:
 			message: "#^Comparison operation \"\\<\\=\" between int\\<1, max\\> and 0 is always false\\.$#"
 			count: 1
 			path: src/Validator/Constraints/MaxSamplesPerOrderValidator.php
+
+		-
+			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Channel\\\\UpdatePage\\:\\:getMaxSamplesPerOrder\\(\\) should return string but returns array\\|bool\\|string\\.$#"
+			count: 1
+			path: tests/Behat/Page/Admin/Channel/UpdatePage.php

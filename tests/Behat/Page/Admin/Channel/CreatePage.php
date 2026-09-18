@@ -13,16 +13,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getElement('max_samples_per_order')->setValue($maxSamplesPerOrder);
     }
 
-    public function setSampleProductCodePrefix(string $sampleProductCodePrefix): void
-    {
-        $this->getElement('sample_product_code_prefix')->setValue($sampleProductCodePrefix);
-    }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'max_samples_per_order' => '#sylius_channel_maxSamplesPerOrder',
-            'sample_product_code_prefix' => '#sylius_channel_sampleProductCodePrefix',
         ]);
     }
 }

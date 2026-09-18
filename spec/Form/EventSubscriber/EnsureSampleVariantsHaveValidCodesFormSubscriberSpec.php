@@ -10,6 +10,7 @@ use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormInterface;
 
@@ -49,7 +50,6 @@ final class EnsureSampleVariantsHaveValidCodesFormSubscriberSpec extends ObjectB
 
         $variant2->getSample()->willReturn($sampleOfVariant2);
         $sampleOfVariant2->getCode()->willReturn(null);
-        $codeGenerator->getPrefix()->willReturn('SAMPLE-');
         $codeGenerator->generate($sampleOfVariant2)->willReturn($sampleOfVariant2Code);
         $sampleOfVariant2->setCode($sampleOfVariant2Code)->shouldBeCalled();
 
@@ -77,7 +77,6 @@ final class EnsureSampleVariantsHaveValidCodesFormSubscriberSpec extends ObjectB
 
         $variant->getSample()->willReturn($sampleOfVariant);
         $sampleOfVariant->getCode()->willReturn(null);
-        $codeGenerator->getPrefix()->willReturn('SAMPLE-');
         $codeGenerator->generate($sampleOfVariant)->willReturn($sampleOfVariantCode);
         $sampleOfVariant->setCode($sampleOfVariantCode)->shouldBeCalled();
 
@@ -104,6 +103,48 @@ final class EnsureSampleVariantsHaveValidCodesFormSubscriberSpec extends ObjectB
         $form->isRoot()->willReturn(true);
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn($channel);
+
+        $this->postSubmit($event);
+    }
+
+    public function it_leaves_a_sample_variant_code_which_has_already_been_filled_in(
+        SampleVariantCodeGeneratorInterface $codeGenerator,
+        FormEvent $event,
+        FormInterface $form,
+        ProductVariantInterface $variant,
+        ProductVariantInterface $sampleOfVariant,
+    ): void {
+        $form->isRoot()->willReturn(true);
+
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($variant);
+
+        $variant->getSample()->willReturn($sampleOfVariant);
+        $sampleOfVariant->getCode()->willReturn('HAND-PICKED-CODE');
+
+        $codeGenerator->generate($sampleOfVariant)->shouldNotBeCalled();
+        $sampleOfVariant->setCode(Argument::any())->shouldNotBeCalled();
+
+        $this->postSubmit($event);
+    }
+
+    public function it_generates_a_code_for_a_sample_variant_whose_code_is_only_whitespace(
+        SampleVariantCodeGeneratorInterface $codeGenerator,
+        FormEvent $event,
+        FormInterface $form,
+        ProductVariantInterface $variant,
+        ProductVariantInterface $sampleOfVariant,
+    ): void {
+        $form->isRoot()->willReturn(true);
+
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($variant);
+
+        $variant->getSample()->willReturn($sampleOfVariant);
+        $sampleOfVariant->getCode()->willReturn('   ');
+
+        $codeGenerator->generate($sampleOfVariant)->willReturn('SAMPLE-MUG-BLUE');
+        $sampleOfVariant->setCode('SAMPLE-MUG-BLUE')->shouldBeCalled();
 
         $this->postSubmit($event);
     }

@@ -23,16 +23,51 @@ final class ConfigurationTest extends TestCase
         $this->assertConfigurationIsValid([[]]);
     }
 
-    public function testConfigurationIsValidWithCustomPrefix(): void
+    public function testTheDefaultTemplatePrefixesTheVariantCode(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [['sample_variant_code_prefix' => 'custom-prefix-']],
-            ['sample_variant_code_prefix' => 'custom-prefix-'],
+            [[]],
+            ['sample_variant_code_template' => 'SAMPLE-{code}'],
         );
     }
 
-    public function testConfigurationIsInvalidWithEmptyPrefix(): void
+    /**
+     * @dataProvider provideValidTemplates
+     */
+    public function testConfigurationIsValidWithACustomTemplate(string $template): void
     {
-        $this->assertConfigurationIsInvalid([['sample_variant_code_prefix' => '']], 'sample_variant_code_prefix');
+        $this->assertProcessedConfigurationEquals(
+            [['sample_variant_code_template' => $template]],
+            ['sample_variant_code_template' => $template],
+        );
+    }
+
+    /**
+     * @return iterable<string, array{0: string}>
+     */
+    public static function provideValidTemplates(): iterable
+    {
+        yield 'prefix' => ['SAMPLE-{code}'];
+        yield 'suffix' => ['{code}-SAMPLE'];
+        yield 'wrapped' => ['S-{code}-S'];
+        yield 'placeholder only' => ['{code}'];
+    }
+
+    public function testConfigurationIsInvalidWithAnEmptyTemplate(): void
+    {
+        $this->assertConfigurationIsInvalid([['sample_variant_code_template' => '']], 'sample_variant_code_template');
+    }
+
+    public function testConfigurationIsInvalidWhenTheTemplateHasNoPlaceholder(): void
+    {
+        $this->assertConfigurationIsInvalid(
+            [['sample_variant_code_template' => 'SAMPLE-']],
+            'must contain the "{code}" placeholder',
+        );
+    }
+
+    public function testConfigurationIsInvalidWithAnUnknownOption(): void
+    {
+        $this->assertConfigurationIsInvalid([['sample_variant_code_prefix' => 'SAMPLE-']]);
     }
 }

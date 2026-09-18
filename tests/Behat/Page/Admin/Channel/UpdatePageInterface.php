@@ -12,7 +12,5 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function setMaxSamplesPerOrder(string $maxSamplesPerOrder): void;
 
-    public function getSampleProductCodePrefix(): string;
 
-    public function setSampleProductCodePrefix(string $sampleProductCodePrefix): void;
 }

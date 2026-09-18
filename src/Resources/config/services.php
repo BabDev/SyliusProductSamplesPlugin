@@ -11,10 +11,9 @@ use BabDev\SyliusProductSamplesPlugin\Form\Extension\ChannelTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Type\SampleProductVariantType;
-use BabDev\SyliusProductSamplesPlugin\Generator\ChannelAwareSampleVariantCodeGenerator;
 use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantNameGeneratorInterface;
-use BabDev\SyliusProductSamplesPlugin\Generator\StaticPrefixSampleVariantCodeGenerator;
+use BabDev\SyliusProductSamplesPlugin\Generator\TemplateSampleVariantCodeGenerator;
 use BabDev\SyliusProductSamplesPlugin\Generator\TranslatedPrefixSampleVariantNameGenerator;
 use BabDev\SyliusProductSamplesPlugin\Menu\ProductFormMenuBuilder;
 use BabDev\SyliusProductSamplesPlugin\Menu\ProductVariantFormMenuBuilder;
@@ -84,21 +83,13 @@ return static function (ContainerConfigurator $container): void {
         ->tag('form.type')
     ;
 
-    $services->set('babdev_sylius_product_samples.generator.static_prefix_sample_variant_code', StaticPrefixSampleVariantCodeGenerator::class)
+    $services->set('babdev_sylius_product_samples.generator.template_sample_variant_code', TemplateSampleVariantCodeGenerator::class)
         ->args([
-            param('babdev_sylius_product_samples.sample_variant_code_prefix'),
+            param('babdev_sylius_product_samples.sample_variant_code_template'),
         ])
     ;
 
-    $services->set('babdev_sylius_product_samples.generator.channel_aware_sample_variant_code', ChannelAwareSampleVariantCodeGenerator::class)
-        ->decorate('babdev_sylius_product_samples.generator.static_prefix_sample_variant_code')
-        ->args([
-            service('sylius.context.channel'),
-            service('.inner'),
-        ])
-    ;
-
-    $services->alias(SampleVariantCodeGeneratorInterface::class, 'babdev_sylius_product_samples.generator.channel_aware_sample_variant_code');
+    $services->alias(SampleVariantCodeGeneratorInterface::class, 'babdev_sylius_product_samples.generator.template_sample_variant_code');
 
     $services->set('babdev_sylius_product_samples.generator.translated_prefix_sample_variant_name', TranslatedPrefixSampleVariantNameGenerator::class)
         ->args([

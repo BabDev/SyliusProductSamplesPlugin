@@ -21,6 +21,6 @@ final class BabDevSyliusProductSamplesExtension extends ConfigurableExtension
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.php');
 
-        $container->setParameter('babdev_sylius_product_samples.sample_variant_code_prefix', $mergedConfig['sample_variant_code_prefix']);
+        $container->setParameter('babdev_sylius_product_samples.sample_variant_code_template', $mergedConfig['sample_variant_code_template']);
     }
 }
