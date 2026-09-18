@@ -33,7 +33,7 @@ final class AddToCartTypeExtension extends AbstractTypeExtension
         ;
 
         /*
-         * This listener runs on submit to handle mapping the sample variant to the care before the
+         * This listener runs on submit to handle mapping the sample variant onto the cart item before the
          * validation listener runs on post-submit, allowing the validator to see the correct data.
          */
         $builder->addEventListener(FormEvents::SUBMIT, static function (FormEvent $event): void {
