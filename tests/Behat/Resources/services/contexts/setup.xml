@@ -8,5 +8,10 @@
             <argument type="service" id="sylius.manager.product" />
             <argument type="service" id="babdev_sylius_product_samples.event_listener.sample_variant_generator" />
         </service>
+
+        <service id="babdev_sylius_product_samples.behat.context.setup.channel" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Setup\ChannelContext">
+            <argument type="service" id="sylius.manager.channel" />
+            <argument type="service" id="sylius.context.channel" />
+        </service>
     </services>
 </container>

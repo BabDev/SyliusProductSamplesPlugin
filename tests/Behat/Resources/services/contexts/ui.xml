@@ -19,5 +19,10 @@
             <argument type="service" id="babdev_sylius_product_samples.behat.page.admin.product_variant.create" />
             <argument type="service" id="babdev_sylius_product_samples.behat.page.admin.product_variant.update" />
         </service>
+
+        <service id="babdev_sylius_product_samples.behat.context.ui.shop.product" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Ui\Shop\ProductContext">
+            <argument type="service" id="babdev_sylius_product_samples.behat.page.shop.product.show" />
+            <argument type="service" id="babdev_sylius_product_samples.behat.page.shop.cart_summary" />
+        </service>
     </services>
 </container>
