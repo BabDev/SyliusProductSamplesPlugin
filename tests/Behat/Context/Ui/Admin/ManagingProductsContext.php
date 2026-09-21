@@ -126,7 +126,7 @@ final class ManagingProductsContext implements Context
 
         Assert::same(
             $this->updateSimpleProductPage->getOriginalSamplePriceForChannel($channel),
-            $originalPrice
+            $originalPrice,
         );
     }
 }

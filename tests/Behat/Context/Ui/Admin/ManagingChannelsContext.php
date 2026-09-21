@@ -26,7 +26,6 @@ final class ManagingChannelsContext implements Context
         $this->createPage->setMaxSamplesPerOrder($maxSamplesPerOrder);
     }
 
-
     /**
      * @When I set its max number of samples per order to :maxSamplesPerOrder
      */
@@ -34,7 +33,6 @@ final class ManagingChannelsContext implements Context
     {
         $this->updatePage->setMaxSamplesPerOrder($maxSamplesPerOrder);
     }
-
 
     /**
      * @Then /^(it|this channel) should allow (\d+) samples per order$/
@@ -46,5 +44,4 @@ final class ManagingChannelsContext implements Context
 
         Assert::eq($this->updatePage->getMaxSamplesPerOrder(), $number);
     }
-
 }

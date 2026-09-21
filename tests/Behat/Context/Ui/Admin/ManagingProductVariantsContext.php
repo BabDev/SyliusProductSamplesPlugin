@@ -62,7 +62,7 @@ final class ManagingProductVariantsContext implements Context
     public function theVariantWithCodeShouldHaveItsSampleOriginallyPricedAtForChannel(
         ProductVariantInterface $productVariant,
         string $price,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 

@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace spec\BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber;
 
-use BabDev\SyliusProductSamplesPlugin\Model\ChannelInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormInterface;

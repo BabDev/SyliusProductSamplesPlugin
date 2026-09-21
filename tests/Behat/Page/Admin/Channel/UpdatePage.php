@@ -18,8 +18,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getElement('max_samples_per_order')->setValue($maxSamplesPerOrder);
     }
 
-
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
