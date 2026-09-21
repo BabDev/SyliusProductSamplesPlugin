@@ -16,4 +16,4 @@ The below table shows the supported PHP, Symfony, and Sylius versions for this p
 
 | Version | Status             | PHP Versions | Symfony Versions | Sylius Versions |
 |---------|--------------------|--------------|------------------|-----------------|
-| 1.x     | Actively Supported | 8.1+         | 5.4              | 1.12            |
+| 1.x     | Actively Supported | 8.1+         | 5.4, 6.4         | 1.12            |
