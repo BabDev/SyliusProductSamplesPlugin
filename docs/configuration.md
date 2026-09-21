@@ -33,7 +33,7 @@ Each channel carries an optional limit for a maximum number of samples per order
 
 The limit is enforced by a validation constraint mapped onto the `Sylius\Component\Core\Model\Order` and `Sylius\Bundle\OrderBundle\Controller\AddToCartCommand` classes in the `sylius` validation group.
 
-See [Usage](/open-source/packages/syliusproductsamplesplugin/docs/1.x/usage) for how the count is taken.
+See [Usage](/open-source/packages/product-samples-plugin/docs/1.x/usage) for how the count is taken.
 
 ## Extension Points
 

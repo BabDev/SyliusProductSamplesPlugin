@@ -6,7 +6,7 @@ The [Sylius](https://sylius.com/) product samples plugin adds support for produc
 
 ## Documentation
 
-Please see the [BabDev website](https://www.babdev.com/open-source/packages/syliusproductsamplesplugin/docs/1.x) for detailed information on how to use this plugin.
+Please see the [BabDev website](https://www.babdev.com/open-source/packages/product-samples-plugin/docs/1.x) for detailed information on how to use this plugin.
 
 ## Security
 
