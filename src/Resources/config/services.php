@@ -134,6 +134,10 @@ return static function (ContainerConfigurator $container): void {
     $services->alias(ProductVariantTranslationsSynchronizerInterface::class, 'babdev_sylius_product_samples.synchronizer.product_variant.translations');
 
     $services->set('babdev_sylius_product_samples.validator.max_samples_per_order', MaxSamplesPerOrderValidator::class)
+        ->args([
+            service('sylius.repository.order'),
+            service('sylius.repository.product_variant'),
+        ])
         ->tag('validator.constraint_validator', ['alias' => 'babdev_sylius_product_samples_max_samples_per_order'])
     ;
 

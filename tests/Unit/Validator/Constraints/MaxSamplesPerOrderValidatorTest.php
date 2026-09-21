@@ -10,9 +10,12 @@ use BabDev\SyliusProductSamplesPlugin\Validator\Constraints\MaxSamplesPerOrder;
 use BabDev\SyliusProductSamplesPlugin\Validator\Constraints\MaxSamplesPerOrderValidator;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\MockObject\MockObject;
+use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
@@ -187,9 +190,35 @@ final class MaxSamplesPerOrderValidatorTest extends ConstraintValidatorTestCase
         $this->validator->validate($this->createOrder(1), new NotNull());
     }
 
+    /** @var MockObject&OrderRepositoryInterface */
+    private MockObject $orderRepository;
+
+    /** @var MockObject&ProductVariantRepositoryInterface */
+    private MockObject $productVariantRepository;
+
     protected function createValidator(): MaxSamplesPerOrderValidator
     {
-        return new MaxSamplesPerOrderValidator();
+        $this->orderRepository = $this->createMock(OrderRepositoryInterface::class);
+        $this->productVariantRepository = $this->createMock(ProductVariantRepositoryInterface::class);
+
+        return new MaxSamplesPerOrderValidator($this->orderRepository, $this->productVariantRepository);
+    }
+
+    /**
+     * Builds the command the shop API validates, wiring the repositories it resolves the cart and the
+     * variant through.
+     */
+    private function createAddItemToCartCommand(
+        ?OrderInterface $cart,
+        ?ProductVariantInterface $variant,
+        int $quantity,
+    ): AddItemToCart {
+        $command = AddItemToCart::createFromData('TOKEN', 'VARIANT_CODE', $quantity);
+
+        $this->orderRepository->method('findCartByTokenValue')->with('TOKEN')->willReturn($cart);
+        $this->productVariantRepository->method('findOneBy')->with(['code' => 'VARIANT_CODE'])->willReturn($variant);
+
+        return $command;
     }
 
     private function createOrder(?int $maxSamplesPerOrder, OrderItemInterface ...$items): OrderInterface
@@ -233,6 +262,90 @@ final class MaxSamplesPerOrderValidatorTest extends ConstraintValidatorTestCase
         $variant->method('getSampleOf')->willReturn(null);
 
         return $variant;
+    }
+
+    /**
+     * @test
+     */
+    public function no_violation_is_raised_when_the_api_adds_a_sample_within_the_limit(): void
+    {
+        $sampleVariant = $this->createSampleVariant();
+        $order = $this->createOrder(2, $this->createItem($sampleVariant, 1));
+
+        $this->validator->validate(
+            $this->createAddItemToCartCommand($order, $sampleVariant, 1),
+            new MaxSamplesPerOrder(),
+        );
+
+        $this->assertNoViolation();
+    }
+
+    /**
+     * @test
+     */
+    public function a_violation_is_raised_when_the_api_adds_a_sample_beyond_the_limit(): void
+    {
+        $sampleVariant = $this->createSampleVariant();
+        $order = $this->createOrder(1, $this->createItem($sampleVariant, 1));
+
+        $this->validator->validate(
+            $this->createAddItemToCartCommand($order, $sampleVariant, 1),
+            new MaxSamplesPerOrder(),
+        );
+
+        $this->buildViolation(self::MESSAGE)
+            ->setParameter('{{ limit }}', '1')
+            ->setPlural(1)
+            ->assertRaised()
+        ;
+    }
+
+    /**
+     * @test
+     */
+    public function a_violation_is_raised_when_the_api_adds_more_samples_at_once_than_the_limit_allows(): void
+    {
+        $sampleVariant = $this->createSampleVariant();
+        $order = $this->createOrder(2);
+
+        $this->validator->validate(
+            $this->createAddItemToCartCommand($order, $sampleVariant, 3),
+            new MaxSamplesPerOrder(),
+        );
+
+        $this->buildViolation(self::MESSAGE)
+            ->setParameter('{{ limit }}', '2')
+            ->setPlural(2)
+            ->assertRaised()
+        ;
+    }
+
+    /**
+     * @test
+     */
+    public function no_violation_is_raised_when_the_api_adds_a_variant_which_is_not_a_sample(): void
+    {
+        $order = $this->createOrder(1, $this->createItem($this->createSampleVariant(), 1));
+
+        $this->validator->validate(
+            $this->createAddItemToCartCommand($order, $this->createVariant(), 5),
+            new MaxSamplesPerOrder(),
+        );
+
+        $this->assertNoViolation();
+    }
+
+    /**
+     * @test
+     */
+    public function no_violation_is_raised_when_the_api_names_a_cart_which_cannot_be_found(): void
+    {
+        $this->validator->validate(
+            $this->createAddItemToCartCommand(null, $this->createSampleVariant(), 1),
+            new MaxSamplesPerOrder(),
+        );
+
+        $this->assertNoViolation();
     }
 
     private function createSampleVariant(): ProductVariantInterface
