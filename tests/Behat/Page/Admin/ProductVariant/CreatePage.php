@@ -24,6 +24,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getElement('sample_shipping_category')->selectOption($shippingCategoryName);
     }
 
+    /**
+     * @return array<array-key, mixed>
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

@@ -13,6 +13,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getElement('max_samples_per_order')->setValue($maxSamplesPerOrder);
     }
 
+    /**
+     * @return array<array-key, mixed>
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

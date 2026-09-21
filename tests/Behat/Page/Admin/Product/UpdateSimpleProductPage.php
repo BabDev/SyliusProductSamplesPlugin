@@ -44,6 +44,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $this->getElement('sample_original_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
+    /**
+     * @return array<array-key, mixed>
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

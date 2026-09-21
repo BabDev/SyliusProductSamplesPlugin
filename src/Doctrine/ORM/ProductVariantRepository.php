@@ -12,6 +12,9 @@ use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository as CoreProduc
  */
 class ProductVariantRepository extends CoreProductVariantRepository
 {
+    /**
+     * @param mixed $productId
+     */
     public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder
     {
         return parent::createQueryBuilderByProductId($locale, $productId)

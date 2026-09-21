@@ -4,12 +4,19 @@ includes:
 parameters:
     level: max
     reportUnmatchedIgnoredErrors: false
-    checkMissingIterableValueType: false
+    phpVersion: 80100
     paths:
         - src
         - tests/Behat
         - tests/Functional
         - tests/Unit
+
+    ignoreErrors:
+        # The trait is part of the plugin's public API, implemented by integrators' own Channel classes;
+        # the only implementation in this repository lives in the excluded test application.
+        -
+            identifier: trait.unused
+            path: src/Model/ChannelTrait.php
 
     excludePaths:
         # Makes PHPStan crash

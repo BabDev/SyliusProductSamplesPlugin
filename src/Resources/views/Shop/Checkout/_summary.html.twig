@@ -1,5 +1,5 @@
 {#
- # Forked from @SyliusShop/Checkout/_summary.html.twig (Sylius 1.11).
+ # Forked from @SyliusShop/Checkout/_summary.html.twig (Sylius 1.12).
  #
  # Sylius exposes neither a Twig block nor a template event inside this file, so the whole
  # template has to be carried here to change a few lines. Diff it against the upstream file
@@ -9,8 +9,8 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% set itemsSubtotal = sylius_order_items_subtotal(order) %}
-{% set taxIncluded = sylius_order_tax_included(order) %}
-{% set taxExcluded = sylius_order_tax_excluded(order) %}
+{% set taxIncluded = order.getTaxIncludedTotal() %}
+{% set taxExcluded = order.getTaxExcludedTotal() %}
 
 <div class="ui segment">
     <table class="ui very basic table" id="sylius-checkout-subtotal" {{ sylius_test_html_attribute('checkout-subtotal') }}>
@@ -31,7 +31,7 @@
                         {{ 'babdev_sylius_product_samples.ui.sample_of_product'|trans({'%product%': item.getVariant.product.name}) }}
                     {% endif %}
                 </td>
-                <td class="center aligned">
+                <td class="center aligned" {{ sylius_test_html_attribute('item-subtotal-quantity', item.variant.product.name) }}>
                     {{ item.quantity }}
                 </td>
                 <td class="right aligned" id="sylius-item-{{ item.variant.product.slug }}-subtotal" {{ sylius_test_html_attribute('item-subtotal', item.variant.product.slug) }}>

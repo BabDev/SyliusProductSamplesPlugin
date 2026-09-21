@@ -22,6 +22,9 @@ final class SampleAwareProductVariantPricesProvider implements ProductVariantsPr
     ) {
     }
 
+    /**
+     * @return array<array-key, mixed>
+     */
     public function provideVariantsPrices(CoreProductInterface $product, ChannelInterface $channel): array
     {
         $variantsPrices = $this->decoratedProvider->provideVariantsPrices($product, $channel);

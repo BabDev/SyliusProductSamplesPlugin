@@ -11,6 +11,7 @@ use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -121,8 +122,10 @@ final class ProductVariantTypeExtensionSpec extends ObjectBehavior
         $builder->get('sample')->willReturn($sampleBuilder);
 
         $sampleBuilder->addEventListener(FormEvents::PRE_SET_DATA, Argument::type(\Closure::class), self::SAMPLE_LISTENER_PRIORITY)
-            ->will(function (array $args) use (&$listener): void {
+            ->will(function (array $args, ObjectProphecy $object) use (&$listener): object {
                 $listener = $args[1];
+
+                return $object->reveal();
             })
         ;
 

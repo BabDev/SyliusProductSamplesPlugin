@@ -1,86 +1,115 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			message: '#^Method BabDev\\SyliusProductSamplesPlugin\\BabDevSyliusProductSamplesPlugin\:\:getContainerExtension\(\) should return Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface\|null but returns mixed\.$#'
+			identifier: return.type
 			count: 1
 			path: src/BabDevSyliusProductSamplesPlugin.php
 
 		-
-			message: "#^Method BabDev\\\\SyliusProductSamplesPlugin\\\\Doctrine\\\\ORM\\\\ProductVariantRepository\\:\\:createQueryBuilderByProductId\\(\\) has parameter \\$productId with no type specified\\.$#"
+			message: '#^Short ternary operator is not allowed\. Use null coalesce operator if applicable or consider using long ternary\.$#'
+			identifier: ternary.shortNotAllowed
 			count: 1
-			path: src/Doctrine/ORM/ProductVariantRepository.php
+			path: src/BabDevSyliusProductSamplesPlugin.php
 
 		-
-			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductInterface' will always evaluate to true\\.$#"
+			message: '#^Parameter \#2 \$value of method Symfony\\Component\\DependencyInjection\\Container\:\:setParameter\(\) expects array\|bool\|float\|int\|string\|UnitEnum\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/DependencyInjection/BabDevSyliusProductSamplesExtension.php
+
+		-
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:isInstanceOf\(\) with BabDev\\SyliusProductSamplesPlugin\\Model\\ProductInterface and ''BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductInterface'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/EventListener/SampleVariantGeneratorListener.php
 
 		-
-			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:isInstanceOf\(\) with BabDev\\SyliusProductSamplesPlugin\\Model\\ProductVariantInterface and ''BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
 
 		-
-			message: "#^Cannot call method getData\\(\\) on Symfony\\\\Component\\\\Form\\\\FormInterface\\|null\\.$#"
+			message: '#^Cannot call method getData\(\) on Symfony\\Component\\Form\\FormInterface\|null\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
 
 		-
-			message: "#^Cannot call method getParent\\(\\) on Symfony\\\\Component\\\\Form\\\\FormInterface\\|null\\.$#"
+			message: '#^Cannot call method getParent\(\) on Symfony\\Component\\Form\\FormInterface\|null\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
 
 		-
-			message: "#^Cannot call method getSamplesActive\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null\\.$#"
+			message: '#^Cannot call method getSamplesActive\(\) on Sylius\\Component\\Product\\Model\\ProductInterface\|null\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
 
 		-
-			message: "#^Only booleans are allowed in a negated boolean, mixed given\\.$#"
+			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
+			identifier: booleanNot.exprNotBoolean
 			count: 1
 			path: src/Form/EventSubscriber/ManageSampleProductVariantAssignmentsFormSubscriber.php
 
 		-
-			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:isInstanceOf\(\) with BabDev\\SyliusProductSamplesPlugin\\Model\\ProductVariantInterface and ''BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantOptionValuesFormSubscriber.php
 
 		-
-			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:isInstanceOf\\(\\) with BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface and 'BabDev\\\\\\\\SyliusProductSamplesPlugin\\\\\\\\Model\\\\\\\\ProductVariantInterface' will always evaluate to true\\.$#"
+			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:isInstanceOf\(\) with BabDev\\SyliusProductSamplesPlugin\\Model\\ProductVariantInterface and ''BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
 
 		-
-			message: "#^Comparison operation \"\\<\\=\" between int\\<1, max\\> and 0 is always false\\.$#"
+			message: '#^Comparison operation "\<\=" between int\<1, max\> and 0 is always false\.$#'
+			identifier: smallerOrEqual.alwaysFalse
 			count: 1
 			path: src/Validator/Constraints/MaxSamplesPerOrderValidator.php
 
 		-
-			message: "#^Cannot call method getId\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null\\.$#"
+			message: '#^Cannot call method getId\(\) on Sylius\\Component\\Product\\Model\\ProductInterface\|null\.$#'
+			identifier: method.nonObject
 			count: 2
 			path: tests/Behat/Context/Ui/Admin/ManagingProductVariantsContext.php
 
 		-
-			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Channel\\\\UpdatePage\\:\\:getMaxSamplesPerOrder\\(\\) should return string but returns array\\|bool\\|string\\.$#"
+			message: '#^Parameter \#2 \$channel of method Tests\\BabDev\\SyliusProductSamplesPlugin\\Behat\\Page\\Admin\\ProductVariant\\CreatePageInterface\:\:specifySamplePrice\(\) expects Sylius\\Component\\Core\\Model\\ChannelInterface, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Behat/Context/Ui/Admin/ManagingProductVariantsContext.php
+
+		-
+			message: '#^Method Tests\\BabDev\\SyliusProductSamplesPlugin\\Behat\\Page\\Admin\\Channel\\UpdatePage\:\:getMaxSamplesPerOrder\(\) should return string but returns bool\|list\<string\>\|string\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: tests/Behat/Page/Admin/Channel/UpdatePage.php
 
 		-
-			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Product\\\\UpdateSimpleProductPage\\:\\:getOriginalSamplePriceForChannel\\(\\) should return string but returns array\\|bool\\|string\\.$#"
+			message: '#^Method Tests\\BabDev\\SyliusProductSamplesPlugin\\Behat\\Page\\Admin\\Product\\UpdateSimpleProductPage\:\:getOriginalSamplePriceForChannel\(\) should return string but returns bool\|list\<string\>\|string\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: tests/Behat/Page/Admin/Product/UpdateSimpleProductPage.php
 
 		-
-			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Product\\\\UpdateSimpleProductPage\\:\\:getSamplePriceForChannel\\(\\) should return string but returns array\\|bool\\|string\\.$#"
+			message: '#^Method Tests\\BabDev\\SyliusProductSamplesPlugin\\Behat\\Page\\Admin\\Product\\UpdateSimpleProductPage\:\:getSamplePriceForChannel\(\) should return string but returns bool\|list\<string\>\|string\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: tests/Behat/Page/Admin/Product/UpdateSimpleProductPage.php
 
 		-
-			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\ProductVariant\\\\UpdatePage\\:\\:getOriginalSamplePriceForChannel\\(\\) should return string but returns array\\|bool\\|string\\.$#"
+			message: '#^Method Tests\\BabDev\\SyliusProductSamplesPlugin\\Behat\\Page\\Admin\\ProductVariant\\UpdatePage\:\:getOriginalSamplePriceForChannel\(\) should return string but returns bool\|list\<string\>\|string\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: tests/Behat/Page/Admin/ProductVariant/UpdatePage.php
 
 		-
-			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\ProductVariant\\\\UpdatePage\\:\\:getSamplePriceForChannel\\(\\) should return string but returns array\\|bool\\|string\\.$#"
+			message: '#^Method Tests\\BabDev\\SyliusProductSamplesPlugin\\Behat\\Page\\Admin\\ProductVariant\\UpdatePage\:\:getSamplePriceForChannel\(\) should return string but returns bool\|list\<string\>\|string\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: tests/Behat/Page/Admin/ProductVariant/UpdatePage.php

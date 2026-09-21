@@ -21,6 +21,9 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
+/**
+ * @extends ConstraintValidatorTestCase<MaxSamplesPerOrderValidator>
+ */
 final class MaxSamplesPerOrderValidatorTest extends ConstraintValidatorTestCase
 {
     private const MESSAGE = 'babdev_sylius_product_samples.order.allowed_samples.max_per_order';

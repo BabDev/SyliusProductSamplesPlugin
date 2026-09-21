@@ -16,6 +16,9 @@ final class BabDevSyliusProductSamplesExtension extends ConfigurableExtension
         return 'babdev_sylius_product_samples';
     }
 
+    /**
+     * @param array<array-key, mixed> $mergedConfig
+     */
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));

@@ -1,28 +1,13 @@
 {
-  "dependencies": {
-    "chart.js": "^2.9.3",
-    "jquery": "^3.6",
-    "jquery.dirtyforms": "^2.0",
-    "lightbox2": "^2.11",
-    "semantic-ui-css": "^2.4",
-    "slick-carousel": "^1.8.1"
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "encore dev",
+    "build:prod": "encore production",
+    "postinstall": "semantic-ui-css-patch",
+    "lint": "yarn lint:js",
+    "watch": "encore dev --watch"
   },
   "devDependencies": {
-    "@babel/core": "^7.17",
-    "@symfony/webpack-encore": "^1.8",
-    "core-js": "^3.21",
-    "sass": "^1.49",
-    "sass-loader": "^12.6"
-  },
-  "scripts": {
-    "dev": "encore dev",
-    "watch": "encore dev --watch",
-    "build": "encore production --progress"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sylius/Sylius.git"
-  },
-  "author": "Paweł Jędrzejewski",
-  "license": "MIT"
+    "@sylius-ui/frontend": "^1.0"
+  }
 }

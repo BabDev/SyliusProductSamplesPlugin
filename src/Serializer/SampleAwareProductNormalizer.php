@@ -32,6 +32,7 @@ final class SampleAwareProductNormalizer implements ContextAwareNormalizerInterf
     /**
      * @param mixed $object
      * @param string|null $format
+     * @param array<array-key, mixed> $context
      *
      * @phpstan-return \ArrayObject<array-key, mixed>|array<array-key, mixed>|bool|float|int|string|null
      * @psalm-return \ArrayObject|array<array-key, mixed>|bool|float|int|string|null

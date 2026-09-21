@@ -1,12 +1,6 @@
 sylius_ui:
     events:
-        sylius.admin.channel.create.form:
-            blocks:
-                product_samples:
-                    template: "@BabDevSyliusProductSamplesPlugin/Admin/Channel/_product_samples_form.html.twig"
-                    priority: 0
-
-        sylius.admin.channel.update.form:
+        sylius.admin.channel.form.second_column_content:
             blocks:
                 product_samples:
                     template: "@BabDevSyliusProductSamplesPlugin/Admin/Channel/_product_samples_form.html.twig"

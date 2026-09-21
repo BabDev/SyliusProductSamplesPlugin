@@ -18,9 +18,6 @@ use Webmozart\Assert\Assert;
 
 final class SampleVariantGeneratorListener
 {
-    /**
-     * @param FactoryInterface<ChannelPricingInterface> $channelPricingFactory
-     */
     public function __construct(
         private FactoryInterface $channelPricingFactory,
         private ProductVariantFactoryInterface $productVariantFactory,
@@ -80,6 +77,9 @@ final class SampleVariantGeneratorListener
     private function createChannelPricingForChannel(int $price, ChannelInterface $channel): ChannelPricingInterface
     {
         $channelPricing = $this->channelPricingFactory->createNew();
+
+        Assert::isInstanceOf($channelPricing, ChannelPricingInterface::class);
+
         $channelPricing->setPrice($price);
         $channelPricing->setChannelCode($channel->getCode());
 

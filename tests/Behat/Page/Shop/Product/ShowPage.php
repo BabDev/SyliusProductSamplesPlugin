@@ -68,6 +68,9 @@ class ShowPage extends BaseShowPage implements ShowPageInterface
         return trim($this->getElement('validation_errors')->getText());
     }
 
+    /**
+     * @return array<array-key, mixed>
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

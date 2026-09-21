@@ -83,7 +83,7 @@ Feature: Adding a new product
         And the product "Dice Brewing" should appear in the store
         And product "Dice Brewing" should have product samples enabled
 
-    @ui @no-api
+    @ui @javascript @no-api
     Scenario: Adding a new configurable product without product samples
         Given the store has a product option "Bottle size" with a code "bottle_size"
         And this product option has the "0.7" option value with code "bottle_size_medium"
@@ -98,7 +98,7 @@ Feature: Adding a new product
         And the product "Gentleman Jack" should appear in the store
         And product "Gentleman Jack" should have product samples disabled
 
-    @ui @no-api
+    @ui @javascript @no-api
     Scenario: Adding a new configurable product with product samples
         Given the store has a product option "Bottle size" with a code "bottle_size"
         And this product option has the "0.7" option value with code "bottle_size_medium"

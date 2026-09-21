@@ -8,6 +8,7 @@ use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface as CoreProductInterface;
@@ -129,8 +130,10 @@ final class AddToCartTypeExtensionSpec extends ObjectBehavior
         $builder->add('requestSample', SubmitType::class, Argument::type('array'))->willReturn($builder);
 
         $builder->addEventListener(FormEvents::SUBMIT, Argument::type(\Closure::class))
-            ->will(function (array $args) use (&$listener): void {
+            ->will(function (array $args, ObjectProphecy $object) use (&$listener): object {
                 $listener = $args[1];
+
+                return $object->reveal();
             })
         ;
 

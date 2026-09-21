@@ -19,6 +19,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('sample_original_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
+    /**
+     * @return array<array-key, mixed>
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

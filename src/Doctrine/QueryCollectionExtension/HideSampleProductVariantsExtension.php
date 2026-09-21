@@ -26,6 +26,9 @@ final class HideSampleProductVariantsExtension implements ContextAwareQueryColle
     {
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,

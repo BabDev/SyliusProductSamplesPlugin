@@ -70,6 +70,8 @@ final class ProductVariantChoiceTypeExtensionTest extends TestCase
     /**
      * Resolves the options exactly as the form factory would: the type's defaults first, then the
      * extension's override on top.
+     *
+     * @return iterable<BaseProductVariant>
      */
     private function resolveChoices(object $product): iterable
     {
@@ -78,10 +80,15 @@ final class ProductVariantChoiceTypeExtensionTest extends TestCase
         (new ProductVariantChoiceType())->configureOptions($resolver);
         (new ProductVariantChoiceTypeExtension())->configureOptions($resolver);
 
-        return $resolver->resolve(['product' => $product])['choices'];
+        /** @var iterable<BaseProductVariant> $choices */
+        $choices = $resolver->resolve(['product' => $product])['choices'];
+
+        return $choices;
     }
 
     /**
+     * @param iterable<BaseProductVariant> $variants
+     *
      * @return list<string|null>
      */
     private function codesOf(iterable $variants): array
