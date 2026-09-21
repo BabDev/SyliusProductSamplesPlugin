@@ -1,3 +1,11 @@
+{#
+ # Forked from @SyliusAdmin/Product/_info.html.twig (Sylius 1.11).
+ #
+ # Sylius exposes neither a Twig block nor a template event inside this file, so the whole
+ # template has to be carried here to change a few lines. Diff it against the upstream file
+ # when upgrading Sylius: the only intended difference is that
+ # a sample badge is appended for line items whose variant is a sample.
+ #}
 <div class="ui header">
     {% include '@SyliusAdmin/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_admin_product_tiny_thumbnail'} %}
     <div class="content">
