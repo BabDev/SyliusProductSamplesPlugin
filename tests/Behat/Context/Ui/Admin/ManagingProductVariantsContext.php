@@ -15,9 +15,9 @@ use Webmozart\Assert\Assert;
 final class ManagingProductVariantsContext implements Context
 {
     public function __construct(
-        private SharedStorageInterface $sharedStorage,
-        private CreatePageInterface $createPage,
-        private UpdatePageInterface $updatePage,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly CreatePageInterface $createPage,
+        private readonly UpdatePageInterface $updatePage,
     ) {
     }
 

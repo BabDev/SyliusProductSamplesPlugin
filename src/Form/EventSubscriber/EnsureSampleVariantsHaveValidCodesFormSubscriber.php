@@ -15,7 +15,7 @@ use Webmozart\Assert\Assert;
 final class EnsureSampleVariantsHaveValidCodesFormSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private SampleVariantCodeGeneratorInterface $codeGenerator,
+        private readonly SampleVariantCodeGeneratorInterface $codeGenerator,
     ) {
     }
 
@@ -45,7 +45,7 @@ final class EnsureSampleVariantsHaveValidCodesFormSubscriber implements EventSub
 
     private function ensureSampleVariantHasCode(ProductVariantInterface $variant): void
     {
-        if (null === $sample = $variant->getSample()) {
+        if (!($sample = $variant->getSample()) instanceof \Sylius\Component\Product\Model\ProductVariantInterface) {
             return;
         }
 

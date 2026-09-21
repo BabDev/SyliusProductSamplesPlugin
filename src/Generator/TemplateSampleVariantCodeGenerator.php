@@ -17,7 +17,7 @@ final class TemplateSampleVariantCodeGenerator implements SampleVariantCodeGener
      */
     public const CODE_PLACEHOLDER = '{code}';
 
-    public function __construct(private string $template)
+    public function __construct(private readonly string $template)
     {
     }
 

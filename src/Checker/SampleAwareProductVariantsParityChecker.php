@@ -15,7 +15,7 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
  */
 final class SampleAwareProductVariantsParityChecker implements ProductVariantsParityCheckerInterface
 {
-    public function __construct(private ProductVariantsParityCheckerInterface $decorated)
+    public function __construct(private readonly ProductVariantsParityCheckerInterface $decorated)
     {
     }
 
@@ -25,7 +25,7 @@ final class SampleAwareProductVariantsParityChecker implements ProductVariantsPa
             return $this->decorated->checkParity($variant, $product);
         }
 
-        if ($variant instanceof SampleAwareProductVariantInterface && null !== $variant->getSampleOf()) {
+        if ($variant instanceof SampleAwareProductVariantInterface && $variant->getSampleOf() instanceof \Sylius\Component\Product\Model\ProductVariantInterface) {
             return false;
         }
 

@@ -22,8 +22,8 @@ use Webmozart\Assert\Assert;
 final class ManagingInventoryContext implements Context
 {
     public function __construct(
-        private ProductVariantRepositoryInterface $productVariantRepository,
-        private ObjectManager $objectManager,
+        private readonly ProductVariantRepositoryInterface $productVariantRepository,
+        private readonly ObjectManager $objectManager,
     ) {
     }
 

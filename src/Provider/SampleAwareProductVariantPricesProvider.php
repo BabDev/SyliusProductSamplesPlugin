@@ -17,8 +17,8 @@ use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 final class SampleAwareProductVariantPricesProvider implements ProductVariantsPricesProviderInterface
 {
     public function __construct(
-        private ProductVariantsPricesProviderInterface $decoratedProvider,
-        private ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
+        private readonly ProductVariantsPricesProviderInterface $decoratedProvider,
+        private readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
     ) {
     }
 

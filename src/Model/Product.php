@@ -30,7 +30,7 @@ class Product extends CoreProduct implements ProductInterface
                 return true;
             }
 
-            return null === $productVariant->getSampleOf();
+            return !$productVariant->getSampleOf() instanceof BaseProductVariantInterface;
         });
 
         /*
@@ -65,7 +65,7 @@ class Product extends CoreProduct implements ProductInterface
                 return true;
             }
 
-            return null === $productVariant->getSampleOf();
+            return !$productVariant->getSampleOf() instanceof BaseProductVariantInterface;
         });
     }
 
@@ -77,7 +77,7 @@ class Product extends CoreProduct implements ProductInterface
                 return true;
             }
 
-            return null === $productVariant->getSampleOf();
+            return !$productVariant->getSampleOf() instanceof BaseProductVariantInterface;
         })->count() && !$this->hasOptions();
     }
 }

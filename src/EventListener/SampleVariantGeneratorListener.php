@@ -13,17 +13,18 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface as BaseProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 final class SampleVariantGeneratorListener
 {
     public function __construct(
-        private FactoryInterface $channelPricingFactory,
-        private ProductVariantFactoryInterface $productVariantFactory,
-        private SampleVariantCodeGeneratorInterface $codeGenerator,
-        private ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,
-        private ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
+        private readonly FactoryInterface $channelPricingFactory,
+        private readonly ProductVariantFactoryInterface $productVariantFactory,
+        private readonly SampleVariantCodeGeneratorInterface $codeGenerator,
+        private readonly ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,
+        private readonly ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
     ) {
     }
 
@@ -42,12 +43,12 @@ final class SampleVariantGeneratorListener
             Assert::isInstanceOf($variant, ProductVariantInterface::class);
 
             // Don't generate a sample if this variant is a sample of another variant
-            if (null !== $variant->getSampleOf()) {
+            if ($variant->getSampleOf() instanceof BaseProductVariantInterface) {
                 continue;
             }
 
             // Don't generate a sample if this variant already has one
-            if (null !== $variant->getSample()) {
+            if ($variant->getSample() instanceof BaseProductVariantInterface) {
                 continue;
             }
 

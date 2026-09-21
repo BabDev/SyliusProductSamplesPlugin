@@ -28,8 +28,8 @@ final class SampleProductVariantType extends AbstractResourceType
      * @param string[] $validationGroups
      */
     public function __construct(
-        private ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,
-        private ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
+        private readonly ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,
+        private readonly ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
         string $dataClass,
         array $validationGroups = [],
     ) {

@@ -15,7 +15,7 @@ class ShowPage extends BaseShowPage implements ShowPageInterface
      * The parent holds its own reference to the cart summary page privately, so this class keeps one too
      * rather than reaching into it.
      */
-    private SummaryPageInterface $cartSummaryPage;
+    private readonly SummaryPageInterface $cartSummaryPage;
 
     /**
      * @param array<string, mixed>|\ArrayAccess<string, mixed> $minkParameters

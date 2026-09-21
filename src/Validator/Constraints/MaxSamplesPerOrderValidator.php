@@ -11,6 +11,7 @@ use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface as BaseProductVariantInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -23,8 +24,8 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 final class MaxSamplesPerOrderValidator extends ConstraintValidator
 {
     public function __construct(
-        private OrderRepositoryInterface $orderRepository,
-        private ProductVariantRepositoryInterface $productVariantRepository,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly ProductVariantRepositoryInterface $productVariantRepository,
     ) {
     }
 
@@ -110,7 +111,7 @@ final class MaxSamplesPerOrderValidator extends ConstraintValidator
 
         $variant = $this->productVariantRepository->findOneBy(['code' => $command->productVariantCode]);
 
-        $pending = $variant instanceof ProductVariantInterface && null !== $variant->getSampleOf()
+        $pending = $variant instanceof ProductVariantInterface && $variant->getSampleOf() instanceof BaseProductVariantInterface
             ? $command->quantity
             : 0;
 
@@ -134,6 +135,6 @@ final class MaxSamplesPerOrderValidator extends ConstraintValidator
     {
         $variant = $item->getVariant();
 
-        return $variant instanceof ProductVariantInterface && null !== $variant->getSampleOf();
+        return $variant instanceof ProductVariantInterface && $variant->getSampleOf() instanceof BaseProductVariantInterface;
     }
 }

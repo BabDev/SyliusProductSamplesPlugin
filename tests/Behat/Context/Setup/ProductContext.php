@@ -14,8 +14,8 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 final class ProductContext implements Context
 {
     public function __construct(
-        private ObjectManager $objectManager,
-        private SampleVariantGeneratorListener $sampleVariantGenerator,
+        private readonly ObjectManager $objectManager,
+        private readonly SampleVariantGeneratorListener $sampleVariantGenerator,
     ) {
     }
 

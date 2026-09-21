@@ -14,8 +14,8 @@ use Webmozart\Assert\Assert;
 final class ManagingProductsContext implements Context
 {
     public function __construct(
-        private CreateSimpleProductPageInterface $createSimpleProductPage,
-        private UpdateSimpleProductPageInterface $updateSimpleProductPage,
+        private readonly CreateSimpleProductPageInterface $createSimpleProductPage,
+        private readonly UpdateSimpleProductPageInterface $updateSimpleProductPage,
     ) {
     }
 

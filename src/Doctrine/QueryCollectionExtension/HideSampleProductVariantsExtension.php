@@ -9,6 +9,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Keeps sample variants out of the shop API's product variant collection.
@@ -22,7 +23,7 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
  */
 final class HideSampleProductVariantsExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
+    public function __construct(private readonly UserContextInterface $userContext)
     {
     }
 
@@ -42,7 +43,7 @@ final class HideSampleProductVariantsExtension implements ContextAwareQueryColle
 
         $user = $this->userContext->getUser();
 
-        if (null !== $user && \in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if ($user instanceof UserInterface && \in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
             return;
         }
 

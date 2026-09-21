@@ -10,6 +10,7 @@ use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterf
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -24,8 +25,8 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
     private const PROVIDE_SAMPLE_PRIORITY = 10;
 
     public function __construct(
-        private ProductVariantFactoryInterface $productVariantFactory,
-        private SampleVariantCodeGeneratorInterface $codeGenerator,
+        private readonly ProductVariantFactoryInterface $productVariantFactory,
+        private readonly SampleVariantCodeGeneratorInterface $codeGenerator,
     ) {
     }
 
@@ -55,7 +56,7 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
 
                 $product = $variant->getProduct();
 
-                if (null === $product) {
+                if (!$product instanceof ProductInterface) {
                     return;
                 }
 

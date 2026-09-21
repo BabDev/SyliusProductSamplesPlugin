@@ -8,6 +8,7 @@ use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Webmozart\Assert\Assert;
 
 final class ManageSampleProductVariantAssignmentsFormSubscriber implements EventSubscriberInterface
@@ -39,7 +40,7 @@ final class ManageSampleProductVariantAssignmentsFormSubscriber implements Event
          * If we are editing a product, the variant form will have a parent and we'll want to check the form data.
          * If we're editing a single variant, then we can check the product data directly.
          */
-        if (null !== $productForm = $variantForm->getParent()) {
+        if (($productForm = $variantForm->getParent()) instanceof FormInterface) {
             if (!$productForm->get('samplesActive')->getData() && null === $sampleVariant->getId()) {
                 $event->setData(null);
 

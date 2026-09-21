@@ -18,12 +18,17 @@ final class BabDevSyliusProductSamplesPlugin extends Bundle
         return 'babdev_sylius_product_samples';
     }
 
-    public function getContainerExtension(): ?ExtensionInterface
+    /**
+     * Overridden because {@see SyliusPluginTrait} derives the expected extension alias from the plugin
+     * name, which would underscore "BabDev" to "bab_dev" and not match this extension's alias.
+     */
+    public function getContainerExtension(): ExtensionInterface
     {
-        if (null === $this->extension) {
-            $this->extension = new BabDevSyliusProductSamplesExtension();
+        // The trait types this property as `ExtensionInterface|bool`; only ever assigned one here.
+        if (!$this->containerExtension instanceof ExtensionInterface) {
+            $this->containerExtension = new BabDevSyliusProductSamplesExtension();
         }
 
-        return $this->extension ?: null;
+        return $this->containerExtension;
     }
 }

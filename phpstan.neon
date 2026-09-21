@@ -4,12 +4,6 @@ includes:
 parameters:
     level: max
     reportUnmatchedIgnoredErrors: false
-    phpVersion: 80100
-    paths:
-        - src
-        - tests/Behat
-        - tests/Functional
-        - tests/Unit
 
     ignoreErrors:
         # The trait is part of the plugin's public API, implemented by integrators' own Channel classes;
@@ -18,10 +12,14 @@ parameters:
             identifier: trait.unused
             path: src/Model/ChannelTrait.php
 
-    excludePaths:
-        # Makes PHPStan crash
-        - 'src/DependencyInjection/Configuration.php'
-
-        # Test dependencies
-        - 'tests/Application/app/**.php'
-        - 'tests/Application/src/**.php'
+        # PHPUnit's assertions are static, but the convention is to call them on $this.
+        -
+            identifier: staticMethod.dynamicCall
+            paths:
+                - tests/Functional/*
+                - tests/Unit/*
+    paths:
+        - src
+        - tests/Behat
+        - tests/Functional
+        - tests/Unit

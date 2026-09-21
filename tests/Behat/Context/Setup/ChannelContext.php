@@ -13,8 +13,8 @@ use Webmozart\Assert\Assert;
 final class ChannelContext implements Context
 {
     public function __construct(
-        private ObjectManager $objectManager,
-        private ChannelContextInterface $channelContext,
+        private readonly ObjectManager $objectManager,
+        private readonly ChannelContextInterface $channelContext,
     ) {
     }
 

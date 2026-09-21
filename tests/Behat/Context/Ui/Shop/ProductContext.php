@@ -12,8 +12,8 @@ use Webmozart\Assert\Assert;
 final class ProductContext implements Context
 {
     public function __construct(
-        private ShowPageInterface $showPage,
-        private SummaryPageInterface $cartSummaryPage,
+        private readonly ShowPageInterface $showPage,
+        private readonly SummaryPageInterface $cartSummaryPage,
     ) {
     }
 

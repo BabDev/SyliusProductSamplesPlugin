@@ -19,6 +19,12 @@ parameters:
 			path: src/DependencyInjection/BabDevSyliusProductSamplesExtension.php
 
 		-
+			message: '#^Cannot call method end\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
 			message: '#^Call to static method Webmozart\\Assert\\Assert\:\:isInstanceOf\(\) with BabDev\\SyliusProductSamplesPlugin\\Model\\ProductInterface and ''BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductInterface'' will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1

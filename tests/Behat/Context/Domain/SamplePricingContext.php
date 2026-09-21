@@ -22,8 +22,8 @@ use Webmozart\Assert\Assert;
 final class SamplePricingContext implements Context
 {
     public function __construct(
-        private ProductVariantsPricesProviderInterface $productVariantsPricesProvider,
-        private SharedStorageInterface $sharedStorage,
+        private readonly ProductVariantsPricesProviderInterface $productVariantsPricesProvider,
+        private readonly SharedStorageInterface $sharedStorage,
     ) {
     }
 

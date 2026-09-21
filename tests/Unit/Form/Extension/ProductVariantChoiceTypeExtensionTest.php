@@ -20,10 +20,7 @@ final class ProductVariantChoiceTypeExtensionTest extends TestCase
      */
     public function it_extends_the_product_variant_choice_type(): void
     {
-        self::assertSame(
-            [ProductVariantChoiceType::class],
-            [...ProductVariantChoiceTypeExtension::getExtendedTypes()],
-        );
+        $this->assertSame([ProductVariantChoiceType::class], [...ProductVariantChoiceTypeExtension::getExtendedTypes()]);
     }
 
     /**
@@ -45,7 +42,7 @@ final class ProductVariantChoiceTypeExtensionTest extends TestCase
 
         $choices = $this->resolveChoices($product);
 
-        self::assertSame(['MUG-BLUE'], $this->codesOf($choices));
+        $this->assertSame(['MUG-BLUE'], $this->codesOf($choices));
     }
 
     /**
@@ -64,7 +61,7 @@ final class ProductVariantChoiceTypeExtensionTest extends TestCase
 
         $choices = $this->resolveChoices($product);
 
-        self::assertSame(['MUG-BLUE', 'MUG-RED'], $this->codesOf($choices));
+        $this->assertSame(['MUG-BLUE', 'MUG-RED'], $this->codesOf($choices));
     }
 
     /**

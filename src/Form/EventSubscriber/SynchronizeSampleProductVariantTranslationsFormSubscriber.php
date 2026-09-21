@@ -14,7 +14,7 @@ use Webmozart\Assert\Assert;
 final class SynchronizeSampleProductVariantTranslationsFormSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
+        private readonly ProductVariantTranslationsSynchronizerInterface $translationsSynchronizer,
     ) {
     }
 

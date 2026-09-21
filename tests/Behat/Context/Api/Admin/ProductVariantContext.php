@@ -19,8 +19,8 @@ use Webmozart\Assert\Assert;
 final class ProductVariantContext implements Context
 {
     public function __construct(
-        private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker,
+        private readonly ApiClientInterface $client,
+        private readonly ResponseCheckerInterface $responseChecker,
     ) {
     }
 
@@ -66,7 +66,7 @@ final class ProductVariantContext implements Context
         /** @var list<string> $variantIris */
         $variantIris = array_map(static fn (mixed $iri): string => \is_string($iri) ? $iri : '', $variantIris);
 
-        $codes = array_map(static fn (string $iri): string => basename($iri), $variantIris);
+        $codes = array_map(basename(...), $variantIris);
 
         Assert::inArray(
             $sampleCode,

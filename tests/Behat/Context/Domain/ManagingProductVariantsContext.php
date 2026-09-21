@@ -20,7 +20,7 @@ final class ManagingProductVariantsContext implements Context
     /** @var list<string|null> */
     private array $foundCodes = [];
 
-    public function __construct(private ProductVariantRepositoryInterface $productVariantRepository)
+    public function __construct(private readonly ProductVariantRepositoryInterface $productVariantRepository)
     {
     }
 

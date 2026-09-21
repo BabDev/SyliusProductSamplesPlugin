@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BabDev\SyliusProductSamplesPlugin\Synchronizer;
 
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface as BaseProductVariantInterface;
 
 final class ProductVariantOptionValuesSynchronizer implements ProductVariantOptionValuesSynchronizerInterface
 {
@@ -12,7 +13,7 @@ final class ProductVariantOptionValuesSynchronizer implements ProductVariantOpti
     {
         $actualVariant = $sampleVariant->getSampleOf();
 
-        if (null === $actualVariant) {
+        if (!$actualVariant instanceof BaseProductVariantInterface) {
             return;
         }
 

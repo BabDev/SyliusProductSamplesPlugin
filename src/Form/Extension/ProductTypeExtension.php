@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 final class ProductTypeExtension extends AbstractTypeExtension
 {
     public function __construct(
-        private SampleVariantCodeGeneratorInterface $codeGenerator,
+        private readonly SampleVariantCodeGeneratorInterface $codeGenerator,
     ) {
     }
 

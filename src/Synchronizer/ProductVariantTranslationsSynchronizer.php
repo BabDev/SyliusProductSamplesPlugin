@@ -6,12 +6,13 @@ namespace BabDev\SyliusProductSamplesPlugin\Synchronizer;
 
 use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantNameGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface as BaseProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 
 final class ProductVariantTranslationsSynchronizer implements ProductVariantTranslationsSynchronizerInterface
 {
     public function __construct(
-        private SampleVariantNameGeneratorInterface $nameGenerator,
+        private readonly SampleVariantNameGeneratorInterface $nameGenerator,
     ) {
     }
 
@@ -19,7 +20,7 @@ final class ProductVariantTranslationsSynchronizer implements ProductVariantTran
     {
         $actualVariant = $sampleVariant->getSampleOf();
 
-        if (null === $actualVariant) {
+        if (!$actualVariant instanceof BaseProductVariantInterface) {
             return;
         }
 

@@ -13,8 +13,8 @@ use Webmozart\Assert\Assert;
 final class ManagingChannelsContext implements Context
 {
     public function __construct(
-        private CreatePageInterface $createPage,
-        private UpdatePageInterface $updatePage,
+        private readonly CreatePageInterface $createPage,
+        private readonly UpdatePageInterface $updatePage,
     ) {
     }
 
