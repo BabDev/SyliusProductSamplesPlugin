@@ -22,7 +22,7 @@ final class ProductVariantChoiceTypeExtensionTest extends TestCase
     {
         self::assertSame(
             [ProductVariantChoiceType::class],
-            iterator_to_array(ProductVariantChoiceTypeExtension::getExtendedTypes()),
+            [...ProductVariantChoiceTypeExtension::getExtendedTypes()],
         );
     }
 
