@@ -31,7 +31,7 @@ Feature: Generating product variants
         And the variant with code "WYBOROWA_ORANGE" should have its sample priced at $0.00 for channel "United States"
         And the variant with code "WYBOROWA_MELON" should have its sample priced at $0.00 for channel "United States"
 
-    @skipped-ui
+    @ui
     Scenario: Generating the rest of product variants for product with at least one when the product has samples enabled
         Given this product is available in "Melon" taste priced at "$95.00"
         And this product has product samples enabled for all channels
@@ -42,7 +42,7 @@ Feature: Generating product variants
         And I should see 2 variants in the list
         And the variant with code "WYBOROWA_ORANGE" should have its sample priced at $0.00 for channel "United States"
 
-    @skipped-ui
+    @ui
     Scenario: Generating the rest of product variants for product with at least one when the product has samples enabled
         Given this product is available in "Orange" taste priced at "$90.00"
         And this product has product samples enabled for all channels
@@ -53,7 +53,7 @@ Feature: Generating product variants
         And I should see 2 variants in the list
         And the variant with code "WYBOROWA_MELON" should have its sample priced at $0.00 for channel "United States"
 
-    @skipped-ui @javascript
+    @ui @javascript
     Scenario: Generating only a part of product variants when the product has samples enabled
         Given this product has product samples enabled for all channels
         And I want to generate new variants for this product

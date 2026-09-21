@@ -51,24 +51,19 @@ parameters:
 			path: src/Form/EventSubscriber/SynchronizeSampleProductVariantTranslationsFormSubscriber.php
 
 		-
-			message: "#^Method BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\Product\\:\\:getNonSampleVariants\\(\\) should return Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\), BabDev\\\\SyliusProductSamplesPlugin\\\\Model\\\\ProductVariantInterface\\> but returns Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\), Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\>\\.$#"
+			message: "#^Comparison operation \"\\<\\=\" between int\\<1, max\\> and 0 is always false\\.$#"
 			count: 1
-			path: src/Model/Product.php
-
-		-
-			message: "#^Cannot call method getCode\\(\\) on Sylius\\\\Component\\\\Core\\\\Model\\\\ChannelInterface\\|null\\.$#"
-			count: 1
-			path: tests/Behat/Context/Setup/ProductContext.php
-
-		-
-			message: "#^Parameter \\#2 \\$channel of method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Context\\\\Setup\\\\ProductContext\\:\\:createChannelPricingForChannel\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\ChannelInterface\\|null, Sylius\\\\Component\\\\Channel\\\\Model\\\\ChannelInterface given\\.$#"
-			count: 1
-			path: tests/Behat/Context/Setup/ProductContext.php
+			path: src/Validator/Constraints/MaxSamplesPerOrderValidator.php
 
 		-
 			message: "#^Cannot call method getId\\(\\) on Sylius\\\\Component\\\\Product\\\\Model\\\\ProductInterface\\|null\\.$#"
 			count: 2
 			path: tests/Behat/Context/Ui/Admin/ManagingProductVariantsContext.php
+
+		-
+			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Channel\\\\UpdatePage\\:\\:getMaxSamplesPerOrder\\(\\) should return string but returns array\\|bool\\|string\\.$#"
+			count: 1
+			path: tests/Behat/Page/Admin/Channel/UpdatePage.php
 
 		-
 			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Product\\\\UpdateSimpleProductPage\\:\\:getOriginalSamplePriceForChannel\\(\\) should return string but returns array\\|bool\\|string\\.$#"
@@ -89,13 +84,3 @@ parameters:
 			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\ProductVariant\\\\UpdatePage\\:\\:getSamplePriceForChannel\\(\\) should return string but returns array\\|bool\\|string\\.$#"
 			count: 1
 			path: tests/Behat/Page/Admin/ProductVariant/UpdatePage.php
-
-		-
-			message: "#^Comparison operation \"\\<\\=\" between int\\<1, max\\> and 0 is always false\\.$#"
-			count: 1
-			path: src/Validator/Constraints/MaxSamplesPerOrderValidator.php
-
-		-
-			message: "#^Method Tests\\\\BabDev\\\\SyliusProductSamplesPlugin\\\\Behat\\\\Page\\\\Admin\\\\Channel\\\\UpdatePage\\:\\:getMaxSamplesPerOrder\\(\\) should return string but returns array\\|bool\\|string\\.$#"
-			count: 1
-			path: tests/Behat/Page/Admin/Channel/UpdatePage.php

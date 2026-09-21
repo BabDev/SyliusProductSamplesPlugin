@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use BabDev\SyliusProductSamplesPlugin\Checker\SampleAwareProductVariantsParityChecker;
 use BabDev\SyliusProductSamplesPlugin\EventListener\SampleVariantGeneratorListener;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\AddToCartTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ChannelTypeExtension;
+use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductGenerateVariantsTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantChoiceTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantTypeExtension;
@@ -27,12 +29,20 @@ use Sylius\Bundle\AdminBundle\Menu\ProductFormMenuBuilder as RootProductFormMenu
 use Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder as RootProductVariantFormMenuBuilder;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 
 return static function (ContainerConfigurator $container): void {
     $services = $container->services();
+
+    $services->set('babdev_sylius_product_samples.checker.sample_aware_product_variants_parity', SampleAwareProductVariantsParityChecker::class)
+        ->decorate('sylius.checker.product_variants_parity')
+        ->args([
+            service('.inner'),
+        ])
+    ;
 
     $services->set('babdev_sylius_product_samples.event_listener.sample_variant_generator', SampleVariantGeneratorListener::class)
         ->args([
@@ -52,6 +62,10 @@ return static function (ContainerConfigurator $container): void {
 
     $services->set('babdev_sylius_product_samples.form.extension.product_variant_choice', ProductVariantChoiceTypeExtension::class)
         ->tag('form.type_extension', ['extended-type' => ProductVariantChoiceType::class])
+    ;
+
+    $services->set('babdev_sylius_product_samples.form.extension.product_generate_variants', ProductGenerateVariantsTypeExtension::class)
+        ->tag('form.type_extension', ['extended-type' => ProductGenerateVariantsType::class])
     ;
 
     $services->set('babdev_sylius_product_samples.form.extension.channel', ChannelTypeExtension::class)

@@ -4,25 +4,18 @@ declare(strict_types=1);
 
 namespace Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Setup;
 
+use BabDev\SyliusProductSamplesPlugin\EventListener\SampleVariantGeneratorListener;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Webmozart\Assert\Assert;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 final class ProductContext implements Context
 {
-    /**
-     * @param FactoryInterface<ChannelPricingInterface> $channelPricingFactory
-     */
     public function __construct(
         private ObjectManager $objectManager,
-        private FactoryInterface $channelPricingFactory,
-        private ProductVariantFactoryInterface $productVariantFactory,
+        private SampleVariantGeneratorListener $sampleVariantGenerator,
     ) {
     }
 
@@ -48,34 +41,22 @@ final class ProductContext implements Context
     {
         $product->setSamplesActive(true);
 
-        foreach ($product->getVariants() as $variant) {
-            Assert::isInstanceOf($variant, ProductVariantInterface::class);
+        $this->sampleVariantGenerator->ensureSampleVariantsExist(new ResourceControllerEvent($product));
 
-            if (null === $variant->getSample()) {
-                /** @var ProductVariantInterface $sample */
-                $sample = $this->productVariantFactory->createForProduct($product);
-                $sample->setCode(sprintf('SAMPLE-%s', $variant->getCode() ?? ''));
-                $sample->setSampleOf($variant);
+        if (0 !== $price) {
+            foreach ($product->getNonSampleVariants() as $variant) {
+                $sample = $variant->getSample();
 
-                $variant->setSample($sample);
-                $product->addVariant($sample);
+                if (!$sample instanceof ProductVariantInterface) {
+                    continue;
+                }
 
-                foreach ($product->getChannels() as $channel) {
-                    $sample->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+                foreach ($sample->getChannelPricings() as $channelPricing) {
+                    $channelPricing->setPrice($price);
                 }
             }
         }
 
         $this->objectManager->flush();
-    }
-
-    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null): ChannelPricingInterface
-    {
-        /** @var ChannelPricingInterface $channelPricing */
-        $channelPricing = $this->channelPricingFactory->createNew();
-        $channelPricing->setPrice($price);
-        $channelPricing->setChannelCode($channel->getCode());
-
-        return $channelPricing;
     }
 }
