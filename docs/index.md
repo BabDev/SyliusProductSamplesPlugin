@@ -1,2 +1,4 @@
 - [Introduction](/open-source/packages/syliusproductsamplesplugin/docs/1.x/intro)
 - [Installation & Setup](/open-source/packages/syliusproductsamplesplugin/docs/1.x/installation)
+- [Configuration](/open-source/packages/syliusproductsamplesplugin/docs/1.x/configuration)
+- [Usage](/open-source/packages/syliusproductsamplesplugin/docs/1.x/usage)
