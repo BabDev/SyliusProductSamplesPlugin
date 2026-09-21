@@ -4,6 +4,16 @@
     <services>
         <defaults public="true" />
 
+        <service id="babdev_sylius_product_samples.behat.context.domain.managing_inventory" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Domain\ManagingInventoryContext">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.manager.product_variant" />
+        </service>
+
+        <service id="babdev_sylius_product_samples.behat.context.domain.sample_pricing" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Domain\SamplePricingContext">
+            <argument type="service" id="sylius.provider.product_variants_prices" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
         <service id="babdev_sylius_product_samples.behat.context.domain.managing_product_variants" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Domain\ManagingProductVariantsContext">
             <argument type="service" id="sylius.repository.product_variant" />
         </service>

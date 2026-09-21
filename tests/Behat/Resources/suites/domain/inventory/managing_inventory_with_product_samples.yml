@@ -1,0 +1,20 @@
+default:
+    suites:
+        domain_managing_inventory_with_product_samples:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_variant
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - babdev_sylius_product_samples.behat.context.setup.product
+
+                - babdev_sylius_product_samples.behat.context.domain.managing_inventory
+
+            filters:
+                tags: "@managing_inventory_with_product_samples&&@domain"
