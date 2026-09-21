@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="babdev_sylius_product_samples.behat.context.api.admin.product_variant" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Api\Admin\ProductVariantContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
+        <service id="babdev_sylius_product_samples.behat.context.api.shop.product_variant" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Api\Shop\ProductVariantContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
+        <service id="babdev_sylius_product_samples.behat.context.api.shop.cart" class="Tests\BabDev\SyliusProductSamplesPlugin\Behat\Context\Api\Shop\CartContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+    </services>
+</container>

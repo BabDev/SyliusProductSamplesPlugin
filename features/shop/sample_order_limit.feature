@@ -39,3 +39,25 @@ Feature: Limiting how many samples an order may contain
         When I view product "Zubrowka Vodka"
         And I request a sample
         Then there should be 2 items in my cart
+
+    @api
+    Scenario: Requesting samples up to the channel limit through the API
+        Given the store allows 2 samples per order
+        When I add "Sample - Wyborowa Vodka" variant of product "Wyborowa Vodka" to the cart
+        And I add "Sample - Zubrowka Vodka" variant of product "Zubrowka Vodka" to the cart
+        Then there should be 2 items in my cart
+
+    @api
+    Scenario: Requesting one sample too many through the API
+        Given the store allows 1 sample per order
+        When I add "Sample - Wyborowa Vodka" variant of product "Wyborowa Vodka" to the cart
+        And I add "Sample - Zubrowka Vodka" variant of product "Zubrowka Vodka" to the cart
+        Then I should be told that I cannot request more than 1 sample per order
+        And there should be 1 item in my cart
+
+    @api
+    Scenario: The limit does not apply through the API when the channel sets none
+        Given the store does not limit how many samples an order may contain
+        When I add "Sample - Wyborowa Vodka" variant of product "Wyborowa Vodka" to the cart
+        And I add "Sample - Zubrowka Vodka" variant of product "Zubrowka Vodka" to the cart
+        Then there should be 2 items in my cart
