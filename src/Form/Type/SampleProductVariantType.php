@@ -24,9 +24,8 @@ use Symfony\Component\Form\FormEvents;
 final class SampleProductVariantType extends AbstractResourceType
 {
     /**
+     * @param class-string $dataClass
      * @param string[] $validationGroups
-     *
-     * @phpstan-param class-string $dataClass
      */
     public function __construct(
         private ProductVariantOptionValuesSynchronizerInterface $optionValuesSynchronizer,

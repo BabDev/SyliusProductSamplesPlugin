@@ -6,9 +6,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use BabDev\SyliusProductSamplesPlugin\EventListener\SampleVariantGeneratorListener;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\AddToCartTypeExtension;
-use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantChoiceTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ChannelTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductTypeExtension;
+use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantChoiceTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Extension\ProductVariantTypeExtension;
 use BabDev\SyliusProductSamplesPlugin\Form\Type\SampleProductVariantType;
 use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;

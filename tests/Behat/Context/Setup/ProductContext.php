@@ -16,6 +16,9 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
+    /**
+     * @param FactoryInterface<ChannelPricingInterface> $channelPricingFactory
+     */
     public function __construct(
         private ObjectManager $objectManager,
         private FactoryInterface $channelPricingFactory,

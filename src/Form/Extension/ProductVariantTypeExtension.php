@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BabDev\SyliusProductSamplesPlugin\Form\Extension;
 
 use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\EnsureSampleVariantsHaveValidCodesFormSubscriber;
-use BabDev\SyliusProductSamplesPlugin\Form\EventSubscriber\ManageSampleProductVariantAssignmentsFormSubscriber;
 use BabDev\SyliusProductSamplesPlugin\Form\Type\SampleProductVariantType;
 use BabDev\SyliusProductSamplesPlugin\Generator\SampleVariantCodeGeneratorInterface;
 use BabDev\SyliusProductSamplesPlugin\Model\ProductVariantInterface;

@@ -14,9 +14,7 @@ interface ProductInterface extends BaseProductInterface
     public function setSamplesActive(bool $samplesActive): void;
 
     /**
-     * @return Collection|ProductVariantInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductVariantInterface>
+     * @return Collection<array-key, ProductVariantInterface>
      */
     public function getNonSampleVariants(): Collection;
 }
